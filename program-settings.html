@@ -4511,6 +4511,105 @@
         });
       });
     })();
+
+    /* ========================================
+       PRE-FILL ALL REQUIRED FIELDS (DEFAULT VIEW)
+       ======================================== */
+    (function() {
+      // 1. Client — "Acme Corporation"
+      var clientInput = document.getElementById('client-input');
+      if (clientInput) {
+        clientInput.value = 'Acme Corporation';
+        clientInput.dataset.selected = 'true';
+      }
+      // Update program code company segment
+      if (window.updateProgramCodeCompany) window.updateProgramCodeCompany('Acme Corporation');
+
+      // 2. Populate topics for Acme Corporation, then select "Data Science"
+      var topicDropdownMenu = document.getElementById('topic-dropdown-menu');
+      var topicNoResults = document.getElementById('topic-no-results');
+      var topicInput = document.getElementById('topic-input');
+      if (topicDropdownMenu && topicInput) {
+        // Clear existing topic items
+        topicDropdownMenu.querySelectorAll('.dropdown-menu__item[data-topic]').forEach(function(item) { item.remove(); });
+        // Add topics for Acme Corporation
+        var acmeTopics = ['Data Science', 'Machine Learning', 'Cloud Computing', 'DevOps'];
+        acmeTopics.forEach(function(topic) {
+          var item = document.createElement('div');
+          item.className = 'dropdown-menu__item';
+          item.setAttribute('data-topic', '');
+          item.textContent = topic;
+          topicDropdownMenu.insertBefore(item, topicNoResults);
+        });
+        // Select "Data Science"
+        topicInput.value = 'Data Science';
+        topicInput.dataset.selected = 'true';
+      }
+      // Update program code topic segment
+      if (window.updateProgramCodeTopic) window.updateProgramCodeTopic('Data Science');
+
+      // 3. Country — check "United States"
+      var usItem = document.querySelector('.dropdown-check-item[data-country="United States"]');
+      if (usItem) usItem.classList.add('checked');
+      // Build tag and hide placeholder
+      var countryTags = document.getElementById('country-tags');
+      var countryPlaceholder = document.getElementById('country-placeholder');
+      if (countryTags && countryPlaceholder) {
+        countryPlaceholder.style.display = 'none';
+        var tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.setAttribute('data-tag-country', 'United States');
+        tag.innerHTML = '<span class="tag-inner">United States <button class="tag-remove"><svg viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7"/></svg></button></span>';
+        tag.querySelector('.tag-remove').addEventListener('click', function(e) {
+          e.stopPropagation();
+          var checkItem = document.querySelector('.dropdown-check-item[data-country="United States"]');
+          if (checkItem) checkItem.classList.remove('checked');
+          tag.remove();
+          var remaining = document.querySelectorAll('#country-tags .tag');
+          if (remaining.length === 0) countryPlaceholder.style.display = '';
+        });
+        countryTags.appendChild(tag);
+      }
+
+      // 4. Language — "English"
+      var langDropdown = document.querySelector('#section-program-info .editor-dropdown[data-placeholder="Select a language"]');
+      if (langDropdown) {
+        var langText = langDropdown.querySelector('.editor-dropdown__text');
+        if (langText) {
+          langText.textContent = 'English';
+          langText.classList.add('editor-dropdown__text--filled');
+        }
+      }
+
+      // 5. Program name
+      var programNameInput = document.getElementById('program-name-input');
+      if (programNameInput) programNameInput.value = 'Data Analytics 14 (USA)';
+
+      // 6. Program code number (company + topic already set above)
+      var programCodeNumber = document.getElementById('program-code-number');
+      if (programCodeNumber) programCodeNumber.value = '014';
+
+      // 7. Number of weeks
+      var numWeeksInput = document.getElementById('num-weeks-input');
+      if (numWeeksInput) numWeeksInput.value = '16';
+
+      // 8. Start date — set to Jun 1, 2026
+      if (datepickerControllers['start-datepicker']) {
+        datepickerControllers['start-datepicker'].setDate(new Date(2026, 5, 1)); // June 1, 2026
+      }
+
+      // 9. End date — set to Sep 21, 2026 (16 weeks later)
+      if (datepickerControllers['end-datepicker']) {
+        datepickerControllers['end-datepicker'].setDate(new Date(2026, 8, 21)); // Sep 21, 2026
+      }
+
+      // 10. Timezone
+      var tzInput = document.getElementById('timezone-input');
+      if (tzInput) {
+        tzInput.value = '(UTC-05:00) Eastern Time (EST)';
+        tzInput.dataset.selected = 'true';
+      }
+    })();
   </script>
 </body>
 </html>
