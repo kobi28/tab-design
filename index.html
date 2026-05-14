@@ -237,7 +237,7 @@
       width: 48px; height: 48px; cursor: pointer; padding: 12px;
       background: transparent; border: none;
     }
-    .settings-btn svg { width: 24px; height: 24px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .settings-btn svg { width: 24px; height: 24px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
     /* Content Wrap (white card with 24px side margins) */
     .content-wrap {
@@ -411,13 +411,13 @@
       border-top: 2px solid var(--color-teal);
     }
     .week-header__left {
-      width: 224px;
-      min-width: 224px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
+      gap: 4px;
       padding-right: 4px;
     }
+    .week-header__left .editor-field { width: 188px; min-width: 188px; flex: none; }
     .week-header__right {
       flex: 1;
       min-width: 0;
@@ -428,7 +428,29 @@
       border-radius: var(--radius-pill-md); border: none; background: transparent;
       cursor: pointer; flex-shrink: 0;
     }
-    .week-more-btn svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .week-more-btn svg { width: 16px; height: 16px; fill: var(--color-text-muted-med); stroke: var(--color-text-muted-med); }
+
+    /* More-dropdown wrapper */
+    .more-dropdown-wrap { position: relative; }
+    .more-dropdown-wrap .dropdown-menu {
+      position: absolute; top: 100%; left: 0; z-index: 120;
+      display: none; width: 200px;
+    }
+    .more-dropdown-wrap.open .dropdown-menu { display: block; }
+    .more-dropdown-wrap .dropdown-menu.flip-up { top: auto; bottom: 100%; }
+
+    /* Dropdown icon item — DS component */
+    .dropdown-icon-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px;
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-muted-dark);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .dropdown-icon-item:hover { background: var(--color-primary-20); color: var(--color-text-dark); }
+    .dropdown-icon-item svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--color-text-muted-dark); transition: color 0.15s ease; }
+    .dropdown-icon-item:hover svg { color: var(--color-text-dark); }
 
     /* Sub Section (date group) */
     .sub-section {
@@ -462,7 +484,7 @@
       display: flex; align-items: center; justify-content: center;
       width: 32px; height: 32px; padding: 8px;
     }
-    .date-title__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .date-title__icon svg { width: 16px; height: 16px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .date-title__text {
       flex: 1;
       font-size: 14px; font-weight: 400; line-height: 20px;
@@ -474,7 +496,14 @@
       cursor: pointer; border: none; background: transparent; border-radius: var(--radius-pill-md);
     }
     .date-title__more:hover { background: var(--color-bg-page); }
-    .date-title__more svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+    .date-title__more svg { width: 16px; height: 16px; fill: var(--color-text-muted-med); stroke: var(--color-text-muted-med); }
+    .date-more-wrap { position: relative; }
+    .date-more-wrap .dropdown-menu {
+      position: absolute; top: 100%; left: 0; z-index: 120;
+      display: none; width: 200px;
+    }
+    .date-more-wrap.open .dropdown-menu { display: block; }
+    .date-more-wrap .dropdown-menu.flip-up { top: auto; bottom: 100%; }
 
     /* Checkbox — DS Component */
     .checkbox {
@@ -646,7 +675,7 @@
     .item-time-icon {
       display: flex; align-items: center; padding: 3px;
     }
-    .item-time-icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .item-time-icon svg { width: 16px; height: 16px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .item-time-text {
       font-size: 14px; font-weight: 400; line-height: 20px;
       color: var(--color-text-primary); padding: 4px;
@@ -708,7 +737,7 @@
     .item-due-value__icon {
       display: flex; align-items: center; padding: 2px 0;
     }
-    .item-due-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .item-due-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
     /* Body Separator */
     .body-separator {
@@ -774,7 +803,7 @@
     .field-value__icon {
       display: flex; align-items: center; padding: 2px 0; flex-shrink: 0;
     }
-    .field-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .field-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .field-value__add-btn {
       display: flex; align-items: center; justify-content: center;
       width: 28px; height: 28px; padding: 6px;
@@ -2187,6 +2216,7 @@
     .editor-dropdown.open .editor-dropdown__panel {
       display: block;
     }
+    .editor-dropdown__panel.flip-up { top: auto; bottom: 100%; margin-top: 0; margin-bottom: 2px; }
 
     /* Editor Form — Date Picker */
     .editor-datepicker {
@@ -2249,6 +2279,7 @@
     .editor-datepicker.open .editor-datepicker__panel {
       display: block;
     }
+    .editor-datepicker__panel.flip-up { top: auto; bottom: 100%; }
 
     /* Content Field Row */
     .content-field-row {
@@ -2341,6 +2372,7 @@
     .le-dropdown-wrap.open .dropdown-menu {
       display: inline-flex;
     }
+    .le-dropdown-wrap .dropdown-menu.flip-up { top: auto; bottom: 100%; margin-top: 0; margin-bottom: 4px; }
 
     /* Calendar */
     .calendar-demo {
@@ -2421,7 +2453,7 @@
        ======================================== */
     @media (max-width: 1024px) {
       .sub-section__left { width: 180px; min-width: 180px; }
-      .week-header__left { width: 180px; min-width: 180px; }
+      .week-header__left .editor-field { width: 148px; min-width: 148px; }
       .field-label { width: 120px; min-width: 120px; }
       .content-field-row__label { width: 120px; min-width: 120px; }
       .checkbox-field { padding-left: 124px; }
@@ -2436,7 +2468,7 @@
       .item-body__left { padding-right: 0; }
       .item-name-row { flex-direction: column; gap: 4px; }
       .sub-section__left { width: 160px; min-width: 160px; }
-      .week-header__left { width: 160px; min-width: 160px; }
+      .week-header__left .editor-field { width: 128px; min-width: 128px; }
       .content-field-row { flex-direction: column; gap: 2px; }
       .content-field-row__label { width: 100%; min-width: 100%; }
     }
@@ -2548,12 +2580,30 @@
         <div class="week-section">
           <div class="week-header">
             <div class="week-header__left">
-              <div class="editor-field" style="flex:1;">
+              <div class="editor-field">
                 <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Week 1</textarea>
               </div>
-              <button class="week-more-btn">
-                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
-              </button>
+              <div class="more-dropdown-wrap">
+                <button class="week-more-btn" onclick="toggleMoreDropdown(this)">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>
+                </button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu__list" style="padding: 4px 0;">
+                    <div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move up</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move down</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Delete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="week-header__right">
               <div class="editor-field" style="width:100%;">
@@ -2585,9 +2635,27 @@
                   </div>
                 </div>
               </div>
-              <button class="date-title__more">
-                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
-              </button>
+              <div class="date-more-wrap">
+                <button class="date-title__more" onclick="toggleMoreDropdown(this)">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>
+                </button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu__list" style="padding: 4px 0;">
+                    <div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move up</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move down</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Delete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="sub-section__right">
@@ -2797,9 +2865,27 @@
                   </div>
                 </div>
               </div>
-              <button class="date-title__more">
-                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
-              </button>
+              <div class="date-more-wrap">
+                <button class="date-title__more" onclick="toggleMoreDropdown(this)">
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>
+                </button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu__list" style="padding: 4px 0;">
+                    <div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move up</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Move down</span>
+                    </div>
+                    <div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>Delete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="sub-section__right">
@@ -3710,6 +3796,18 @@
       });
     });
 
+    // ── Flip-up utility: if a panel overflows the viewport bottom, flip it above ──
+    function positionDropdownPanel(panel) {
+      if (!panel) return;
+      // Reset to default (drop down) first so we can measure correctly
+      panel.classList.remove('flip-up');
+      var rect = panel.getBoundingClientRect();
+      var viewportH = window.innerHeight;
+      if (rect.bottom > viewportH) {
+        panel.classList.add('flip-up');
+      }
+    }
+
     // Editor Dropdown Field
     function toggleEditorDropdown(trigger) {
       var dd = trigger.closest('.editor-dropdown');
@@ -3717,7 +3815,10 @@
       document.querySelectorAll('.editor-dropdown.open').forEach(function(el) {
         el.classList.remove('open');
       });
-      if (!wasOpen) dd.classList.add('open');
+      if (!wasOpen) {
+        dd.classList.add('open');
+        positionDropdownPanel(dd.querySelector('.editor-dropdown__panel'));
+      }
     }
 
     function selectEditorDropdownItem(item) {
@@ -3737,7 +3838,10 @@
       var wasOpen = wrap.classList.contains('open');
       // Close all open LE dropdowns first
       document.querySelectorAll('.le-dropdown-wrap.open').forEach(function(w) { w.classList.remove('open'); });
-      if (!wasOpen) wrap.classList.add('open');
+      if (!wasOpen) {
+        wrap.classList.add('open');
+        positionDropdownPanel(wrap.querySelector('.dropdown-menu'));
+      }
     }
     // Learning Element dropdown — select item and create schedule-item
     var leCounter = 0;
@@ -4039,9 +4143,16 @@
         +           '</div>'
         +         '</div>'
         +       '</div>'
-        +       '<button class="date-title__more">'
-        +         '<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>'
-        +       '</button>'
+        +       '<div class="date-more-wrap">'
+        +         '<button class="date-title__more" onclick="toggleMoreDropdown(this)">'
+        +           '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>'
+        +         '</button>'
+        +         '<div class="dropdown-menu"><div class="dropdown-menu__list" style="padding: 4px 0;">'
+        +           '<div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move up</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move down</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Delete</span></div>'
+        +         '</div></div>'
+        +       '</div>'
         +     '</div>'
         +   '</div>'
         +   '<div class="sub-section__right">'
@@ -4218,6 +4329,7 @@
         if (!wasOpen) {
           dp.classList.add('open');
           renderDpCalendar(dp);
+          positionDropdownPanel(dp.querySelector('.editor-datepicker__panel'));
         }
       };
 
@@ -5016,12 +5128,19 @@
         + '<div class="week-section">'
         +   '<div class="week-header">'
         +     '<div class="week-header__left">'
-        +       '<div class="editor-field" style="flex:1;">'
+        +       '<div class="editor-field">'
         +         '<textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" placeholder="Title" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\';"></textarea>'
         +       '</div>'
-        +       '<button class="week-more-btn">'
-        +         '<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>'
-        +       '</button>'
+        +       '<div class="more-dropdown-wrap">'
+        +         '<button class="week-more-btn" onclick="toggleMoreDropdown(this)">'
+        +           '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>'
+        +         '</button>'
+        +         '<div class="dropdown-menu"><div class="dropdown-menu__list" style="padding: 4px 0;">'
+        +           '<div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move up</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move down</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Delete</span></div>'
+        +         '</div></div>'
+        +       '</div>'
         +     '</div>'
         +     '<div class="week-header__right">'
         +       '<div class="editor-field" style="width:100%;">'
@@ -5052,9 +5171,16 @@
         +           '</div>'
         +         '</div>'
         +       '</div>'
-        +       '<button class="date-title__more">'
-        +         '<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>'
-        +       '</button>'
+        +       '<div class="date-more-wrap">'
+        +         '<button class="date-title__more" onclick="toggleMoreDropdown(this)">'
+        +           '<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.33333 6.66663C2.6 6.66663 2 7.26663 2 7.99996C2 8.73329 2.6 9.33329 3.33333 9.33329C4.06667 9.33329 4.66667 8.73329 4.66667 7.99996C4.66667 7.26663 4.06667 6.66663 3.33333 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M12.6666 6.66663C11.9333 6.66663 11.3333 7.26663 11.3333 7.99996C11.3333 8.73329 11.9333 9.33329 12.6666 9.33329C13.3999 9.33329 13.9999 8.73329 13.9999 7.99996C13.9999 7.26663 13.3999 6.66663 12.6666 6.66663Z" fill="currentColor" stroke="currentColor"/><path d="M8.00008 6.66663C7.26675 6.66663 6.66675 7.26663 6.66675 7.99996C6.66675 8.73329 7.26675 9.33329 8.00008 9.33329C8.73341 9.33329 9.33341 8.73329 9.33341 7.99996C9.33341 7.26663 8.73341 6.66663 8.00008 6.66663Z" fill="currentColor" stroke="currentColor"/></svg>'
+        +         '</button>'
+        +         '<div class="dropdown-menu"><div class="dropdown-menu__list" style="padding: 4px 0;">'
+        +           '<div class="dropdown-icon-item" data-action="move-up" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move up</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="move-down" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Move down</span></div>'
+        +           '<div class="dropdown-icon-item" data-action="delete" onclick="moreMenuAction(this)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.987a68.07 68.07 0 00-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.667 3.313l.146-.873c.107-.634.187-1.107 1.314-1.107h1.746c1.127 0 1.214.5 1.314 1.114l.146.866" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.887 11h2.22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.333 8.333h3.334" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Delete</span></div>'
+        +         '</div></div>'
+        +       '</div>'
         +     '</div>'
         +   '</div>'
         +   '<div class="sub-section__right">'
@@ -5127,6 +5253,138 @@
         if (titleInput) setTimeout(function() { titleInput.focus(); }, 300);
       }
     }
+
+    // ── More-dropdown: toggle ──
+    function toggleMoreDropdown(btn) {
+      event.stopPropagation();
+      var wrap = btn.closest('.more-dropdown-wrap') || btn.closest('.date-more-wrap');
+      if (!wrap) return;
+      var wasOpen = wrap.classList.contains('open');
+      // Close all open more-dropdowns first
+      document.querySelectorAll('.more-dropdown-wrap.open, .date-more-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      if (!wasOpen) {
+        wrap.classList.add('open');
+        positionDropdownPanel(wrap.querySelector('.dropdown-menu'));
+      }
+    }
+
+    // ── More-dropdown: action handler ──
+    function moreMenuAction(item) {
+      event.stopPropagation();
+      var action = item.getAttribute('data-action');
+      var wrap = item.closest('.more-dropdown-wrap') || item.closest('.date-more-wrap');
+
+      // Close the dropdown
+      if (wrap) wrap.classList.remove('open');
+
+      // Determine what we're acting on: a week-section or a sub-section
+      var weekSection = wrap.closest('.week-section');
+      var subSection = wrap.closest('.sub-section');
+
+      if (weekSection) {
+        // ── Week-level actions ──
+        // A week "group" = the .week-section + all following .sub-section and .section-tools
+        // until the next .week-section (or end of .content-area).
+        var contentArea = weekSection.parentNode;
+        var siblings = Array.prototype.slice.call(contentArea.children);
+        var idx = siblings.indexOf(weekSection);
+
+        // Collect the group: weekSection + trailing sub-sections + section-tools
+        var group = [weekSection];
+        for (var i = idx + 1; i < siblings.length; i++) {
+          if (siblings[i].classList.contains('week-section')) break;
+          group.push(siblings[i]);
+        }
+
+        if (action === 'delete') {
+          group.forEach(function(el) { el.remove(); });
+        }
+
+        if (action === 'move-up') {
+          // Find the previous group
+          var prevGroupEnd = idx - 1;
+          if (prevGroupEnd < 0) return;
+          // Walk backwards to find the previous week-section
+          var prevWeekIdx = -1;
+          for (var j = prevGroupEnd; j >= 0; j--) {
+            if (siblings[j].classList.contains('week-section')) { prevWeekIdx = j; break; }
+          }
+          if (prevWeekIdx < 0) return;
+          var refNode = siblings[prevWeekIdx];
+          // Move all group elements before the previous week-section
+          group.forEach(function(el) { contentArea.insertBefore(el, refNode); });
+        }
+
+        if (action === 'move-down') {
+          // Find the next group's first element after our group
+          var lastGroupEl = group[group.length - 1];
+          var lastIdx = siblings.indexOf(lastGroupEl);
+          if (lastIdx >= siblings.length - 1) return;
+          // Find the next week-section after our group
+          var nextWeekIdx = -1;
+          for (var k = lastIdx + 1; k < siblings.length; k++) {
+            if (siblings[k].classList.contains('week-section')) { nextWeekIdx = k; break; }
+          }
+          if (nextWeekIdx < 0) return;
+          // Collect the next group
+          var nextGroup = [siblings[nextWeekIdx]];
+          for (var m = nextWeekIdx + 1; m < siblings.length; m++) {
+            if (siblings[m].classList.contains('week-section')) break;
+            nextGroup.push(siblings[m]);
+          }
+          // Insert our group after the next group
+          var insertAfter = nextGroup[nextGroup.length - 1];
+          // Insert in reverse to maintain order
+          for (var n = group.length - 1; n >= 0; n--) {
+            if (insertAfter.nextSibling) {
+              contentArea.insertBefore(group[n], insertAfter.nextSibling);
+            } else {
+              contentArea.appendChild(group[n]);
+            }
+          }
+        }
+        return;
+      }
+
+      if (subSection) {
+        // ── Sub-section-level actions ──
+        if (action === 'delete') {
+          subSection.remove();
+          return;
+        }
+
+        if (action === 'move-up') {
+          var prev = subSection.previousElementSibling;
+          // Skip non-sub-section siblings (e.g. week-section)
+          while (prev && !prev.classList.contains('sub-section')) {
+            prev = prev.previousElementSibling;
+          }
+          if (prev) {
+            subSection.parentNode.insertBefore(subSection, prev);
+          }
+          return;
+        }
+
+        if (action === 'move-down') {
+          var next = subSection.nextElementSibling;
+          // Skip non-sub-section siblings (e.g. section-tools)
+          while (next && !next.classList.contains('sub-section')) {
+            next = next.nextElementSibling;
+          }
+          if (next) {
+            next.parentNode.insertBefore(subSection, next.nextSibling);
+          }
+          return;
+        }
+      }
+    }
+
+    // ── Close more-dropdowns on outside click ──
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.more-dropdown-wrap') && !e.target.closest('.date-more-wrap')) {
+        document.querySelectorAll('.more-dropdown-wrap.open, .date-more-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+      }
+    });
 
     // Auto-resize textareas on load
     document.querySelectorAll('.editor-field__input, .editor-action__input').forEach(function(ta) {
