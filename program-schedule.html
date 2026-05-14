@@ -1,0 +1,3765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>Program Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS CUSTOM PROPERTIES (Design Tokens)
+       ======================================== */
+    :root {
+      --color-primary-90: #000A14;
+      --color-primary-80: #001730;
+      --color-primary-70: #0059B8;
+      --color-primary-60: #5CABFF;
+      --color-primary-30: #C2DFFF;
+      --color-primary-20: #F0F1FA;
+      --color-primary-10: #F6F7FC;
+      --color-secondary-dark: #25A7A1;
+      --color-secondary-medium: #4AD7D1;
+      --color-secondary-light: #8AE5E1;
+      --color-secondary-translucent: rgba(74, 215, 209, 0.3);
+      --color-tertiary-dark: #F53900;
+      --color-tertiary-medium: #FF6A3D;
+      --color-tertiary-light: #FFB199;
+      --color-tertiary-translucent: rgba(255, 106, 61, 0.3);
+      --color-grey-90: #001730;
+      --color-grey-80: #575C64;
+      --color-grey-70: #8D939D;
+      --color-grey-60: #BDC4D0;
+      --color-grey-50: #D7DEE9;
+      --color-grey-40: #F0F2F5;
+      --color-grey-0: #FFFFFF;
+      --info-dark: #0059B8;
+      --info-muted-dark: #ADD5FF;
+      --info-muted-med: #D4E9FF;
+      --info-muted-light: #EEF6FF;
+      --warning-dark: #EB9C00;
+      --warning-muted-dark: #FFB547;
+      --warning-muted-med: #FFDD96;
+      --warning-muted-light: #FFF0D0;
+      --success-dark: #1A7F5A;
+      --success-muted-dark: #00AF70;
+      --success-muted-med: #68DEB3;
+      --success-muted-light: #E0F5EC;
+      --destructive-dark: #890627;
+      --destructive-muted-dark: #CE0D3D;
+      --destructive-muted-med: #FE8EAA;
+      --destructive-muted-light: #FFE1E9;
+      --color-light-primary: #F6F7FC;
+      --color-light-secondary: #FFFFFF;
+      --color-light-dark: #F0F1FA;
+      --color-dark-primary: #001730;
+      --color-border-primary: #C2DFFF;
+      --color-border-secondary: #5CABFF;
+      --color-text-dark: #000A14;
+      --color-text-muted-dark: #575C64;
+      --color-text-muted-med: #8D939D;
+      --color-text-muted-light: #BDC4D0;
+      --color-text-light: #FFFFFF;
+      --color-text-link: #0059B8;
+      --shadow-card-default: 0 0 24px rgba(3, 15, 29, 0.08);
+      --shadow-card-hover: 0 0 32px rgba(3, 15, 29, 0.2);
+      --font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --space-1: 2px;
+      --space-2: 4px;
+      --space-3: 6px;
+      --space-4: 8px;
+      --space-5: 10px;
+      --space-6: 12px;
+      --space-7: 16px;
+      --space-8: 24px;
+      --space-9: 32px;
+      --space-10: 48px;
+      --radius-xs: 2px;
+      --radius-sm: 4px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-pill-sm: 16px;
+      --radius-pill-md: 20px;
+      --radius-pill-lg: 24px;
+      --duration-fast: 80ms;
+      --duration-standard: 120ms;
+      --duration-panel: 300ms;
+      --ease-default: ease;
+      --ease-panel: ease-in-out;
+      --color-text-primary: var(--color-text-dark);
+      --color-text-secondary: var(--color-text-muted-dark);
+      --color-text-placeholder: var(--color-text-muted-light);
+      --color-bg-surface: var(--color-light-secondary);
+      --color-bg-page: var(--color-primary-10);
+      --color-bg-nav: var(--color-dark-primary);
+      --color-bg-nav-selected: var(--color-primary-70);
+      --color-border-light: var(--color-border-primary);
+      --color-border-medium: var(--color-grey-60);
+      --color-border-strong: var(--color-grey-80);
+      --color-teal: var(--color-secondary-medium);
+      --color-teal-light: var(--color-secondary-light);
+      --color-blue: var(--color-primary-70);
+      --color-blue-hover: var(--color-primary-20);
+      --color-blue-light: var(--color-primary-30);
+      --color-blue-bg: var(--color-primary-20);
+      --color-amber: var(--color-tertiary-medium);
+      --color-amber-light: var(--color-tertiary-light);
+      --color-error: var(--destructive-muted-dark);
+      --color-achieved: var(--success-muted-med);
+      --color-in-progress: var(--warning-muted-dark);
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-text-primary);
+      background: var(--color-grey-0);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      height: 100%;
+    }
+
+    /* ========================================
+       PAGE LAYOUT
+       ======================================== */
+    .page-wrapper {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* Left Nav */
+    .nav-demo {
+      display: flex;
+      width: 80px;
+      min-width: 80px;
+      flex-direction: column;
+      align-items: stretch;
+      background: var(--color-dark-primary);
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+    }
+    .nav-item {
+      width: 80px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px;
+      min-height: 80px;
+      cursor: pointer;
+      transition: background var(--duration-standard) var(--ease-default);
+      background: var(--color-dark-primary);
+      color: var(--color-grey-60);
+      text-decoration: none;
+    }
+    .nav-item svg { width: 24px; height: 24px; }
+    .nav-item svg, .nav-item svg path, .nav-item svg circle, .nav-item svg rect, .nav-item svg line, .nav-item svg polyline { stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-item span { font-size: 12px; letter-spacing: 0.24px; color: currentColor; text-align: center; line-height: normal; padding: 0 2px; }
+    .nav-item:hover { color: var(--color-text-light); }
+    .nav-item.selected { background: var(--color-primary-70); color: var(--color-text-light); }
+
+    /* Main Content */
+    .main-area {
+      flex: 1;
+      margin-left: 80px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--color-bg-page);
+    }
+
+    /* Header — DS Page Header */
+    .header-demo {
+      background: var(--color-bg-page);
+      padding: 12px 24px 0;
+    }
+    .header-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 48px;
+    }
+    .header-left {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .header-program {
+      font-size: 14px; color: var(--color-text-primary); font-weight: 400; line-height: 20px;
+    }
+    .header-separator {
+      width: 1px; height: 20px;
+      background: var(--color-text-secondary);
+    }
+    .header-code {
+      font-size: 14px; color: var(--color-text-primary); font-weight: 400; line-height: 20px;
+    }
+
+    /* Page Tabs */
+    .page-tabs {
+      display: flex; align-items: flex-end;
+    }
+    .page-tab {
+      display: flex; flex-direction: column; align-items: flex-start;
+      cursor: pointer;
+    }
+    .page-tab__label {
+      padding: 14px 12px 10px;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .page-tab__bar {
+      width: 100%; height: 4px;
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+    .page-tab:hover .page-tab__bar { background: var(--color-tertiary-medium); }
+    .page-tab.active .page-tab__label { color: var(--color-text-primary); }
+    .page-tab.active .page-tab__bar { background: var(--color-tertiary-medium); }
+
+    /* Page Title — inside header */
+    .header-title {
+      font-size: 28px; font-weight: 600; line-height: 42px;
+      color: var(--color-text-primary);
+      margin-top: 16px;
+      padding-bottom: 24px;
+    }
+
+    /* Settings icon button */
+    .settings-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; cursor: pointer; padding: 12px;
+      background: transparent; border: none;
+    }
+    .settings-btn svg { width: 24px; height: 24px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Content Wrap (white card with 24px side margins) */
+    .content-wrap {
+      width: auto;
+      margin: 0 24px 24px;
+      background: var(--color-bg-surface);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    /* Toolbar */
+    .toolbar-demo {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px;
+      background: var(--color-bg-surface);
+      border-bottom: 2px solid var(--color-teal);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .toolbar-left { display: flex; align-items: center; gap: 0; }
+    .toolbar-right { display: flex; align-items: center; gap: 8px; }
+
+    /* Tertiary button (+ Group, Rubric, + Learning Element) */
+    .btn-tertiary-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 4px;
+      height: 32px;
+      padding: 5px 8px;
+      border-radius: var(--radius-pill-md);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-size: 14px; font-weight: 600; line-height: 22px;
+      color: var(--color-text-link);
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .btn-tertiary-icon:hover { background: var(--color-blue-hover); }
+    .btn-tertiary-icon svg { width: 16px; height: 16px; stroke: var(--color-text-link); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Search Bar */
+    .search-bar {
+      display: inline-flex;
+      align-items: center;
+      width: 280px;
+      background: var(--color-light-secondary);
+      border: 1px solid var(--color-grey-70);
+      overflow: hidden;
+      height: 32px; border-radius: 16px;
+    }
+    .search-bar__input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: var(--font-family);
+      font-weight: 400;
+      color: var(--color-text-primary);
+      font-size: 14px; line-height: 20px; padding: 6px 14px;
+    }
+    .search-bar__input::placeholder { color: var(--color-text-secondary); }
+    .search-bar__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      align-self: stretch;
+      cursor: pointer;
+      width: 32px;
+    }
+    .search-bar__icon svg { width: 16px; height: 16px; fill: none; stroke: var(--color-text-link); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Action buttons (filter, share) */
+    .action-btn {
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-pill-md); border: none; background: transparent;
+      cursor: pointer;
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .action-btn:hover { background: var(--color-bg-page); }
+    .action-btn svg { width: 16px; height: 16px; stroke: var(--color-text-link); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Buttons — from DS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 6px; border: 1px solid transparent; cursor: pointer;
+      font-family: var(--font-family); font-weight: 600;
+      transition: background var(--duration-standard) var(--ease-default),
+                  color var(--duration-standard) var(--ease-default),
+                  border-color var(--duration-standard) var(--ease-default);
+    }
+    .btn--md {
+      height: 48px; padding: 12px 24px;
+      font-size: 16px; line-height: 24px;
+      border-radius: 24px;
+    }
+    .btn--sm {
+      height: 32px; padding: 5px 16px;
+      font-size: 14px; line-height: 22px;
+      border-radius: 20px;
+    }
+    .btn--primary {
+      background: var(--color-secondary-medium); border-color: transparent;
+      color: var(--color-text-primary);
+    }
+    .btn--primary:hover {
+      background: var(--color-secondary-dark); border-color: transparent;
+    }
+    .btn--primary:disabled {
+      background: var(--color-grey-50); border-color: transparent;
+      color: var(--color-grey-80); cursor: not-allowed;
+    }
+    .btn--secondary {
+      background: transparent; border-color: var(--color-primary-70);
+      color: var(--color-primary-70);
+    }
+    .btn--secondary:hover {
+      background: rgba(0,89,184,0.12); border-color: var(--color-primary-70);
+      color: var(--color-primary-70);
+    }
+    .btn--secondary:disabled {
+      background: var(--color-grey-40); border-color: var(--color-grey-70);
+      color: var(--color-grey-80); cursor: not-allowed;
+    }
+    .btn--tertiary {
+      background: transparent; border-color: transparent;
+      color: var(--color-primary-70); padding: 12px; border-radius: 0;
+    }
+    .btn--tertiary:hover { text-decoration: underline; }
+    .btn--tertiary-destructive {
+      background: transparent; border-color: transparent;
+      color: var(--destructive-dark); padding: 12px; border-radius: 0;
+    }
+    .btn--tertiary-destructive:hover { text-decoration: underline; }
+    .btn--icon-only.btn--sm {
+      width: 32px; height: 32px; padding: 8px;
+      border-radius: 20px;
+    }
+    .btn--tertiary.btn--icon-only:hover {
+      background: rgba(0, 89, 184, 0.12);
+      text-decoration: none;
+    }
+    .btn--tertiary-destructive.btn--icon-only:hover {
+      background: var(--destructive-muted-light);
+      text-decoration: none;
+    }
+    .btn svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .btn--sm svg { width: 16px; height: 16px; }
+
+    /* ========================================
+       CONTENT AREA
+       ======================================== */
+    .content-area {
+      flex: 1;
+      padding: 0 12px 48px;
+      background: var(--color-bg-surface);
+    }
+
+    /* Week section */
+    .week-section {
+      margin-top: 0;
+    }
+    .week-header {
+      display: flex; align-items: center;
+      padding: 12px;
+      background: var(--color-bg-surface);
+    }
+    .week-header__left {
+      width: 224px;
+      min-width: 224px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding-right: 4px;
+    }
+    .week-header__right {
+      flex: 1;
+      min-width: 0;
+    }
+    .week-more-btn {
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-pill-md); border: none; background: transparent;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .week-more-btn svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Sub Section (date group) */
+    .sub-section {
+      display: flex;
+      padding: 0 12px 24px;
+      background: var(--color-bg-surface);
+    }
+    .sub-section__left {
+      width: 224px;
+      min-width: 224px;
+      flex-shrink: 0;
+    }
+    .sub-section__right {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Date title */
+    .date-title {
+      display: flex; align-items: center;
+      border-top: 1px solid var(--color-secondary-light);
+      padding-top: 8px;
+      gap: 4px;
+    }
+    .date-title__icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; padding: 8px;
+    }
+    .date-title__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .date-title__text {
+      flex: 1;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-primary);
+    }
+    .date-title__more {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; padding: 8px;
+      cursor: pointer; border: none; background: transparent; border-radius: var(--radius-pill-md);
+    }
+    .date-title__more:hover { background: var(--color-bg-page); }
+    .date-title__more svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* Checkbox — DS Component */
+    .checkbox {
+      display: inline-flex; align-items: center; gap: var(--space-4);
+      cursor: pointer; user-select: none;
+      font-family: var(--font-family);
+      padding: 7px 8px;
+      border-radius: var(--radius-sm);
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .checkbox:hover { background: var(--color-primary-20); }
+    .checkbox__input {
+      position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+    }
+    .checkbox__box {
+      position: relative;
+      width: 16px; height: 16px; min-width: 16px;
+      border: 1.5px solid var(--color-grey-70);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--duration-standard) var(--ease-default),
+                  border-color var(--duration-standard) var(--ease-default);
+    }
+    .checkbox__box svg { display: none; width: 10px; height: 10px; }
+    .checkbox__box.is-checked {
+      background: transparent;
+      border-color: transparent;
+      border-width: 0;
+    }
+    .checkbox__box.is-checked svg.check-icon {
+      display: block; width: 100%; height: 100%; stroke: none;
+    }
+    .checkbox__label {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-primary);
+    }
+
+    /* Schedule Item */
+    .schedule-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .schedule-item__divider {
+      width: 100%; height: 1px;
+      background: var(--color-secondary-light);
+    }
+    .schedule-item__header {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .schedule-item__checkbox {
+      display: flex; align-items: flex-start;
+      flex-shrink: 0;
+    }
+    .schedule-item__checkbox .checkbox {
+      padding: 8px;
+    }
+    .schedule-item__content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Item Title Row */
+    .item-title-row {
+      display: flex; align-items: center; width: 100%;
+    }
+    .item-module-lesson {
+      display: flex; align-items: center;
+      flex: 1; min-width: 0;
+    }
+    .item-module-lesson span {
+      padding: 4px;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med);
+      white-space: nowrap;
+    }
+    .item-actions {
+      display: flex; align-items: center; flex-shrink: 0;
+    }
+    .item-action-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; padding: 8px;
+      border-radius: var(--radius-pill-md);
+      border: none; background: transparent; cursor: pointer;
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .item-action-btn:hover { background: var(--color-bg-page); }
+    .item-action-btn svg { width: 16px; height: 16px; stroke: var(--color-text-link); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Item Name Row */
+    .item-name-row {
+      display: flex; align-items: flex-start; width: 100%;
+      gap: 16px;
+    }
+    .item-name-left {
+      display: flex; align-items: center; flex: 1; min-width: 0;
+    }
+    .item-name-right {
+      display: flex; align-items: center; flex: 1; min-width: 0;
+    }
+
+    /* Content Type — DS Component */
+    .content-type {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 0 4px;
+      border-radius: var(--radius-xs);
+      font-family: var(--font-family);
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      margin: 4px;
+    }
+    .content-type--lesson { background: var(--info-muted-med); }
+    .content-type--assignment { background: #FFF0D0; }
+    .content-type--break { background: var(--destructive-muted-light); }
+    .content-type__chevron {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .content-type__chevron svg {
+      width: 16px; height: 16px;
+      stroke: var(--color-text-muted-med);
+      stroke-width: 1.5;
+      fill: none;
+      transition: transform var(--duration-standard) var(--ease-default);
+    }
+    .content-type-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .content-type-dropdown .content-type {
+      cursor: pointer;
+      transition: filter 0.15s ease;
+    }
+    .content-type-dropdown .content-type:hover { filter: brightness(0.95); }
+    .content-type-dropdown.open .content-type__chevron svg { transform: rotate(180deg); }
+
+    /* Item Name */
+    .item-name {
+      display: flex; align-items: flex-start; gap: 2px;
+      padding: 0;
+      font-size: 18px; font-weight: 400; line-height: 26px;
+      flex: 1; min-width: 0;
+    }
+    .item-name__required { color: var(--destructive-muted-dark); }
+    .item-name__text { color: var(--color-text-primary); }
+    .item-name__placeholder { color: var(--color-text-muted-med); }
+    .item-name .editor-field__input {
+      padding: 0;
+      min-height: 0;
+    }
+
+    /* Time and Staff info row */
+    .item-time-row {
+      display: flex; align-items: center; gap: 4px;
+      padding: 0;
+    }
+    .item-time-icon {
+      display: flex; align-items: center; padding: 3px;
+    }
+    .item-time-icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .item-time-text {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-primary); padding: 4px;
+      white-space: nowrap;
+    }
+    .item-staff-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 4px;
+    }
+    .item-staff-icon {
+      display: flex; align-items: center; padding: 3px;
+    }
+    .item-staff-icon svg { width: 16px; height: 16px; stroke: var(--color-text-muted-med); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .item-staff-label {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med); padding: 4px 0 4px 4px; width: 20px;
+    }
+    .item-staff-value {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med); padding: 4px;
+      white-space: nowrap;
+    }
+
+    /* Description Row */
+    .item-desc-row {
+      display: flex; align-items: flex-start; width: 100%;
+      gap: 16px;
+    }
+    .item-desc-text {
+      flex: 1; min-width: 0;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med);
+      padding: 4px;
+    }
+    .item-desc-text--filled {
+      color: var(--color-text-primary);
+    }
+
+    /* Due Date */
+    .item-due-row {
+      display: flex; align-items: center;
+    }
+    .item-due-label {
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-secondary);
+      padding: 5px 4px;
+      white-space: nowrap;
+    }
+    .item-due-label .required { color: var(--destructive-muted-dark); }
+    .item-due-value {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px;
+      flex: 1; min-width: 0;
+    }
+    .item-due-value__text {
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med);
+    }
+    .item-due-value__icon {
+      display: flex; align-items: center; padding: 2px 0;
+    }
+    .item-due-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Body Separator */
+    .body-separator {
+      width: 100%; height: 1px;
+      background: var(--color-grey-60);
+      margin: 6px 0;
+      transition: opacity var(--duration-panel) var(--ease-panel);
+    }
+    .body-separator.is-collapsed { opacity: 0; height: 0; margin: 0; }
+
+    /* Collapse chevron rotation */
+    .item-action-btn[title="Collapse"] svg {
+      transition: transform var(--duration-panel) var(--ease-panel);
+    }
+
+    /* Body Fields (two column layout for details) */
+    .item-body {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      transition: max-height var(--duration-panel) var(--ease-panel),
+                  opacity var(--duration-panel) var(--ease-panel);
+    }
+    .item-body.is-collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+    }
+    .item-body__left {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column;
+      padding-right: 16px;
+    }
+    .item-body__right {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column;
+    }
+
+    /* Field Row */
+    .field-row {
+      display: flex; align-items: flex-start; width: 100%;
+    }
+    .field-label {
+      width: 148px; min-width: 148px; flex-shrink: 0;
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-secondary);
+      padding: 5px 4px;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .field-label .required { color: var(--destructive-muted-dark); }
+    .field-value {
+      flex: 1; min-width: 0;
+      display: flex; align-items: flex-start; gap: 4px;
+      padding: 4px;
+    }
+    .field-value__text {
+      flex: 1; min-width: 0;
+      font-size: 14px; font-weight: 400; line-height: 20px;
+      color: var(--color-text-muted-med);
+    }
+    .field-value__text--filled {
+      color: var(--color-text-primary);
+    }
+    .field-value__icon {
+      display: flex; align-items: center; padding: 2px 0; flex-shrink: 0;
+    }
+    .field-value__icon svg { width: 16px; height: 16px; stroke: var(--color-text-primary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .field-value__add-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; padding: 6px;
+      border-radius: var(--radius-pill-md);
+      border: none; background: transparent; cursor: pointer;
+      flex-shrink: 0;
+    }
+    .field-value__add-btn:hover { background: var(--color-bg-page); }
+    .field-value__add-btn svg { width: 16px; height: 16px; stroke: var(--color-text-link); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Lecture Plan — status + link field */
+    .lecture-plan {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: var(--color-bg-surface);
+    }
+    .lecture-plan__content {
+      flex: 1; min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    .lecture-plan__content:hover {
+      background: var(--color-primary-20);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .lecture-plan__status {
+      color: var(--destructive-muted-dark);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .lecture-plan__text {
+      color: var(--color-text-primary);
+      flex: 1; min-width: 0;
+    }
+    .lecture-plan__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-pill-md);
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .lecture-plan__arrow:hover { background: var(--color-blue-hover); }
+    .lecture-plan__arrow svg {
+      width: 16px; height: 16px;
+      stroke: var(--color-text-link);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Flyout Panel — DS Pattern */
+    .flyout-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 10, 20, 0.4);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease-in-out;
+    }
+    .flyout-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .flyout {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50%;
+      min-width: 600px;
+      height: 100vh;
+      background: var(--color-light-secondary);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 300ms ease-in-out;
+      box-shadow: 0px 0px 16px rgba(3, 15, 29, 0.2);
+    }
+    .flyout.is-open {
+      transform: translateX(0);
+    }
+    .flyout__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--color-light-secondary);
+    }
+    .flyout__header-cancel {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--color-text-link);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 12px;
+    }
+    .flyout__header-cancel:hover { opacity: 0.8; }
+    .flyout__header-approve {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 24px;
+      border: none;
+      background: var(--color-grey-50);
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--color-text-muted-dark);
+      cursor: not-allowed;
+    }
+    .flyout__header-approve.is-active {
+      background: var(--color-secondary-medium);
+      color: var(--color-text-dark);
+      cursor: pointer;
+    }
+    .flyout__header-approve.is-active:hover {
+      background: var(--color-secondary-dark);
+    }
+    .flyout__content {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 0 48px 48px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    /* Flyout Title Block */
+    .flyout__title {
+      font-family: var(--font-family);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 42px;
+      color: var(--color-primary-80);
+      margin: 0;
+    }
+    .flyout__info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+    }
+    .flyout__info-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .flyout__info-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      background: var(--color-light-dark);
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      white-space: nowrap;
+    }
+    .flyout__info-value {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      white-space: nowrap;
+    }
+
+    /* Flyout Form Sections */
+    .flyout-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .flyout-section__title {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      background: var(--info-muted-med);
+      font-family: var(--font-family);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 26px;
+      color: var(--color-text-dark);
+      align-self: flex-start;
+    }
+    .flyout-field {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .flyout-question {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+    }
+    .flyout-textarea {
+      width: 100%;
+      min-height: 88px;
+      padding: 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-grey-50);
+      border-radius: var(--radius-lg);
+      background: var(--color-grey-0);
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+      height: auto;
+    }
+    .flyout-textarea::placeholder { color: var(--color-text-muted-dark); }
+    .flyout-textarea:focus { border-color: var(--color-border-secondary); }
+    .flyout-text-input {
+      width: 100%;
+      padding: 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-grey-50);
+      border-radius: var(--radius-lg);
+      background: var(--color-grey-0);
+      outline: none;
+      box-sizing: border-box;
+    }
+    .flyout-text-input::placeholder { color: var(--color-text-muted-dark); }
+    .flyout-text-input:focus { border-color: var(--color-border-secondary); }
+    .flyout-radio-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+    }
+    .flyout-radio-item {
+      flex: 1; min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-muted-med);
+      padding: 6px 8px;
+    }
+    .flyout-radio-item input[type="radio"] {
+      appearance: none;
+      width: 16px; height: 16px; min-width: 16px;
+      border: 1.5px solid var(--color-grey-70);
+      border-radius: 50%;
+      background: var(--color-grey-0);
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+    }
+    .flyout-radio-item input[type="radio"]:checked {
+      border-color: var(--color-secondary-medium);
+    }
+    .flyout-radio-item input[type="radio"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-secondary-medium);
+    }
+    .flyout-commitment {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 8px;
+    }
+    .flyout-commitment__check {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .flyout-commitment__check input[type="checkbox"] {
+      appearance: none;
+      width: 16px; height: 16px; min-width: 16px;
+      border: 1.5px solid var(--color-grey-70);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      margin: 0;
+      cursor: pointer;
+    }
+    .flyout-commitment__check input[type="checkbox"]:checked {
+      background: var(--color-secondary-medium);
+      border-color: var(--color-secondary-medium);
+    }
+    .flyout-commitment__text {
+      display: flex;
+      gap: 4px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      padding-top: 6px;
+    }
+    .flyout-commitment__text .required { color: var(--destructive-muted-dark); flex-shrink: 0; }
+    .flyout-spacer { height: 120px; flex-shrink: 0; }
+
+    /* Flyout Section Header — simple title row */
+    .flyout-section__header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Text-selection commenting */
+    .flyout-field {
+      position: relative;
+    }
+    .flyout-answer {
+      width: 100%;
+      padding: 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-grey-50);
+      border-radius: var(--radius-lg);
+      background: var(--color-grey-40);
+      box-sizing: border-box;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      cursor: text;
+      user-select: text;
+      position: relative;
+      -webkit-user-select: text;
+    }
+    .flyout-answer-single {
+      width: 100%;
+      padding: 16px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-grey-50);
+      border-radius: var(--radius-lg);
+      background: var(--color-grey-40);
+      box-sizing: border-box;
+      user-select: text;
+      -webkit-user-select: text;
+      position: relative;
+    }
+
+    /* Answer hover tooltip — cursor-following */
+    .cursor-tooltip {
+      position: fixed;
+      padding: 6px 12px;
+      background: var(--color-dark-primary);
+      color: var(--color-text-light);
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 18px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 10000;
+      transition: opacity var(--duration-standard) var(--ease-default);
+    }
+    .cursor-tooltip.is-visible { opacity: 1; }
+
+    /* Highlighted text */
+    .flyout-answer .highlight,
+    .flyout-answer-single .highlight {
+      background: var(--warning-muted-med);
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 0 1px;
+    }
+    .flyout-answer .highlight:hover,
+    .flyout-answer-single .highlight:hover {
+      background: var(--warning-muted-dark);
+    }
+    .flyout-answer .highlight.active,
+    .flyout-answer-single .highlight.active {
+      background: var(--warning-muted-dark);
+    }
+
+    /* Selection popover — appears on text select */
+    .selection-popover {
+      position: fixed;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--color-dark-primary);
+      color: var(--color-text-light);
+      border-radius: var(--radius-pill-sm);
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 18px;
+      cursor: pointer;
+      z-index: 10000;
+      box-shadow: var(--shadow-card-hover);
+      white-space: nowrap;
+      user-select: none;
+      transition: opacity var(--duration-fast) var(--ease-default);
+    }
+    .selection-popover.is-visible { display: inline-flex; }
+    .selection-popover svg {
+      width: 12px; height: 12px;
+      stroke: var(--color-text-light);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .selection-popover:hover { opacity: 0.9; }
+
+    /* Comment dialog — appears on popover click */
+    .comment-dialog-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      display: none;
+    }
+    .comment-dialog-overlay.is-open { display: block; }
+    .comment-dialog {
+      position: fixed;
+      z-index: 10002;
+      width: 340px;
+      right: 48px;
+      bottom: 48px;
+      background: var(--color-light-secondary);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card-hover);
+      border: 1px solid var(--color-border-primary);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .comment-dialog.is-open { display: flex; }
+    .comment-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-grey-50);
+    }
+    .comment-dialog__title {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: var(--color-text-dark);
+    }
+    .comment-dialog__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 0;
+    }
+    .comment-dialog__close:hover { background: var(--color-bg-page); }
+    .comment-dialog__close svg {
+      width: 14px; height: 14px;
+      stroke: var(--color-text-muted-med);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+    .comment-dialog__body {
+      padding: 12px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .comment-dialog__quote {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      color: var(--color-text-muted-dark);
+      font-style: italic;
+      padding: 8px 10px;
+      background: var(--warning-muted-light);
+      border-left: 3px solid var(--warning-muted-dark);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .comment-dialog__textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-grey-50);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .comment-dialog__textarea::placeholder { color: var(--color-text-muted-med); }
+    .comment-dialog__textarea:focus { border-color: var(--color-border-secondary); }
+    .comment-dialog__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 0 16px 12px;
+    }
+    .comment-dialog__cancel {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: var(--color-text-link);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill-md);
+    }
+    .comment-dialog__cancel:hover { background: var(--color-blue-hover); }
+    .comment-dialog__submit {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      background: var(--color-secondary-medium);
+      border: none;
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill-md);
+    }
+    .comment-dialog__submit:hover { background: var(--color-secondary-dark); }
+
+    /* Inline annotation below a highlighted field */
+    .flyout-annotation {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 0;
+      padding: 8px 0;
+      background: var(--warning-muted-light);
+      border-radius: var(--radius-sm);
+      animation: fadeSlideIn 200ms ease-out;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .flyout-annotation__marker {
+      width: 4px;
+      min-height: 100%;
+      background: var(--warning-muted-dark);
+      border-radius: 2px;
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .flyout-annotation__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .flyout-annotation__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .flyout-annotation__quote {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.24px;
+      color: var(--color-text-muted-dark);
+      font-style: italic;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 280px;
+    }
+    .flyout-annotation__input {
+      width: 100%;
+      min-height: 36px;
+      padding: 8px 10px;
+      font-family: var(--font-family);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-border-primary);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .flyout-annotation__input::placeholder { color: var(--color-text-muted-med); }
+    .flyout-annotation__input:focus { border-color: var(--color-border-secondary); }
+    /* Annotation button SVG stroke override */
+    .flyout-annotation__header .btn svg {
+      stroke-width: 1;
+    }
+    .flyout-annotation__meta {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.24px;
+      color: var(--color-text-muted-med);
+    }
+    .flyout-annotation__meta strong {
+      color: var(--color-text-muted-dark);
+      font-weight: 600;
+    }
+    .flyout-annotation__comment {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      margin: -3px 0 8px 0;
+    }
+    /* Reply thread (lead instructor response) */
+    .flyout-annotation__reply {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 12px;
+      background: var(--color-grey-10);
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--color-primary-70);
+    }
+    .flyout-annotation__reply-comment {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+    }
+    .flyout-annotation__reply-meta {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.24px;
+      color: var(--color-text-muted-med);
+    }
+    .flyout-annotation__reply-meta strong {
+      color: var(--color-text-muted-dark);
+      font-weight: 600;
+    }
+    .flyout-annotation__reply-action {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 18px;
+      color: var(--color-primary-70);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-top: 2px;
+      align-self: flex-start;
+    }
+    .flyout-annotation__reply-action:hover {
+      text-decoration: underline;
+    }
+    /* Inline reply input area */
+    .flyout-annotation__reply-form {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .flyout-annotation__reply-form.is-open {
+      display: flex;
+    }
+    .flyout-annotation__reply-form textarea {
+      width: 100%;
+      min-height: 36px;
+      padding: 8px 10px;
+      font-family: var(--font-family);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--color-text-dark);
+      border: 1px solid var(--color-border-primary);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .flyout-annotation__reply-form textarea::placeholder {
+      color: var(--color-text-muted-med);
+    }
+    .flyout-annotation__reply-form textarea:focus {
+      border-color: var(--color-border-secondary);
+    }
+    .flyout-annotation__reply-form-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .flyout-annotation__resolve {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .flyout-annotation__resolve input[type="checkbox"] {
+      appearance: none;
+      width: 16px; height: 16px; min-width: 16px;
+      border: 1.5px solid var(--color-grey-70);
+      border-radius: var(--radius-sm);
+      background: var(--color-grey-0);
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+    }
+    .flyout-annotation__resolve input[type="checkbox"]:checked {
+      background: var(--color-secondary-medium);
+      border-color: var(--color-secondary-medium);
+    }
+    .flyout-annotation__resolve input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 5px;
+      width: 4px; height: 8px;
+      border: solid var(--color-grey-0);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .flyout-annotation__resolve span {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--color-text-muted-dark);
+    }
+    .flyout-annotation.is-resolved {
+      opacity: 0.5;
+    }
+    .flyout-annotation.is-resolved .highlight {
+      background: var(--color-grey-50);
+    }
+
+    /* Approve button disabled state */
+    .flyout__header-approve.is-disabled {
+      background: var(--color-grey-50);
+      color: var(--color-grey-80);
+      cursor: not-allowed;
+    }
+    .flyout__header-approve.is-disabled:hover {
+      background: var(--color-grey-50);
+    }
+    .flyout-annotation__edit svg {
+      width: 12px; height: 12px;
+      stroke: var(--color-text-link);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Flyout inline modal (Request Changes confirmation) */
+    .flyout-modal-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 15, 29, 0.4);
+      z-index: 9998;
+      align-items: center;
+      justify-content: center;
+    }
+    .flyout-modal-overlay.is-open {
+      display: flex;
+    }
+    .flyout-modal {
+      width: 600px;
+      max-width: calc(100% - 48px);
+      background: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 0 32px rgba(3, 15, 29, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flyout-modal__tools {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding: 16px 16px 0;
+    }
+    .flyout-modal__close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+    }
+    .flyout-modal__close:hover {
+      background: var(--color-primary-20);
+    }
+    .flyout-modal__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 48px 48px;
+      gap: 16px;
+      text-align: center;
+    }
+    .flyout-modal__illustration {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      background: var(--success-muted-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .flyout-modal__title {
+      font-family: var(--font-family);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 32px;
+      color: var(--color-text-dark);
+      margin: 0;
+    }
+    .flyout-modal__body {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-muted-med);
+      margin: 0;
+      max-width: 400px;
+    }
+    .flyout-modal__cta {
+      margin-top: 8px;
+    }
+
+    /* Flyout header — review actions */
+    .flyout__header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    .flyout__header-request {
+      display: none;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 24px;
+      border: 1px solid var(--color-primary-70);
+      background: transparent;
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--color-primary-70);
+      cursor: pointer;
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .flyout__header-request.is-visible { display: inline-flex; }
+    .flyout__header-request:hover { background: rgba(0,89,184,0.12); }
+    .flyout__header-request__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      margin-left: 4px;
+      border-radius: 10px;
+      background: var(--destructive-muted-dark);
+      font-family: var(--font-family);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 14px;
+      color: var(--color-text-light);
+    }
+
+    /* Flyout read-only state */
+    .flyout__content--readonly .flyout-radio-item {
+      pointer-events: none;
+    }
+    .flyout__content--readonly .flyout-commitment__check input[type="checkbox"] {
+      pointer-events: none;
+    }
+
+    /* Checkbox field row — uses DS .checkbox inside */
+    .checkbox-field {
+      padding: 0 4px 0 144px;
+    }
+
+    /* Info note */
+    .info-note {
+      display: flex; align-items: center;
+      padding: 0 4px 6px;
+    }
+    .info-note__icon {
+      display: flex; align-items: flex-start; padding: 3px;
+    }
+    .info-note__icon svg { width: 16px; height: 16px; stroke: var(--color-text-secondary); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .info-note__text {
+      flex: 1; min-width: 0;
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-secondary);
+    }
+
+    /* Inline Tools (+ Learning Element, + Sub group) */
+    .inline-tools {
+      display: flex; flex-direction: column; gap: 8px;
+      align-items: flex-start;
+    }
+    .inline-tools__divider {
+      align-self: stretch;
+      height: 1px;
+      background: var(--color-secondary-light);
+    }
+
+    /* Section-level tools (full width) */
+    .section-tools {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 0 12px;
+    }
+    .section-tools__divider {
+      width: 100%; height: 1px;
+      background: var(--color-secondary-light);
+    }
+
+    /* Sub group button uses .btn .btn--sm .btn--secondary from DS */
+
+    /* Bottom area */
+    .bottom-section {
+      padding: 12px 12px 24px;
+    }
+
+    /* ========================================
+       DS EDITOR FORM COMPONENTS
+       ======================================== */
+
+    /* Editor Form — Standard Text Field */
+    .editor-field {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .editor-field__input {
+      width: 100%;
+      padding: 4px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: background 0.15s ease;
+      cursor: text;
+      box-sizing: border-box;
+      resize: none;
+      overflow: hidden;
+      min-height: 28px;
+    }
+    .editor-field__input::placeholder {
+      color: var(--color-text-muted-med);
+    }
+    .editor-field__input:hover,
+    .editor-field__input:focus {
+      background: var(--color-primary-20);
+    }
+
+    /* Editor Form — Standard Text Field with Action */
+    .editor-action {
+      position: relative;
+      width: 100%;
+    }
+    .editor-action__row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+    }
+    .editor-action:hover .editor-action__row,
+    .editor-action:focus-within .editor-action__row {
+      background: var(--color-primary-20);
+    }
+    .editor-action__input {
+      flex: 1;
+      min-width: 0;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      min-height: 20px;
+      padding: 0;
+    }
+    .editor-action__input::placeholder {
+      color: var(--color-text-muted-med);
+    }
+    .editor-action:hover .editor-action__input--filled,
+    .editor-action:focus-within .editor-action__input--filled {
+      text-decoration: underline;
+    }
+    .editor-action__icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      padding: 2px 0;
+    }
+    .editor-action__icons svg {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    .editor-action__icons svg path {
+      stroke: var(--color-text-muted-med);
+      transition: stroke 0.15s ease;
+    }
+    .editor-action:hover .editor-action__icons svg,
+    .editor-action:focus-within .editor-action__icons svg {
+      opacity: 1;
+    }
+    .editor-action__icons svg:hover path {
+      stroke: var(--color-text-dark);
+    }
+
+    /* Editor Form — Dropdown Field */
+    .editor-dropdown {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .editor-dropdown__trigger {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .editor-dropdown__trigger:hover {
+      background: var(--color-primary-20);
+    }
+    .editor-dropdown__text {
+      flex: 1;
+      min-width: 0;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-muted-med);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .editor-dropdown__text--filled {
+      color: var(--color-text-dark);
+    }
+    .editor-dropdown__chevron {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.2s ease;
+      padding: 2px 0;
+    }
+    .editor-dropdown__chevron path {
+      stroke: var(--color-text-muted-med);
+    }
+    .editor-dropdown__trigger:hover .editor-dropdown__chevron {
+      opacity: 1;
+    }
+    .editor-dropdown.open .editor-dropdown__trigger {
+      background: var(--color-primary-20);
+    }
+    .editor-dropdown.open .editor-dropdown__chevron {
+      opacity: 1;
+      transform: rotate(180deg);
+    }
+    .editor-dropdown__panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      margin-top: 2px;
+    }
+    .editor-dropdown.open .editor-dropdown__panel {
+      display: block;
+    }
+
+    /* Editor Form — Date Picker */
+    .editor-datepicker {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .editor-datepicker__trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .editor-datepicker__trigger:hover {
+      background: var(--color-primary-20);
+    }
+    .editor-datepicker__text {
+      flex: 1;
+      min-width: 0;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-muted-med);
+    }
+    .editor-datepicker__text--filled {
+      color: var(--color-text-dark);
+    }
+    .editor-datepicker__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      padding: 2px 0;
+      transition: opacity 0.15s ease;
+    }
+    .editor-datepicker__icon path {
+      stroke: var(--color-text-muted-med);
+      transition: stroke 0.15s ease;
+    }
+    .editor-datepicker__trigger:hover .editor-datepicker__icon path {
+      stroke: var(--color-text-dark);
+    }
+    .editor-datepicker.open .editor-datepicker__trigger {
+      background: var(--color-primary-20);
+    }
+    .editor-datepicker.open .editor-datepicker__icon path {
+      stroke: var(--color-text-dark);
+    }
+    .editor-datepicker__panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      margin-top: 0;
+    }
+    .editor-datepicker.open .editor-datepicker__panel {
+      display: block;
+    }
+
+    /* Content Field Row */
+    .content-field-row {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      position: relative;
+    }
+    .content-field-row__label {
+      width: 148px;
+      min-width: 148px;
+      padding: 5px 4px;
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--color-text-muted-dark);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      box-sizing: border-box;
+    }
+    .content-field-row__label .required-star {
+      color: var(--destructive-muted-dark);
+    }
+    .content-field-row__field {
+      flex: 1;
+      min-width: 0;
+    }
+    .content-field-row__field .editor-field,
+    .content-field-row__field .editor-action,
+    .content-field-row__field .editor-dropdown,
+    .content-field-row__field .editor-datepicker {
+      width: 100%;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+      display: inline-flex;
+      background: var(--color-grey-0);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card-hover);
+      overflow: hidden;
+    }
+    .dropdown-menu__list {
+      flex: 1; min-width: 0;
+      padding: 4px 0;
+      max-height: 280px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .dropdown-menu__list::-webkit-scrollbar { width: 8px; }
+    .dropdown-menu__list::-webkit-scrollbar-track { background: transparent; }
+    .dropdown-menu__list::-webkit-scrollbar-thumb { background: #D9D9D9; border-radius: 2px; border: 2px solid transparent; background-clip: padding-box; }
+    .dropdown-item {
+      padding: 8px 12px;
+      font-size: 12px; font-weight: 400; line-height: 18px;
+      color: var(--color-text-muted-dark);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .dropdown-item:hover { background: var(--color-primary-20); color: var(--color-text-dark); }
+    .dropdown-item.selected { background: var(--color-primary-20); color: var(--color-text-dark); }
+
+    /* Calendar */
+    .calendar-demo {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      background: var(--color-bg-surface);
+      border: 1px solid #C2DFFF;
+      border-radius: var(--radius-lg);
+      box-shadow: 0px 0px 32px 0px rgba(3, 15, 29, 0.2);
+    }
+    .calendar-head {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 0;
+    }
+    .calendar-head-controls {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-width: 0;
+    }
+    .calendar-head-label {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      white-space: nowrap;
+    }
+    .calendar-nav {
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: none; background: transparent;
+      border-radius: 20px; cursor: pointer;
+      flex-shrink: 0;
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .calendar-nav:hover { background: var(--color-bg-page); }
+    .calendar-nav svg { width: 16px; height: 16px; stroke: var(--color-text-dark); fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 36px);
+      gap: 2px;
+      justify-content: center;
+    }
+    .calendar-weekday {
+      height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 18px;
+      color: var(--color-text-muted-med);
+    }
+    .calendar-day {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+      border-radius: 18px; cursor: pointer;
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .calendar-day:hover { background: #D1FFEF; }
+    .calendar-day.selected { background: var(--color-secondary-medium); }
+    .calendar-day.inactive { color: var(--color-text-muted-med); cursor: default; }
+    .calendar-day.inactive:hover { background: transparent; }
+
+    /* ========================================
+       RESPONSIVE (desktop only 768-1440)
+       ======================================== */
+    @media (max-width: 1024px) {
+      .sub-section__left { width: 180px; min-width: 180px; }
+      .week-header__left { width: 180px; min-width: 180px; }
+      .field-label { width: 120px; min-width: 120px; }
+      .content-field-row__label { width: 120px; min-width: 120px; }
+      .checkbox-field { padding-left: 124px; }
+      .content-area { padding: 0 8px 48px; }
+      .toolbar-demo { padding: 12px 8px; }
+      .content-wrap { margin: 0 16px 24px; }
+      .header-demo { padding: 12px 16px 0; }
+    }
+
+    @media (max-width: 868px) {
+      .item-body { flex-direction: column; gap: 0; }
+      .item-body__left { padding-right: 0; }
+      .item-name-row { flex-direction: column; gap: 4px; }
+      .sub-section__left { width: 160px; min-width: 160px; }
+      .week-header__left { width: 160px; min-width: 160px; }
+      .content-field-row { flex-direction: column; gap: 2px; }
+      .content-field-row__label { width: 100%; min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Left Navigation -->
+    <nav class="nav-demo nav-demo--level2">
+      <!-- Home -->
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9.02 2.84001L3.63 7.04001C2.73 7.74001 2 9.23001 2 10.36V17.77C2 20.09 3.89 21.99 6.21 21.99H17.79C20.11 21.99 22 20.09 22 17.78V10.5C22 9.29001 21.19 7.74001 20.2 7.05001L14.02 2.72001C12.62 1.74001 10.37 1.79001 9.02 2.84001Z"/><path d="M12 17.99V14.99"/></svg>
+        <span>Home</span>
+      </div>
+      <!-- Program settings -->
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M18 3H6C4.89543 3 4 3.89543 4 5V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V5C20 3.89543 19.1046 3 18 3Z"/><path d="M7 7H17"/><path d="M8 10.5C8.27614 10.5 8.5 10.7239 8.5 11C8.5 11.2761 8.27614 11.5 8 11.5C7.72386 11.5 7.5 11.2761 7.5 11C7.5 10.7239 7.72386 10.5 8 10.5Z" fill="currentColor"/><path d="M11 11H17"/><path d="M8 16C8.55228 16 9 15.5523 9 15C9 14.4477 8.55228 14 8 14C7.44772 14 7 14.4477 7 15C7 15.5523 7.44772 16 8 16Z" fill="currentColor"/><path d="M11 15H17"/></svg>
+        <span>Program<br>settings</span>
+      </div>
+      <!-- Graduation -->
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19 9C19 10.45 18.57 11.78 17.83 12.89C16.75 14.49 15.04 15.62 13.05 15.91C12.71 15.97 12.36 16 12 16C11.64 16 11.29 15.97 10.95 15.91C8.96 15.62 7.25 14.49 6.17 12.89C5.43 11.78 5 10.45 5 9C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9Z"/><path d="M21.2501 18.47L19.6001 18.86C19.2301 18.95 18.9401 19.23 18.8601 19.6L18.5101 21.07C18.3201 21.87 17.3001 22.11 16.7701 21.48L12.0001 16L7.23008 21.49C6.70008 22.12 5.68008 21.88 5.49008 21.08L5.14008 19.61C5.05008 19.24 4.76008 18.95 4.40008 18.87L2.75008 18.48C1.99008 18.3 1.72008 17.35 2.27008 16.8L6.17008 12.9C7.25008 14.5 8.96008 15.63 10.9501 15.92C11.2901 15.98 11.6401 16.01 12.0001 16.01C12.3601 16.01 12.7101 15.98 13.0501 15.92C15.0401 15.63 16.7501 14.5 17.8301 12.9L21.7301 16.8C22.2801 17.34 22.0101 18.29 21.2501 18.47Z"/><path d="M12.58 5.98L13.17 7.15999C13.25 7.31999 13.46 7.48 13.65 7.51L14.72 7.68999C15.4 7.79999 15.56 8.3 15.07 8.79L14.24 9.61998C14.1 9.75998 14.02 10.03 14.07 10.23L14.31 11.26C14.5 12.07 14.07 12.39 13.35 11.96L12.35 11.37C12.17 11.26 11.87 11.26 11.69 11.37L10.69 11.96C9.96997 12.38 9.53997 12.07 9.72997 11.26L9.96997 10.23C10.01 10.04 9.93997 9.75998 9.79997 9.61998L8.96997 8.79C8.47997 8.3 8.63997 7.80999 9.31997 7.68999L10.39 7.51C10.57 7.48 10.78 7.31999 10.86 7.15999L11.45 5.98C11.74 5.34 12.26 5.34 12.58 5.98Z"/></svg>
+        <span>Graduation</span>
+      </div>
+      <!-- Managing Staff -->
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12.1596 10.87C12.0596 10.86 11.9396 10.86 11.8296 10.87C9.44957 10.79 7.55957 8.84 7.55957 6.44C7.55957 3.99 9.53957 2 11.9996 2C14.4496 2 16.4396 3.99 16.4396 6.44C16.4296 8.84 14.5396 10.79 12.1596 10.87Z"/><path d="M7.15973 14.56C4.73973 16.18 4.73973 18.82 7.15973 20.43C9.90973 22.27 14.4197 22.27 17.1697 20.43C19.5897 18.81 19.5897 16.17 17.1697 14.56C14.4297 12.73 9.91973 12.73 7.15973 14.56Z"/></svg>
+        <span>Managing<br>Staff</span>
+      </div>
+      <!-- Schedule & Content (selected) -->
+      <div class="nav-item selected">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13"/><path d="M16.0399 3.02001L8.15988 10.9C7.85988 11.2 7.55988 11.79 7.49988 12.22L7.06988 15.23C6.90988 16.32 7.67988 17.08 8.76988 16.93L11.7799 16.5C12.1999 16.44 12.7899 16.14 13.0999 15.84L20.9799 7.96001C22.3399 6.60001 22.9799 5.02001 20.9799 3.02001C18.9799 1.02001 17.3999 1.66001 16.0399 3.02001Z"/><path d="M14.9102 4.15002C15.5802 6.54002 17.4502 8.41002 19.8502 9.09002"/></svg>
+        <span>Schedule &amp;<br>Content</span>
+      </div>
+      <!-- Learner -->
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M18.0001 7.16C17.9401 7.15 17.8701 7.15 17.8101 7.16C16.4301 7.11 15.3301 5.98 15.3301 4.58C15.3301 3.15 16.4801 2 17.9101 2C19.3401 2 20.4901 3.16 20.4901 4.58C20.4801 5.98 19.3801 7.11 18.0001 7.16Z"/><path d="M16.9704 14.44C18.3404 14.67 19.8504 14.43 20.9104 13.72C22.3204 12.78 22.3204 11.24 20.9104 10.3C19.8404 9.59004 18.3104 9.35003 16.9404 9.59003"/><path d="M5.97047 7.16C6.03047 7.15 6.10047 7.15 6.16047 7.16C7.54047 7.11 8.64047 5.98 8.64047 4.58C8.64047 3.15 7.49047 2 6.06047 2C4.63047 2 3.48047 3.16 3.48047 4.58C3.49047 5.98 4.59047 7.11 5.97047 7.16Z"/><path d="M7.00043 14.44C5.63043 14.67 4.12043 14.43 3.06043 13.72C1.65043 12.78 1.65043 11.24 3.06043 10.3C4.13043 9.59004 5.66043 9.35003 7.03043 9.59003"/><path d="M12.0001 14.63C11.9401 14.62 11.8701 14.62 11.8101 14.63C10.4301 14.58 9.33008 13.45 9.33008 12.05C9.33008 10.62 10.4801 9.46997 11.9101 9.46997C13.3401 9.46997 14.4901 10.63 14.4901 12.05C14.4801 13.45 13.3801 14.59 12.0001 14.63Z"/><path d="M9.08973 17.78C7.67973 18.72 7.67973 20.26 9.08973 21.2C10.6897 22.27 13.3097 22.27 14.9097 21.2C16.3197 20.26 16.3197 18.72 14.9097 17.78C13.3197 16.72 10.6897 16.72 9.08973 17.78Z"/></svg>
+        <span>Learner</span>
+      </div>
+    </nav>
+
+    <!-- Main Area -->
+    <main class="main-area">
+      <!-- Header — DS Page Header -->
+      <header class="header-demo">
+        <div class="header-meta">
+          <div class="header-left">
+            <span class="header-program">Data Analytics 14 (USA)</span>
+            <div class="header-separator"></div>
+            <span class="header-code">AMZN-DANA-014</span>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <div class="page-tabs">
+              <div class="page-tab active" data-tab="header">
+                <span class="page-tab__label">Program schedule</span>
+                <div class="page-tab__bar"></div>
+              </div>
+              <div class="page-tab" data-tab="header">
+                <span class="page-tab__label">Resources</span>
+                <div class="page-tab__bar"></div>
+              </div>
+              <div class="page-tab" data-tab="header">
+                <span class="page-tab__label">PD Resources</span>
+                <div class="page-tab__bar"></div>
+              </div>
+            </div>
+            <button class="settings-btn" title="Settings">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" /><path d="M2 12.88V11.12C2 10.08 2.85 9.22 3.9 9.22C5.71 9.22 6.45 7.94 5.54 6.37C5.02 5.47 5.33 4.3 6.24 3.78L7.97 2.79C8.76 2.32 9.78 2.6 10.25 3.39L10.36 3.58C11.26 5.15 12.74 5.15 13.65 3.58L13.76 3.39C14.23 2.6 15.25 2.32 16.04 2.79L17.77 3.78C18.68 4.3 18.99 5.47 18.47 6.37C17.56 7.94 18.3 9.22 20.11 9.22C21.15 9.22 22.01 10.07 22.01 11.12V12.88C22.01 13.92 21.16 14.78 20.11 14.78C18.3 14.78 17.56 16.06 18.47 17.63C18.99 18.54 18.68 19.7 17.77 20.22L16.04 21.21C15.25 21.68 14.23 21.4 13.76 20.61L13.65 20.42C12.75 18.85 11.27 18.85 10.36 20.42L10.25 20.61C9.78 21.4 8.76 21.68 7.97 21.21L6.24 20.22C5.33 19.7 5.02 18.53 5.54 17.63C6.45 16.06 5.71 14.78 3.9 14.78C2.85 14.78 2 13.92 2 12.88Z" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="header-title">Program Schedule</div>
+      </header>
+
+      <!-- Content Wrap (white card with 24px side margins) -->
+      <div class="content-wrap">
+      <!-- Toolbar -->
+      <div class="toolbar-demo">
+        <div class="toolbar-left">
+          <button class="btn-tertiary-icon">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" /><path d="M8 12V4" /></svg>
+            <span>Group</span>
+          </button>
+          <button class="btn-tertiary-icon">
+            <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" /><rect x="9" y="2" width="5" height="5" rx="1" /><rect x="2" y="9" width="5" height="5" rx="1" /><rect x="9" y="9" width="5" height="5" rx="1" /></svg>
+            <span>Rubric</span>
+          </button>
+        </div>
+        <div class="toolbar-right">
+          <div class="search-bar">
+            <input type="text" class="search-bar__input" placeholder="Search by week (e.g., Week 6)">
+            <div class="search-bar__icon">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="7.33" cy="7.33" r="5.33" /><path d="M14 14L12 12" /></svg>
+            </div>
+          </div>
+          <button class="action-btn" title="Filter">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M3.6 1.33H12.4C13.13 1.33 13.73 1.93 13.73 2.66V4.13C13.73 4.66 13.4 5.33 13.07 5.66L10.2 8.2C9.8 8.53 9.53 9.2 9.53 9.73V12.6C9.53 13 9.27 13.53 8.93 13.73L8 14.33C7.13 14.87 5.93 14.27 5.93 13.2V9.67C5.93 9.2 5.67 8.6 5.4 8.27L2.87 5.6C2.53 5.27 2.27 4.66 2.27 4.27V2.73C2.27 1.93 2.87 1.33 3.6 1.33Z" /></svg>
+          </button>
+          <button class="action-btn" title="Share">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M5.27 9.63L10.74 12.71" /><path d="M10.73 3.29L5.27 6.37" /><circle cx="3.33" cy="8" r="2" /><circle cx="12.67" cy="2.67" r="2" /><circle cx="12.67" cy="13.33" r="2" /></svg>
+          </button>
+          <button class="btn btn--sm btn--primary">save</button>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content-area">
+        <!-- Week 1 -->
+        <div class="week-section">
+          <div class="week-header">
+            <div class="week-header__left">
+              <div class="editor-field" style="flex:1;">
+                <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Week 1</textarea>
+              </div>
+              <button class="week-more-btn">
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
+              </button>
+            </div>
+            <div class="week-header__right">
+              <div class="editor-field" style="width:100%;">
+                <textarea class="editor-field__input" rows="1" placeholder="Description" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub Section: Fri 21 March 2025 — Break Day -->
+        <div class="sub-section">
+          <div class="sub-section__left">
+            <div class="date-title" style="display:flex; align-items:center; gap:4px;">
+              <div class="editor-datepicker" data-editor-dp style="flex:1;">
+                <div class="editor-datepicker__trigger" onclick="toggleEditorDatepicker(this)">
+                  <span class="editor-datepicker__text editor-datepicker__text--filled">Fri 21 March 2025</span>
+                  <svg class="editor-datepicker__icon" viewBox="0 0 16 16" fill="none"><path d="M5.333 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.667 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.333 6.06h11.333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 5.667v5.666c0 2-1 3.334-3.333 3.334H5.333C3 14.667 2 13.333 2 11.333V5.667c0-2 1-3.334 3.333-3.334h5.334C13 2.333 14 3.667 14 5.667z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="editor-datepicker__panel">
+                  <div class="calendar-demo" style="margin:0;">
+                    <div class="calendar-head">
+                      <div class="calendar-head-controls">
+                        <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,-1)"><svg viewBox="0 0 16 16" fill="none"><path d="M9.77124 4L6 7.77124 9.77124 11.5425" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                        <span class="calendar-head-label">March 2025</span>
+                        <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,1)"><svg viewBox="0 0 16 16" fill="none"><path d="M6 11.5425L9.77124 7.77124 6 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="calendar-grid"></div>
+                  </div>
+                </div>
+              </div>
+              <button class="date-title__more">
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
+              </button>
+            </div>
+          </div>
+          <div class="sub-section__right">
+            <!-- Break Day Item -->
+            <div class="schedule-item">
+              <div class="schedule-item__divider"></div>
+              <div class="schedule-item__header">
+                <div class="schedule-item__checkbox">
+                  <label class="checkbox" data-checkbox="break-1">
+                    <input type="checkbox" class="checkbox__input">
+                    <span class="checkbox__box">
+                      <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                      <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                    </span>
+                  </label>
+                </div>
+                <div class="schedule-item__content">
+                  <div class="item-title-row">
+                    <div class="item-name-left">
+                      <span class="content-type content-type--break">Break Day</span>
+                      <div class="item-name">
+                        <span class="item-name__required">*</span>
+                        <div class="editor-field" style="flex:1;">
+                          <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Break Day</textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-actions">
+                      <!-- down -->
+                      <button class="item-action-btn" title="Move down">
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M8 3V13" /><path d="M12 9L8 13L4 9" /></svg>
+                      </button>
+                      <!-- up -->
+                      <button class="item-action-btn" title="Move up">
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M8 13V3" /><path d="M4 7L8 3L12 7" /></svg>
+                      </button>
+                      <!-- hide -->
+                      <button class="item-action-btn" title="Hide">
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M9.69 6.31L6.31 9.69C5.88 9.26 5.61 8.66 5.61 8C5.61 6.67 6.68 5.6 8.01 5.6C8.67 5.6 9.27 5.87 9.69 6.31Z" /><path d="M11.88 3.84C10.71 2.97 9.38 2.49 8 2.49C5.65 2.49 3.47 3.87 1.93 6.27C1.28 7.28 1.28 8.73 1.93 9.74C2.52 10.64 3.21 11.41 3.98 12.01" /><path d="M5.61 13.05C6.37 13.37 7.18 13.55 8 13.55C10.35 13.55 12.53 12.17 14.07 9.77C14.72 8.76 14.72 7.31 14.07 6.3C13.82 5.91 13.54 5.55 13.25 5.21" /><path d="M10.36 8.47C10.17 9.47 9.37 10.27 8.37 10.46" /><path d="M6.31 9.69L1.33 14.67" /><path d="M14.67 1.33L9.69 6.31" /></svg>
+                      </button>
+                      <!-- delete -->
+                      <button class="item-action-btn" title="Delete">
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M14 3.99C11.78 3.77 9.55 3.65 7.32 3.65C6 3.65 4.68 3.72 3.36 3.85L2 3.99" /><path d="M5.67 3.31L5.81 2.44C5.91 1.81 6 1.33 7.13 1.33H8.87C10 1.33 10.1 1.83 10.19 2.45L10.33 3.31" /><path d="M12.57 6.09L12.13 12.84C12.07 13.65 12 14.67 10.14 14.67H5.86C4 14.67 3.93 13.65 3.87 12.84L3.43 6.09" /><path d="M6.89 11H9.11" /><path d="M6.33 8.33H9.67" /></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Description -->
+                  <div class="item-desc-row">
+                    <div class="editor-field" style="width:100%;">
+                      <textarea class="editor-field__input" rows="1" placeholder="Description" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- + Learning Element -->
+            <div class="inline-tools">
+              <div class="inline-tools__divider"></div>
+              <button class="btn-tertiary-icon">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" /><path d="M8 12V4" /></svg>
+                <span>Learning Element</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub Section: Fri 7 April 2025 — Live Session + Lab 2 -->
+        <div class="sub-section">
+          <div class="sub-section__left">
+            <div class="date-title" style="display:flex; align-items:center; gap:4px;">
+              <div class="editor-datepicker" data-editor-dp style="flex:1;">
+                <div class="editor-datepicker__trigger" onclick="toggleEditorDatepicker(this)">
+                  <span class="editor-datepicker__text editor-datepicker__text--filled">Fri 7 April 2025</span>
+                  <svg class="editor-datepicker__icon" viewBox="0 0 16 16" fill="none"><path d="M5.333 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.667 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.333 6.06h11.333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 5.667v5.666c0 2-1 3.334-3.333 3.334H5.333C3 14.667 2 13.333 2 11.333V5.667c0-2 1-3.334 3.333-3.334h5.334C13 2.333 14 3.667 14 5.667z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="editor-datepicker__panel">
+                  <div class="calendar-demo" style="margin:0;">
+                    <div class="calendar-head">
+                      <div class="calendar-head-controls">
+                        <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,-1)"><svg viewBox="0 0 16 16" fill="none"><path d="M9.77124 4L6 7.77124 9.77124 11.5425" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                        <span class="calendar-head-label">April 2025</span>
+                        <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,1)"><svg viewBox="0 0 16 16" fill="none"><path d="M6 11.5425L9.77124 7.77124 6 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="calendar-grid"></div>
+                  </div>
+                </div>
+              </div>
+              <button class="date-title__more">
+                <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" /><circle cx="8" cy="13" r="1" fill="currentColor" stroke="none" /></svg>
+              </button>
+            </div>
+          </div>
+          <div class="sub-section__right">
+            <!-- Live Session Item -->
+            <div class="schedule-item">
+              <div class="schedule-item__divider"></div>
+              <div class="schedule-item__header">
+                <div class="schedule-item__checkbox">
+                  <label class="checkbox" data-checkbox="session-1">
+                    <input type="checkbox" class="checkbox__input">
+                    <span class="checkbox__box">
+                      <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                      <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                    </span>
+                  </label>
+                </div>
+                <div class="schedule-item__content">
+                  <!-- Module / Lesson row -->
+                  <div class="item-title-row">
+                    <div class="item-module-lesson">
+                      <span>Module</span>
+                      <span>/</span>
+                      <span>Lesson</span>
+                    </div>
+                    <div class="item-actions">
+                      <button class="item-action-btn" title="Collapse"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6L12 10" /></svg></button>
+                      <button class="item-action-btn" title="Move down"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3V13" /><path d="M12 9L8 13L4 9" /></svg></button>
+                      <button class="item-action-btn" title="Move up"><svg viewBox="0 0 16 16" fill="none"><path d="M8 13V3" /><path d="M4 7L8 3L12 7" /></svg></button>
+                      <button class="item-action-btn" title="Hide"><svg viewBox="0 0 16 16" fill="none"><path d="M9.69 6.31L6.31 9.69C5.88 9.26 5.61 8.66 5.61 8C5.61 6.67 6.68 5.6 8.01 5.6C8.67 5.6 9.27 5.87 9.69 6.31Z" /><path d="M11.88 3.84C10.71 2.97 9.38 2.49 8 2.49C5.65 2.49 3.47 3.87 1.93 6.27C1.28 7.28 1.28 8.73 1.93 9.74C2.52 10.64 3.21 11.41 3.98 12.01" /><path d="M5.61 13.05C6.37 13.37 7.18 13.55 8 13.55C10.35 13.55 12.53 12.17 14.07 9.77C14.72 8.76 14.72 7.31 14.07 6.3C13.82 5.91 13.54 5.55 13.25 5.21" /><path d="M10.36 8.47C10.17 9.47 9.37 10.27 8.37 10.46" /><path d="M6.31 9.69L1.33 14.67" /><path d="M14.67 1.33L9.69 6.31" /></svg></button>
+                      <button class="item-action-btn" title="Delete"><svg viewBox="0 0 16 16" fill="none"><path d="M14 3.99C11.78 3.77 9.55 3.65 7.32 3.65C6 3.65 4.68 3.72 3.36 3.85L2 3.99" /><path d="M5.67 3.31L5.81 2.44C5.91 1.81 6 1.33 7.13 1.33H8.87C10 1.33 10.1 1.83 10.19 2.45L10.33 3.31" /><path d="M12.57 6.09L12.13 12.84C12.07 13.65 12 14.67 10.14 14.67H5.86C4 14.67 3.93 13.65 3.87 12.84L3.43 6.09" /><path d="M6.89 11H9.11" /><path d="M6.33 8.33H9.67" /></svg></button>
+                    </div>
+                  </div>
+                  <!-- Name Row -->
+                  <div class="item-name-row">
+                    <div class="item-name-left">
+                      <span class="content-type-dropdown"><span class="content-type content-type--lesson"><span class="content-type__label">Live Session</span> <span class="content-type__chevron"><svg viewBox="0 0 16 16"><path d="M13 6L8.884 10.116a1 1 0 0 1-1.768 0L3 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span>
+                      <div class="item-name">
+                        <span class="item-name__required">*</span>
+                        <div class="editor-field" style="flex:1;">
+                          <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Windows OS Part 1</textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-name-right">
+                      <div class="item-time-row">
+                        <div class="item-time-icon">
+                          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" /><path d="M10.47 10.12L8.41 8.89C8.05 8.68 7.75 8.17 7.75 7.75V5.01" /></svg>
+                        </div>
+                        <span class="item-time-text">11:00am</span>
+                        <span class="item-time-text" style="padding: 4px 0;">-</span>
+                        <span class="item-time-text">1:00pm</span>
+                        <span class="item-time-text">Eastern time</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Description + Staff Row -->
+                  <div class="item-desc-row">
+                    <div style="flex:1;">
+                      <div class="editor-field">
+                        <textarea class="editor-field__input" rows="1" placeholder="Description" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                      </div>
+                    </div>
+                    <div class="item-staff-row" style="flex:1;">
+                      <div class="item-staff-icon">
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M8 8C9.84 8 11.33 6.51 11.33 4.67C11.33 2.83 9.84 1.33 8 1.33C6.16 1.33 4.67 2.83 4.67 4.67C4.67 6.51 6.16 8 8 8Z" /><path d="M13.73 14.67C13.73 12.09 11.16 10 8 10C4.84 10 2.27 12.09 2.27 14.67" /></svg>
+                      </div>
+                      <span class="item-staff-label">LI:</span>
+                      <span class="item-staff-value">Not assigned</span>
+                      <span class="item-staff-label">TA:</span>
+                      <span class="item-staff-value">Not assigned</span>
+                    </div>
+                  </div>
+
+                  <!-- Body separator -->
+                  <div class="body-separator"></div>
+
+                  <!-- Body Fields -->
+                  <div class="item-body">
+                    <div class="item-body__left">
+                      <!-- Lesson / LTI link -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Lesson / LTI link:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-action">
+                            <div class="editor-action__row">
+                              <textarea class="editor-action__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                              <div class="editor-action__icons">
+                                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Lecture recording -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Lecture recording:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Paste URL" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Lecture plan -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Lecture plan:</div>
+                        <div class="content-field-row__field">
+                          <div class="lecture-plan">
+                            <div class="lecture-plan__content">
+                              <span class="lecture-plan__status">Not submitted:</span>
+                              <span class="lecture-plan__text">Lecture plan</span>
+                            </div>
+                            <button class="lecture-plan__arrow" title="Go to lecture plan">
+                              <svg viewBox="0 0 16 16" fill="none"><path d="M3.953 8H12.047" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.467 3.953L12.513 8 8.467 12.047" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Optional for learner checkbox -->
+                      <div class="checkbox-field">
+                        <label class="checkbox" data-checkbox="optional-learner-1">
+                          <input type="checkbox" class="checkbox__input">
+                          <span class="checkbox__box">
+                            <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                            <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                          </span>
+                          <span class="checkbox__label">Optional for learner</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="item-body__right">
+                      <!-- LI/TA resources -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">LI/TA resources:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Notes -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Notes:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Enter text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab 2 / Assignment Item -->
+            <div class="schedule-item">
+              <div class="schedule-item__header">
+                <div class="schedule-item__checkbox" style="padding-top: 8px;">
+                  <label class="checkbox" data-checkbox="lab-1">
+                    <input type="checkbox" class="checkbox__input">
+                    <span class="checkbox__box">
+                      <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                      <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                    </span>
+                  </label>
+                </div>
+                <div class="schedule-item__content" style="border-top: 1px solid var(--color-secondary-light); padding-top: 8px;">
+                  <!-- Module / Lesson row -->
+                  <div class="item-title-row">
+                    <div class="item-module-lesson">
+                      <span>Module</span>
+                      <span>/</span>
+                      <span>Lesson</span>
+                    </div>
+                    <div class="item-actions">
+                      <button class="item-action-btn" title="Collapse"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6L12 10" /></svg></button>
+                      <button class="item-action-btn" title="Move down"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3V13" /><path d="M12 9L8 13L4 9" /></svg></button>
+                      <button class="item-action-btn" title="Move up"><svg viewBox="0 0 16 16" fill="none"><path d="M8 13V3" /><path d="M4 7L8 3L12 7" /></svg></button>
+                      <button class="item-action-btn" title="Hide"><svg viewBox="0 0 16 16" fill="none"><path d="M9.69 6.31L6.31 9.69C5.88 9.26 5.61 8.66 5.61 8C5.61 6.67 6.68 5.6 8.01 5.6C8.67 5.6 9.27 5.87 9.69 6.31Z" /><path d="M11.88 3.84C10.71 2.97 9.38 2.49 8 2.49C5.65 2.49 3.47 3.87 1.93 6.27C1.28 7.28 1.28 8.73 1.93 9.74C2.52 10.64 3.21 11.41 3.98 12.01" /><path d="M5.61 13.05C6.37 13.37 7.18 13.55 8 13.55C10.35 13.55 12.53 12.17 14.07 9.77C14.72 8.76 14.72 7.31 14.07 6.3C13.82 5.91 13.54 5.55 13.25 5.21" /><path d="M10.36 8.47C10.17 9.47 9.37 10.27 8.37 10.46" /><path d="M6.31 9.69L1.33 14.67" /><path d="M14.67 1.33L9.69 6.31" /></svg></button>
+                      <button class="item-action-btn" title="Delete"><svg viewBox="0 0 16 16" fill="none"><path d="M14 3.99C11.78 3.77 9.55 3.65 7.32 3.65C6 3.65 4.68 3.72 3.36 3.85L2 3.99" /><path d="M5.67 3.31L5.81 2.44C5.91 1.81 6 1.33 7.13 1.33H8.87C10 1.33 10.1 1.83 10.19 2.45L10.33 3.31" /><path d="M12.57 6.09L12.13 12.84C12.07 13.65 12 14.67 10.14 14.67H5.86C4 14.67 3.93 13.65 3.87 12.84L3.43 6.09" /><path d="M6.89 11H9.11" /><path d="M6.33 8.33H9.67" /></svg></button>
+                    </div>
+                  </div>
+                  <!-- Name Row with Due Date -->
+                  <div class="item-name-row">
+                    <div class="item-name-left">
+                      <span class="content-type-dropdown"><span class="content-type content-type--assignment"><span class="content-type__label">Review Module</span> <span class="content-type__chevron"><svg viewBox="0 0 16 16"><path d="M13 6L8.884 10.116a1 1 0 0 1-1.768 0L3 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span>
+                      <div class="item-name">
+                        <span class="item-name__required">*</span>
+                        <div class="editor-field" style="flex:1;">
+                          <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Lab 2</textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Description + Due Date -->
+                  <div class="item-desc-row">
+                    <div style="flex:1;">
+                      <div class="editor-field">
+                        <textarea class="editor-field__input" rows="1" placeholder="Description" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                      </div>
+                    </div>
+                    <div style="flex:1;">
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Due date:<span class="required-star">*</span></div>
+                        <div class="content-field-row__field">
+                          <div class="editor-datepicker" data-editor-dp>
+                            <div class="editor-datepicker__trigger" onclick="toggleEditorDatepicker(this)">
+                              <span class="editor-datepicker__text">Add due date</span>
+                              <svg class="editor-datepicker__icon" viewBox="0 0 16 16" fill="none"><path d="M5.333 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.667 1.333v2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.333 6.06h11.333" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 5.667v5.666c0 2-1 3.334-3.333 3.334H5.333C3 14.667 2 13.333 2 11.333V5.667c0-2 1-3.334 3.333-3.334h5.334C13 2.333 14 3.667 14 5.667z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="editor-datepicker__panel">
+                              <div class="calendar-demo" style="margin:0;">
+                                <div class="calendar-head">
+                                  <div class="calendar-head-controls">
+                                    <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,-1)"><svg viewBox="0 0 16 16" fill="none"><path d="M9.77124 4L6 7.77124 9.77124 11.5425" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                                    <span class="calendar-head-label">May 2026</span>
+                                    <button class="calendar-nav" onclick="event.stopPropagation();dpNav(this,1)"><svg viewBox="0 0 16 16" fill="none"><path d="M6 11.5425L9.77124 7.77124 6 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                                  </div>
+                                </div>
+                                <div class="calendar-grid"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Body separator -->
+                  <div class="body-separator"></div>
+
+                  <!-- Body Fields for Assignment -->
+                  <div class="item-body">
+                    <div class="item-body__left">
+                      <!-- Submission format -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Submission format:<span class="required-star">*</span></div>
+                        <div class="content-field-row__field">
+                          <div class="editor-dropdown" data-editor-dd>
+                            <div class="editor-dropdown__trigger" onclick="toggleEditorDropdown(this)">
+                              <span class="editor-dropdown__text">Select</span>
+                              <svg class="editor-dropdown__chevron" viewBox="0 0 16 16" fill="none"><path d="M13 6L8.88384 10.1162C8.39773 10.6023 7.60227 10.6023 7.11616 10.1162L3 6" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="editor-dropdown__panel">
+                              <div class="dropdown-menu" style="width:100%;">
+                                <div class="dropdown-menu__list" data-dropdown="sub-fmt">
+                                  <div class="dropdown-item" data-dd="sub-fmt" onclick="selectEditorDropdownItem(this)">File Upload</div>
+                                  <div class="dropdown-item" data-dd="sub-fmt" onclick="selectEditorDropdownItem(this)">Text Entry</div>
+                                  <div class="dropdown-item" data-dd="sub-fmt" onclick="selectEditorDropdownItem(this)">URL</div>
+                                  <div class="dropdown-item" data-dd="sub-fmt" onclick="selectEditorDropdownItem(this)">No Submission</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Rubric -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Rubric:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-dropdown" data-editor-dd>
+                            <div class="editor-dropdown__trigger" onclick="toggleEditorDropdown(this)">
+                              <span class="editor-dropdown__text">Select a rubric</span>
+                              <svg class="editor-dropdown__chevron" viewBox="0 0 16 16" fill="none"><path d="M13 6L8.88384 10.1162C8.39773 10.6023 7.60227 10.6023 7.11616 10.1162L3 6" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="editor-dropdown__panel">
+                              <div class="dropdown-menu" style="width:100%;">
+                                <div class="dropdown-menu__list" data-dropdown="rubric">
+                                  <div class="dropdown-item" data-dd="rubric" onclick="selectEditorDropdownItem(this)">Rubric A</div>
+                                  <div class="dropdown-item" data-dd="rubric" onclick="selectEditorDropdownItem(this)">Rubric B</div>
+                                  <div class="dropdown-item" data-dd="rubric" onclick="selectEditorDropdownItem(this)">Rubric C</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Assignment materials -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Assignment materials:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-action">
+                            <div class="editor-action__row">
+                              <textarea class="editor-action__input" rows="1" placeholder="standard text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                              <div class="editor-action__icons">
+                                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Learner grade -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Learner grade:<span class="required-star">*</span></div>
+                        <div class="content-field-row__field">
+                          <div class="editor-dropdown" data-editor-dd>
+                            <div class="editor-dropdown__trigger" onclick="toggleEditorDropdown(this)">
+                              <span class="editor-dropdown__text editor-dropdown__text--filled">Score and Pass/Fail</span>
+                              <svg class="editor-dropdown__chevron" viewBox="0 0 16 16" fill="none"><path d="M13 6L8.88384 10.1162C8.39773 10.6023 7.60227 10.6023 7.11616 10.1162L3 6" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="editor-dropdown__panel">
+                              <div class="dropdown-menu" style="width:100%;">
+                                <div class="dropdown-menu__list" data-dropdown="learner-grade">
+                                  <div class="dropdown-item" data-dd="learner-grade" onclick="selectEditorDropdownItem(this)">Score Only</div>
+                                  <div class="dropdown-item selected" data-dd="learner-grade" onclick="selectEditorDropdownItem(this)">Score and Pass/Fail</div>
+                                  <div class="dropdown-item" data-dd="learner-grade" onclick="selectEditorDropdownItem(this)">Pass/Fail Only</div>
+                                  <div class="dropdown-item" data-dd="learner-grade" onclick="selectEditorDropdownItem(this)">Complete/Incomplete</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Minimum score to pass -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Minimum score to pass:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">51%</textarea>
+                          </div>
+                          <div class="info-note">
+                            <div class="info-note__icon">
+                              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" /><path d="M8 5V8.67" /><circle cx="8" cy="11" r="0.5" fill="currentColor" stroke="none" /></svg>
+                            </div>
+                            <span class="info-note__text">Edit the default for this assignment only.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Optional for learner checkbox -->
+                      <div class="checkbox-field">
+                        <label class="checkbox" data-checkbox="optional-learner-2">
+                          <input type="checkbox" class="checkbox__input">
+                          <span class="checkbox__box">
+                            <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                            <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                          </span>
+                          <span class="checkbox__label">Optional for learner</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="item-body__right">
+                      <!-- Release grade -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Release grade:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-dropdown" data-editor-dd>
+                            <div class="editor-dropdown__trigger" onclick="toggleEditorDropdown(this)">
+                              <span class="editor-dropdown__text">Select</span>
+                              <svg class="editor-dropdown__chevron" viewBox="0 0 16 16" fill="none"><path d="M13 6L8.88384 10.1162C8.39773 10.6023 7.60227 10.6023 7.11616 10.1162L3 6" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="editor-dropdown__panel">
+                              <div class="dropdown-menu" style="width:100%;">
+                                <div class="dropdown-menu__list" data-dropdown="release-grade">
+                                  <div class="dropdown-item" data-dd="release-grade" onclick="selectEditorDropdownItem(this)">Immediately</div>
+                                  <div class="dropdown-item" data-dd="release-grade" onclick="selectEditorDropdownItem(this)">Manually</div>
+                                  <div class="dropdown-item" data-dd="release-grade" onclick="selectEditorDropdownItem(this)">On Due Date</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Answer key -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Answer key:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Paste URL" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Estimated learner time -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Estimated learner time:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Enter hours and minutes" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Estimated grading time -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Estimated grading time:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Enter hours and minutes" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Notes -->
+                      <div class="content-field-row">
+                        <div class="content-field-row__label">Notes:</div>
+                        <div class="content-field-row__field">
+                          <div class="editor-field">
+                            <textarea class="editor-field__input" rows="1" placeholder="Enter text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- + Learning Element -->
+            <div class="inline-tools">
+              <div class="inline-tools__divider"></div>
+              <button class="btn-tertiary-icon">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" /><path d="M8 12V4" /></svg>
+                <span>Learning Element</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section-level tools (full width divider + Sub group) -->
+        <div class="section-tools">
+          <div class="section-tools__divider"></div>
+          <div style="padding: 8px 0;">
+            <button class="btn btn--sm btn--secondary">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" /><path d="M8 12V4" /></svg>
+              Sub group
+            </button>
+          </div>
+        </div>
+      </div>
+      </div><!-- /.content-wrap -->
+
+      <!-- Lecture Plan Flyout -->
+      <div class="flyout-overlay" id="lecture-plan-overlay"></div>
+      <div class="flyout" id="lecture-plan-flyout">
+        <div class="flyout__header">
+          <button class="flyout__header-cancel" id="flyout-cancel">Cancel</button>
+          <div class="flyout__header-right">
+            <button class="flyout__header-request" id="flyout-request">Request changes<span class="flyout__header-request__badge" id="flyout-request-badge">0</span></button>
+            <button class="flyout__header-approve is-active" id="flyout-approve">Approve plan</button>
+          </div>
+        </div>
+        <div class="flyout__content flyout__content--readonly">
+          <!-- Title -->
+          <div>
+            <h2 class="flyout__title">Peripheral Devices</h2>
+            <div class="flyout__info">
+              <div class="flyout__info-row">
+                <span class="flyout__info-label">Lecture date:</span>
+                <span class="flyout__info-value">Friday 7 March 2025 | 11:00 - 1:00pm</span>
+              </div>
+              <div class="flyout__info-row">
+                <span class="flyout__info-label">Instructor:</span>
+                <span class="flyout__info-value">Abi Bromley</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Checklist -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Technical Checklist</span>
+            <div class="flyout-field">
+              <p class="flyout-question">Able to access lesson folder on JupyterLite/Codio/Google Slides</p>
+              <div class="flyout-radio-group">
+                <label class="flyout-radio-item"><input type="radio" name="tc1" value="yes" checked> Yes</label>
+                <label class="flyout-radio-item"><input type="radio" name="tc1" value="no"> No</label>
+              </div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">Exercises and Examples run as expected</p>
+              <div class="flyout-radio-group">
+                <label class="flyout-radio-item"><input type="radio" name="tc2" value="yes" checked> Yes</label>
+                <label class="flyout-radio-item"><input type="radio" name="tc2" value="no"> No</label>
+              </div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">Note any concerns using this form</p>
+              <div class="flyout-radio-group">
+                <label class="flyout-radio-item"><input type="radio" name="tc3" value="yes"> Yes</label>
+                <label class="flyout-radio-item"><input type="radio" name="tc3" value="no" checked> No</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessing Learner Understanding -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Accessing Learner Understanding</span>
+            <div class="flyout-field">
+              <p class="flyout-question">What additional industry-based examples would help solidify learner understanding?</p>
+              <div class="flyout-answer">I will use examples from common peripheral devices learners interact with daily, such as USB keyboards, wireless mice, and Bluetooth headsets. We will also explore enterprise-grade peripherals like barcode scanners and industrial printers used in warehouse and retail settings.</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">What prerequisite knowledge, technical or otherwise, is needed to help learners experience success with this lesson?</p>
+              <div class="flyout-answer">Learners should have a basic understanding of how a computer motherboard communicates with external components, including familiarity with ports (USB, HDMI, Thunderbolt) and the concept of device drivers.</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">In what ways can you confirm that this prerequisite knowledge exists?</p>
+              <div class="flyout-answer">I will start with a quick warm-up poll asking learners to identify common port types from images. This will surface any gaps before we proceed into deeper material.</div>
+            </div>
+          </div>
+
+          <!-- Lecture Opening -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Lecture Opening</span>
+            <div class="flyout-field">
+              <p class="flyout-question">How will you introduce the lesson?</p>
+              <div class="flyout-answer">I will open by asking learners to look at their own workspace and count how many peripheral devices they are currently using. This creates an immediate personal connection to the topic and leads into a discussion about how these devices communicate with the OS.</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">What expectations will you set for the session?</p>
+              <div class="flyout-answer">By the end of this session, learners will be able to identify peripheral device categories, explain how plug-and-play works, troubleshoot basic driver issues, and understand the role of device managers in Windows OS.</div>
+            </div>
+          </div>
+
+          <!-- Pacing -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Pacing</span>
+            <div class="flyout-field">
+              <p class="flyout-question">How long do you have to present this lesson?</p>
+              <div class="flyout-answer-single">2 hours (11:00am - 1:00pm) with a 10-minute break at the midpoint</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">If you are running low on time, what sections could you skip or shorten?</p>
+              <div class="flyout-answer">The historical overview of legacy ports (serial, parallel) can be shortened to a brief mention. The hands-on troubleshooting exercise can be condensed by doing one scenario as a group demo rather than individual practice.</div>
+            </div>
+          </div>
+
+          <!-- Anticipating Challenges/Clarity of Explanations -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Anticipating Challenges/Clarity of Explanations</span>
+            <div class="flyout-field">
+              <p class="flyout-question">Which specific concepts, examples, or exercises do you anticipate will challenge learners?</p>
+              <div class="flyout-answer">The difference between device drivers and firmware can be confusing. I will use an analogy: drivers are like translators between the device and the OS, while firmware is the device's own internal instruction set.</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">What questions can you anticipate from learners, and how do you plan to answer those?</p>
+              <div class="flyout-answer">"Why do some devices work without installing drivers?" — I will explain the concept of class drivers built into the OS and how USB HID devices leverage this. "What happens when a driver update fails?" — I will walk through rollback procedures in Device Manager.</div>
+            </div>
+          </div>
+
+          <!-- Engagement -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Engagement</span>
+            <div class="flyout-field">
+              <p class="flyout-question">How do you plan to build rapport with the Learner?</p>
+              <div class="flyout-answer">I will share a brief personal story about a peripheral troubleshooting challenge I faced in a professional setting. Throughout the session, I will use learner names, encourage questions via the chat, and incorporate short collaborative polls every 20 minutes.</div>
+            </div>
+            <div class="flyout-field">
+              <p class="flyout-question">What additional resources, if any, would you share with the Learners to aid in their understanding of the concepts in this lesson?</p>
+              <div class="flyout-answer">I will share a PDF quick-reference guide for common peripheral troubleshooting steps, a link to the Microsoft Device Manager documentation, and a short video walkthrough of driver installation on Windows 11.</div>
+            </div>
+          </div>
+
+          <!-- Checking for Understanding -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Checking for Understanding</span>
+            <div class="flyout-field">
+              <p class="flyout-question">What three questions would you ask as "Knowledge Checks" during the lecture to engage learners while assessing their understanding of the concepts being presented?</p>
+              <div class="flyout-answer">1. What is the primary difference between a class driver and a vendor-specific driver?
+2. If a newly connected USB device is not recognised by Windows, what are the first three troubleshooting steps you would take?
+3. Can you name two peripheral devices that typically require manual driver installation and explain why?</div>
+            </div>
+          </div>
+
+          <!-- Additional Questions/Concerns -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Additional Questions/Concerns</span>
+            <div class="flyout-field">
+              <div class="flyout-answer">No additional concerns at this time. I have reviewed all exercise files and confirmed they load correctly in the JupyterLite environment.</div>
+            </div>
+          </div>
+
+          <!-- Statement of Commitment and Ownership -->
+          <div class="flyout-section">
+            <span class="flyout-section__title">Statement of Commitment and Ownership</span>
+            <div class="flyout-field">
+              <div class="flyout-commitment">
+                <div class="flyout-commitment__check">
+                  <input type="checkbox" id="commitment-check" checked>
+                </div>
+                <div class="flyout-commitment__text">
+                  <span class="required">*</span>
+                  <label for="commitment-check">By submitting this lesson, I declare that I have thoroughly prepared for this lesson according to the Lead Instructors' Commitment Statement. I also accept ownership of this lesson plan and agree to follow it closely on lecture day.</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flyout-spacer"></div>
+        </div>
+
+        <!-- Request Changes Confirmation Modal (inside flyout) -->
+        <div class="flyout-modal-overlay" id="flyout-modal-overlay">
+          <div class="flyout-modal">
+            <div class="flyout-modal__tools">
+              <button class="flyout-modal__close" id="flyout-modal-close">
+                <svg width="16" height="16" fill="none" stroke="#000A14" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>
+              </button>
+            </div>
+            <div class="flyout-modal__content">
+              <div class="flyout-modal__illustration">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#1A7F5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3 class="flyout-modal__title">Comments Sent</h3>
+              <p class="flyout-modal__body">Your comments have been sent to the lead instructor for review.</p>
+              <div class="flyout-modal__cta">
+                <button class="btn btn--primary btn--md" id="flyout-modal-cta">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Text selection popover -->
+      <!-- Text selection popover -->
+      <div class="selection-popover" id="selection-popover">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M5.67 12.67H5.33C2.67 12.67 1.33 12 1.33 8.67V5.33C1.33 2.67 2.67 1.33 5.33 1.33H10.67C13.33 1.33 14.67 2.67 14.67 5.33V8.67C14.67 11.33 13.33 12.67 10.67 12.67H10.33C10.13 12.67 9.93 12.77 9.8 12.93L8.8 14.27C8.36 14.85 7.64 14.85 7.2 14.27L6.2 12.93C6.09 12.79 5.85 12.67 5.67 12.67Z"/><path d="M5.33 5.33H10.67"/><path d="M5.33 8.67H8.67"/></svg>
+        Comment
+      </div>
+
+      <!-- Comment dialog -->
+      <div class="comment-dialog-overlay" id="comment-dialog-overlay"></div>
+      <div class="comment-dialog" id="comment-dialog">
+        <div class="comment-dialog__header">
+          <span class="comment-dialog__title">Add comment</span>
+          <button class="comment-dialog__close" id="comment-dialog-close" title="Close">
+            <svg viewBox="0 0 16 16"><path d="M4 4L12 12"/><path d="M12 4L4 12"/></svg>
+          </button>
+        </div>
+        <div class="comment-dialog__body">
+          <div class="comment-dialog__quote" id="comment-dialog-quote"></div>
+          <textarea class="comment-dialog__textarea" id="comment-dialog-input" placeholder="Write your comment..." oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+        </div>
+        <div class="comment-dialog__footer">
+          <button class="comment-dialog__cancel" id="comment-dialog-cancel">Cancel</button>
+          <button class="comment-dialog__submit" id="comment-dialog-submit">Add comment</button>
+        </div>
+      </div>
+
+      <!-- Cursor-following tooltip -->
+      <div class="cursor-tooltip" id="cursor-tooltip">Select text to add a comment</div>
+    </main>
+  </div>
+
+  <!-- JavaScript Interactions -->
+  <script>
+    // Checkbox — DS interaction pattern
+    document.querySelectorAll('.checkbox[data-checkbox]').forEach(function(label) {
+      var input = label.querySelector('.checkbox__input');
+      var box = label.querySelector('.checkbox__box');
+      if (!input || !box || input.disabled) return;
+      input.addEventListener('change', function() {
+        if (input.checked) {
+          box.classList.add('is-checked');
+          box.classList.remove('is-indeterminate');
+        } else {
+          box.classList.remove('is-checked');
+          box.classList.remove('is-indeterminate');
+        }
+      });
+    });
+
+    // Page tab switching
+    document.querySelectorAll('.page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var group = tab.getAttribute('data-tab');
+        document.querySelectorAll('.page-tab[data-tab="' + group + '"]').forEach(function(t) {
+          t.classList.remove('active');
+        });
+        tab.classList.add('active');
+      });
+    });
+
+    // Content-type dropdown toggle — DS interaction
+    document.querySelectorAll('.content-type-dropdown .content-type').forEach(function(trigger) {
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wrapper = trigger.closest('.content-type-dropdown');
+        var wasOpen = wrapper.classList.contains('open');
+        document.querySelectorAll('.content-type-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+        if (!wasOpen) wrapper.classList.add('open');
+      });
+    });
+
+    // Nav item switching
+    document.querySelectorAll('.nav-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('selected'); });
+        item.classList.add('selected');
+      });
+    });
+
+    // Editor Dropdown Field
+    function toggleEditorDropdown(trigger) {
+      var dd = trigger.closest('.editor-dropdown');
+      var wasOpen = dd.classList.contains('open');
+      document.querySelectorAll('.editor-dropdown.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!wasOpen) dd.classList.add('open');
+    }
+
+    function selectEditorDropdownItem(item) {
+      var dd = item.closest('.editor-dropdown');
+      var textEl = dd.querySelector('.editor-dropdown__text');
+      var list = item.closest('.dropdown-menu__list');
+      list.querySelectorAll('.dropdown-item').forEach(function(i) { i.classList.remove('selected'); });
+      item.classList.add('selected');
+      textEl.textContent = item.textContent;
+      textEl.classList.add('editor-dropdown__text--filled');
+      dd.classList.remove('open');
+    }
+
+    // Close editor dropdowns on outside click
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.editor-dropdown')) {
+        document.querySelectorAll('.editor-dropdown.open').forEach(function(el) {
+          el.classList.remove('open');
+        });
+      }
+      if (!e.target.closest('.content-type-dropdown')) {
+        document.querySelectorAll('.content-type-dropdown.open').forEach(function(d) { d.classList.remove('open'); });
+      }
+    });
+
+    // Editor Datepicker Field
+    (function() {
+      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var weekdays = ['S','M','T','W','T','F','S'];
+
+      function getState(dp) {
+        if (!dp._dpState) {
+          dp._dpState = { month: 4, year: 2026, selectedDay: null, selectedMonth: null, selectedYear: null };
+          var textEl = dp.querySelector('.editor-datepicker__text');
+          if (textEl && textEl.classList.contains('editor-datepicker__text--filled')) {
+            var parts = textEl.textContent.trim().split(' ');
+            if (parts.length === 3) {
+              var mi = monthShort.indexOf(parts[0]);
+              if (mi >= 0) {
+                dp._dpState.selectedMonth = mi;
+                dp._dpState.selectedDay = parseInt(parts[1]);
+                dp._dpState.selectedYear = parseInt(parts[2]);
+                dp._dpState.month = mi;
+                dp._dpState.year = parseInt(parts[2]);
+              }
+            }
+          }
+        }
+        return dp._dpState;
+      }
+
+      function renderDpCalendar(dp) {
+        var state = getState(dp);
+        var label = dp.querySelector('.calendar-head-label');
+        var grid = dp.querySelector('.calendar-grid');
+        if (!label || !grid) return;
+
+        label.textContent = monthNames[state.month] + ' ' + state.year;
+        grid.innerHTML = '';
+
+        for (var w = 0; w < 7; w++) {
+          var wd = document.createElement('div');
+          wd.className = 'calendar-weekday';
+          wd.textContent = weekdays[w];
+          grid.appendChild(wd);
+        }
+
+        var firstDay = new Date(state.year, state.month, 1).getDay();
+        var daysInMonth = new Date(state.year, state.month + 1, 0).getDate();
+        var prevMonthDays = new Date(state.year, state.month, 0).getDate();
+
+        for (var p = firstDay - 1; p >= 0; p--) {
+          var pd = document.createElement('div');
+          pd.className = 'calendar-day inactive';
+          pd.textContent = prevMonthDays - p;
+          grid.appendChild(pd);
+        }
+
+        for (var d = 1; d <= daysInMonth; d++) {
+          var dd = document.createElement('div');
+          dd.className = 'calendar-day';
+          dd.textContent = d;
+          if (d === state.selectedDay && state.month === state.selectedMonth && state.year === state.selectedYear) {
+            dd.classList.add('selected');
+          }
+          dd.addEventListener('click', (function(day) {
+            return function(e) {
+              e.stopPropagation();
+              var s = getState(dp);
+              s.selectedDay = day;
+              s.selectedMonth = s.month;
+              s.selectedYear = s.year;
+              var textEl = dp.querySelector('.editor-datepicker__text');
+              textEl.textContent = monthShort[s.selectedMonth] + ' ' + s.selectedDay + ' ' + s.selectedYear;
+              textEl.classList.add('editor-datepicker__text--filled');
+              dp.classList.remove('open');
+            };
+          })(d));
+          grid.appendChild(dd);
+        }
+
+        var totalCells = firstDay + daysInMonth;
+        var remaining = (7 - (totalCells % 7)) % 7;
+        for (var n = 1; n <= remaining; n++) {
+          var nd = document.createElement('div');
+          nd.className = 'calendar-day inactive';
+          nd.textContent = n;
+          grid.appendChild(nd);
+        }
+      }
+
+      window.toggleEditorDatepicker = function(trigger) {
+        var dp = trigger.closest('.editor-datepicker');
+        var wasOpen = dp.classList.contains('open');
+        document.querySelectorAll('.editor-datepicker.open').forEach(function(el) { el.classList.remove('open'); });
+        if (!wasOpen) {
+          dp.classList.add('open');
+          renderDpCalendar(dp);
+        }
+      };
+
+      window.dpNav = function(btn, dir) {
+        var dp = btn.closest('.editor-datepicker');
+        var state = getState(dp);
+        state.month += dir;
+        if (state.month > 11) { state.month = 0; state.year++; }
+        if (state.month < 0) { state.month = 11; state.year--; }
+        renderDpCalendar(dp);
+      };
+
+      // Close datepickers on outside click
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.editor-datepicker')) {
+          document.querySelectorAll('.editor-datepicker.open').forEach(function(el) { el.classList.remove('open'); });
+        }
+      });
+    })();
+
+    // Cursor-following tooltip on flyout answers
+    (function() {
+      var tip = document.getElementById('cursor-tooltip');
+      var isOver = false;
+
+      document.addEventListener('mousemove', function(e) {
+        if (!isOver) return;
+        tip.style.left = (e.clientX + 24) + 'px';
+        tip.style.top = (e.clientY - 48) + 'px';
+      });
+
+      document.addEventListener('mouseover', function(e) {
+        var answer = e.target.closest('.flyout-answer, .flyout-answer-single');
+        if (answer && !window.getSelection().toString().trim()) {
+          isOver = true;
+          tip.classList.add('is-visible');
+        }
+      });
+
+      document.addEventListener('mouseout', function(e) {
+        var answer = e.target.closest('.flyout-answer, .flyout-answer-single');
+        if (answer) {
+          var related = e.relatedTarget;
+          if (!related || !related.closest || !related.closest('.flyout-answer, .flyout-answer-single')) {
+            isOver = false;
+            tip.classList.remove('is-visible');
+          }
+        }
+      });
+
+      // Hide tooltip when user starts selecting text
+      document.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.flyout-answer, .flyout-answer-single')) {
+          isOver = false;
+          tip.classList.remove('is-visible');
+        }
+      });
+    })();
+
+    // Text-selection commenting system
+    (function() {
+      var popover = document.getElementById('selection-popover');
+      var dialog = document.getElementById('comment-dialog');
+      var dialogOverlay = document.getElementById('comment-dialog-overlay');
+      var dialogQuote = document.getElementById('comment-dialog-quote');
+      var dialogInput = document.getElementById('comment-dialog-input');
+      var dialogClose = document.getElementById('comment-dialog-close');
+      var dialogCancel = document.getElementById('comment-dialog-cancel');
+      var dialogSubmit = document.getElementById('comment-dialog-submit');
+      var currentRange = null;
+      var currentAnswer = null;
+      var annotationId = 0;
+
+      // Show popover on text selection
+      document.addEventListener('mouseup', function(e) {
+        if (e.target.closest('.comment-dialog') || e.target.closest('.selection-popover')) return;
+        setTimeout(function() {
+          var sel = window.getSelection();
+          if (!sel || sel.isCollapsed || !sel.rangeCount) { hidePopover(); return; }
+          var range = sel.getRangeAt(0);
+          var container = range.commonAncestorContainer;
+          if (container.nodeType === 3) container = container.parentNode;
+          var answer = container.closest('.flyout-answer, .flyout-answer-single');
+          if (!answer) { hidePopover(); return; }
+          var text = sel.toString().trim();
+          if (!text) { hidePopover(); return; }
+          currentRange = range.cloneRange();
+          currentAnswer = answer;
+          var rect = range.getBoundingClientRect();
+          popover.style.left = (rect.left + rect.width / 2 - 45) + 'px';
+          popover.style.top = (rect.top - 36) + 'px';
+          popover.classList.add('is-visible');
+        }, 10);
+      });
+
+      function hidePopover() {
+        if (popover) popover.classList.remove('is-visible');
+      }
+
+      function openDialog() {
+        if (!currentRange) return;
+        var selectedText = currentRange.toString().trim();
+        if (!selectedText) return;
+        hidePopover();
+        // Populate dialog
+        dialogQuote.textContent = '"' + (selectedText.length > 120 ? selectedText.substring(0, 120) + '...' : selectedText) + '"';
+        dialogInput.value = '';
+        dialogInput.style.height = 'auto';
+        // Position is handled by CSS (bottom-right fixed)
+        dialogOverlay.classList.add('is-open');
+        dialog.classList.add('is-open');
+        setTimeout(function() { dialogInput.focus(); }, 50);
+      }
+
+      function closeDialog() {
+        dialog.classList.remove('is-open');
+        dialogOverlay.classList.remove('is-open');
+        delete dialog.dataset.editId;
+        window.getSelection().removeAllRanges();
+        currentRange = null;
+        currentAnswer = null;
+      }
+
+      function submitComment() {
+        var commentText = dialogInput.value.trim();
+
+        // Handle edit mode
+        var editId = dialog.dataset.editId;
+        if (editId) {
+          var ann = document.querySelector('.flyout-annotation[data-annotation-id="' + editId + '"]');
+          if (ann && commentText) {
+            var commentEl = ann.querySelector('.flyout-annotation__comment');
+            if (commentEl) commentEl.innerHTML = commentText.replace(/</g, '&lt;').replace(/\n/g, '<br>');
+            ann.dataset.commentText = commentText;
+          }
+          delete dialog.dataset.editId;
+          closeDialog();
+          updateAnnotationCount();
+          return;
+        }
+
+        // New comment mode
+        if (!currentRange || !currentAnswer) { closeDialog(); return; }
+        var selectedText = currentRange.toString().trim();
+        if (!selectedText || !commentText) { closeDialog(); return; }
+
+        // Wrap selection in highlight
+        var id = 'hl-' + (++annotationId);
+        var mark = document.createElement('mark');
+        mark.className = 'highlight';
+        mark.dataset.annotationId = id;
+        try {
+          currentRange.surroundContents(mark);
+        } catch (ex) {
+          var frag = currentRange.extractContents();
+          mark.appendChild(frag);
+          currentRange.insertNode(mark);
+        }
+        window.getSelection().removeAllRanges();
+
+        // Create annotation below the field
+        var field = currentAnswer.closest('.flyout-field');
+        if (!field) field = currentAnswer.parentNode;
+
+        var annotation = document.createElement('div');
+        annotation.className = 'flyout-annotation';
+        annotation.dataset.annotationId = id;
+
+        var quoteDisplay = selectedText.length > 50 ? selectedText.substring(0, 50) + '...' : selectedText;
+        var escapedComment = commentText.replace(/</g, '&lt;').replace(/\n/g, '<br>');
+        // Generate timestamp
+        var now = new Date();
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var hours = now.getHours();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12 || 12;
+        var mins = now.getMinutes();
+        var timestamp = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' at ' + hours + ':' + (mins < 10 ? '0' : '') + mins + ampm;
+
+        annotation.innerHTML =
+          '<div class="flyout-annotation__marker"></div>' +
+          '<div class="flyout-annotation__body">' +
+            '<div class="flyout-annotation__header">' +
+              '<span class="flyout-annotation__quote">&ldquo;' + quoteDisplay.replace(/</g, '&lt;') + '&rdquo;</span>' +
+              '<div style="display:flex;align-items:center;gap:2px;">' +
+                '<label class="flyout-annotation__resolve"><input type="checkbox" onchange="resolveAnnotation(\'' + id + '\', this.checked)"><span>Mark as addressed</span></label>' +
+                '<button class="btn btn--tertiary btn--sm btn--icon-only" title="Edit comment" onclick="editAnnotation(\'' + id + '\')">' +
+                  '<svg viewBox="0 0 16 16" fill="none"><path d="M7.33325 1.33337H5.99992C2.66659 1.33337 1.33325 2.66671 1.33325 6.00004V10C1.33325 13.3334 2.66659 14.6667 5.99992 14.6667H9.99992C13.3333 14.6667 14.6666 13.3334 14.6666 10V8.66671" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6933 2.01338L5.43992 7.26671C5.23992 7.46671 5.03992 7.86005 4.99992 8.14671L4.71325 10.1534C4.60659 10.88 5.11992 11.3867 5.84659 11.2867L7.85325 11C8.13325 10.96 8.52659 10.76 8.73325 10.56L13.9866 5.30671C14.8933 4.40005 15.3199 3.34671 13.9866 2.01338C12.6533 0.680046 11.5999 1.10671 10.6933 2.01338Z" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.93994 2.76672C10.3866 4.36006 11.6333 5.60672 13.2333 6.06006" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                '</button>' +
+                '<button class="btn btn--tertiary btn--sm btn--icon-only" title="Delete comment" onclick="deleteAnnotation(\'' + id + '\')">' +
+                  '<svg viewBox="0 0 16 16" fill="none"><path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.66675 3.31337L5.81341 2.44004C5.92008 1.80671 6.00008 1.33337 7.12675 1.33337H8.87341C10.0001 1.33337 10.0867 1.83337 10.1867 2.44671L10.3334 3.31337" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.5667 6.09338L12.1334 12.8067C12.06 13.8534 12 14.6667 10.14 14.6667H5.86002C4.00002 14.6667 3.94002 13.8534 3.86668 12.8067L3.43335 6.09338" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.88672 11H9.10672" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.33325 8.33337H9.66659" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="flyout-annotation__comment">' + escapedComment + '</div>' +
+            '<div class="flyout-annotation__meta"><strong>Sarah Mitchell</strong> &middot; ' + timestamp + '</div>' +
+          '</div>';
+        // Store raw comment text for editing
+        annotation.dataset.commentText = commentText;
+
+        field.appendChild(annotation);
+
+        // Highlight click → scroll to annotation
+        mark.addEventListener('click', function() {
+          annotation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          mark.classList.add('active');
+          setTimeout(function() { mark.classList.remove('active'); }, 1500);
+        });
+
+        closeDialog();
+        updateAnnotationCount();
+      }
+
+      // Popover click → open dialog
+      if (popover) {
+        popover.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openDialog();
+        });
+      }
+
+      // Dialog buttons
+      if (dialogClose) dialogClose.addEventListener('click', closeDialog);
+      if (dialogCancel) dialogCancel.addEventListener('click', closeDialog);
+      if (dialogOverlay) dialogOverlay.addEventListener('click', closeDialog);
+      if (dialogSubmit) dialogSubmit.addEventListener('click', submitComment);
+
+      // Submit on Cmd/Ctrl+Enter
+      if (dialogInput) {
+        dialogInput.addEventListener('keydown', function(e) {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+            e.preventDefault();
+            submitComment();
+          }
+        });
+      }
+
+      // Delete annotation + highlight
+      window.deleteAnnotation = function(id) {
+        var mark = document.querySelector('.highlight[data-annotation-id="' + id + '"]');
+        if (mark) {
+          var parent = mark.parentNode;
+          while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+          parent.removeChild(mark);
+          parent.normalize();
+        }
+        var ann = document.querySelector('.flyout-annotation[data-annotation-id="' + id + '"]');
+        if (ann) ann.remove();
+        updateAnnotationCount();
+      };
+
+      // Edit annotation — reopen dialog with existing comment
+      window.editAnnotation = function(id) {
+        var ann = document.querySelector('.flyout-annotation[data-annotation-id="' + id + '"]');
+        if (!ann) return;
+        var quote = ann.querySelector('.flyout-annotation__quote');
+        var existingText = ann.dataset.commentText || '';
+
+        dialogQuote.textContent = quote ? quote.textContent : '';
+        dialogInput.value = existingText;
+        dialogInput.style.height = 'auto';
+        dialogInput.style.height = dialogInput.scrollHeight + 'px';
+
+        // Store edit state
+        dialog.dataset.editId = id;
+
+        dialogOverlay.classList.add('is-open');
+        dialog.classList.add('is-open');
+        setTimeout(function() { dialogInput.focus(); }, 50);
+      };
+
+      // Track whether changes have been requested (submitted via modal)
+      window.changesRequestedSubmitted = false;
+
+      // Update count in header
+      window.updateAnnotationCount = function() {
+        var all = document.querySelectorAll('.flyout-annotation');
+        var total = all.length;
+        var resolved = document.querySelectorAll('.flyout-annotation.is-resolved').length;
+        var requestBtn = document.getElementById('flyout-request');
+        var badge = document.getElementById('flyout-request-badge');
+        var approveBtn = document.getElementById('flyout-approve');
+
+        // Show/hide request changes button + badge
+        if (requestBtn) {
+          requestBtn.style.display = '';
+          requestBtn.classList.toggle('is-visible', total > 0 && resolved < total);
+        }
+        if (badge) badge.textContent = total - resolved;
+
+        // Approve button: disabled when there are unresolved comments
+        if (approveBtn) {
+          if (total > 0 && resolved < total) {
+            approveBtn.classList.add('is-disabled');
+            approveBtn.classList.remove('is-active');
+          } else {
+            approveBtn.classList.remove('is-disabled');
+            approveBtn.classList.add('is-active');
+          }
+        }
+
+        // If all resolved: hide annotations + highlights, hide request button
+        if (total > 0 && resolved === total) {
+          all.forEach(function(ann) { ann.style.display = 'none'; });
+          document.querySelectorAll('.highlight').forEach(function(hl) {
+            hl.style.background = 'transparent';
+            hl.style.padding = '0';
+          });
+          if (requestBtn) requestBtn.classList.remove('is-visible');
+        }
+      };
+
+      // Resolve/unresolve annotation
+      window.resolveAnnotation = function(id, checked) {
+        var ann = document.querySelector('.flyout-annotation[data-annotation-id="' + id + '"]');
+        if (ann) {
+          ann.classList.toggle('is-resolved', checked);
+        }
+        updateAnnotationCount();
+      };
+    })();
+
+    // Lecture Plan Flyout — open/close
+    (function() {
+      var overlay = document.getElementById('lecture-plan-overlay');
+      var flyout = document.getElementById('lecture-plan-flyout');
+      var cancelBtn = document.getElementById('flyout-cancel');
+      var approveBtn = document.getElementById('flyout-approve');
+
+      function openFlyout() {
+        overlay.classList.add('is-open');
+        flyout.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeFlyout() {
+        overlay.classList.remove('is-open');
+        flyout.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      // Open on lecture-plan click or arrow click
+      document.querySelectorAll('.lecture-plan__content, .lecture-plan__arrow').forEach(function(el) {
+        el.addEventListener('click', openFlyout);
+      });
+
+      // Close on cancel, overlay click, or approve
+      if (cancelBtn) cancelBtn.addEventListener('click', closeFlyout);
+      if (approveBtn) approveBtn.addEventListener('click', closeFlyout);
+      if (overlay) overlay.addEventListener('click', closeFlyout);
+    })();
+
+    // Request Changes — confirmation modal
+    (function() {
+      var requestBtn = document.getElementById('flyout-request');
+      var modalOverlay = document.getElementById('flyout-modal-overlay');
+      var modalCloseBtn = document.getElementById('flyout-modal-close');
+      var modalCtaBtn = document.getElementById('flyout-modal-cta');
+
+      function openModal() {
+        if (modalOverlay) modalOverlay.classList.add('is-open');
+      }
+      function closeModal() {
+        if (modalOverlay) modalOverlay.classList.remove('is-open');
+        // Mark changes as submitted and hide button
+        window.changesRequestedSubmitted = true;
+        if (requestBtn) {
+          requestBtn.classList.remove('is-visible');
+        }
+        // Keep approve plan disabled
+        var approveBtn = document.getElementById('flyout-approve');
+        if (approveBtn) {
+          approveBtn.classList.add('is-disabled');
+          approveBtn.classList.remove('is-active');
+        }
+        // Add lead instructor replies to all unresolved annotations that don't already have a reply
+        addInstructorReplies();
+      }
+
+      function addInstructorReplies() {
+        var annotations = document.querySelectorAll('.flyout-annotation:not(.is-resolved)');
+        var replyTemplates = [
+          'Thanks for flagging this. I\'ll revise this section before the next review.',
+          'Good catch — I\'ll update the content to address your feedback.',
+          'Noted. I\'ll rework this part and resubmit for your review.'
+        ];
+        annotations.forEach(function(ann, i) {
+          // Skip if already has a reply
+          if (ann.querySelector('.flyout-annotation__reply')) return;
+
+          var body = ann.querySelector('.flyout-annotation__body');
+          if (!body) return;
+
+          // Generate a reply timestamp (a few minutes after the original)
+          var now = new Date();
+          now.setMinutes(now.getMinutes() + 5 + i);
+          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          var hours = now.getHours();
+          var ampm = hours >= 12 ? 'pm' : 'am';
+          hours = hours % 12 || 12;
+          var mins = now.getMinutes();
+          var timestamp = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' at ' + hours + ':' + (mins < 10 ? '0' : '') + mins + ampm;
+
+          var replyText = replyTemplates[i % replyTemplates.length];
+
+          var replyId = ann.dataset.annotationId + '-reply-' + Date.now();
+
+          var reply = document.createElement('div');
+          reply.className = 'flyout-annotation__reply';
+          reply.dataset.replyId = replyId;
+          reply.innerHTML =
+            '<div class="flyout-annotation__reply-comment">' + replyText + '</div>' +
+            '<div class="flyout-annotation__reply-meta"><strong>Dr. James Carter</strong> &middot; ' + timestamp + '</div>' +
+            '<button class="flyout-annotation__reply-action" onclick="toggleReplyForm(\'' + replyId + '\')">Reply</button>';
+
+          // Add inline reply form after the reply
+          var form = document.createElement('div');
+          form.className = 'flyout-annotation__reply-form';
+          form.id = 'reply-form-' + replyId;
+          form.innerHTML =
+            '<textarea placeholder="Write a reply..." oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\';"></textarea>' +
+            '<div class="flyout-annotation__reply-form-actions">' +
+              '<button class="btn btn--sm btn--secondary" onclick="cancelReplyForm(\'' + replyId + '\')">Cancel</button>' +
+              '<button class="btn btn--sm btn--primary" onclick="submitReplyForm(\'' + replyId + '\')">Reply</button>' +
+            '</div>';
+
+          // Insert reply + form above the original comment (most recent at top)
+          var originalComment = body.querySelector('.flyout-annotation__comment');
+          if (originalComment) {
+            body.insertBefore(form, originalComment);
+            body.insertBefore(reply, form);
+          } else {
+            body.appendChild(reply);
+            body.appendChild(form);
+          }
+        });
+      }
+
+      // Reply form helpers (global)
+      window.toggleReplyForm = function(replyId) {
+        var form = document.getElementById('reply-form-' + replyId);
+        if (form) {
+          form.classList.toggle('is-open');
+          if (form.classList.contains('is-open')) {
+            var textarea = form.querySelector('textarea');
+            if (textarea) setTimeout(function() { textarea.focus(); }, 50);
+          }
+        }
+      };
+
+      window.cancelReplyForm = function(replyId) {
+        var form = document.getElementById('reply-form-' + replyId);
+        if (form) {
+          form.classList.remove('is-open');
+          var textarea = form.querySelector('textarea');
+          if (textarea) { textarea.value = ''; textarea.style.height = 'auto'; }
+        }
+      };
+
+      window.submitReplyForm = function(replyId) {
+        var form = document.getElementById('reply-form-' + replyId);
+        if (!form) return;
+        var textarea = form.querySelector('textarea');
+        var text = textarea ? textarea.value.trim() : '';
+        if (!text) return;
+
+        // Generate timestamp
+        var now = new Date();
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var hours = now.getHours();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12 || 12;
+        var mins = now.getMinutes();
+        var timestamp = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' at ' + hours + ':' + (mins < 10 ? '0' : '') + mins + ampm;
+
+        var escapedText = text.replace(/</g, '&lt;').replace(/\n/g, '<br>');
+
+        // Create the user reply element
+        var newReplyId = replyId + '-user-' + Date.now();
+        var userReply = document.createElement('div');
+        userReply.className = 'flyout-annotation__reply';
+        userReply.style.borderLeftColor = 'var(--color-secondary-medium)';
+        userReply.dataset.replyId = newReplyId;
+        userReply.innerHTML =
+          '<div class="flyout-annotation__reply-comment">' + escapedText + '</div>' +
+          '<div class="flyout-annotation__reply-meta"><strong>Sarah Mitchell</strong> &middot; ' + timestamp + '</div>';
+
+        // Insert user reply above the form (most recent at top, above instructor reply)
+        var body = form.parentNode;
+        var instructorReply = document.querySelector('.flyout-annotation__reply[data-reply-id="' + replyId + '"]');
+        if (instructorReply) {
+          body.insertBefore(userReply, instructorReply);
+        } else {
+          body.insertBefore(userReply, form);
+        }
+
+        // Reset and close the form
+        textarea.value = '';
+        textarea.style.height = 'auto';
+        form.classList.remove('is-open');
+
+        // Re-show request changes button since comments changed
+        updateAnnotationCount();
+      };
+
+      if (requestBtn) requestBtn.addEventListener('click', openModal);
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+      if (modalCtaBtn) modalCtaBtn.addEventListener('click', closeModal);
+      if (modalOverlay) modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) closeModal();
+      });
+    })();
+
+    // Collapse button — animated toggle of body-separator + item-body
+    document.querySelectorAll('.item-action-btn[title="Collapse"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var content = btn.closest('.schedule-item__content');
+        if (!content) return;
+        var separator = content.querySelector('.body-separator');
+        var body = content.querySelector('.item-body');
+        var svg = btn.querySelector('svg');
+        var isCollapsed = body && body.classList.contains('is-collapsed');
+
+        if (isCollapsed) {
+          // Expand
+          if (body) { body.style.maxHeight = body.scrollHeight + 'px'; body.classList.remove('is-collapsed'); }
+          if (separator) separator.classList.remove('is-collapsed');
+          if (svg) svg.style.transform = '';
+          // Clear inline max-height after transition
+          if (body) setTimeout(function() { if (!body.classList.contains('is-collapsed')) body.style.maxHeight = ''; }, 300);
+        } else {
+          // Collapse — set explicit max-height first so transition works
+          if (body) { body.style.maxHeight = body.scrollHeight + 'px'; body.offsetHeight; body.classList.add('is-collapsed'); }
+          if (separator) separator.classList.add('is-collapsed');
+          if (svg) svg.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+    // Auto-resize textareas on load
+    document.querySelectorAll('.editor-field__input, .editor-action__input').forEach(function(ta) {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+
+  </script>
+</body>
+</html>
