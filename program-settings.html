@@ -457,6 +457,9 @@
                   color var(--duration-standard) var(--ease-default),
                   border-color var(--duration-standard) var(--ease-default);
     }
+    .btn svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .btn--md svg { width: 24px; height: 24px; }
+    .btn--sm svg { width: 16px; height: 16px; }
     .btn--sm {
       height: 32px;
       padding: 5px 16px;
@@ -1550,6 +1553,15 @@
       color: var(--color-text-secondary);
     }
 
+    .clone-search-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .clone-search-row .search-bar {
+      flex: 1;
+    }
+
     /* ========================================
        SEARCH BAR (DS pattern)
        ======================================== */
@@ -2516,23 +2528,32 @@
           <div class="clone-view__title">Choose a Program</div>
           <div class="clone-view__subtitle">Search or select a program to clone its settings including program schedule, resources, PD resources, graduation settings and rubrics.</div>
         </div>
-        <!-- Search bar -->
-        <div class="search-bar search-bar--lg" id="clone-search-bar">
-          <input class="search-bar__input" type="text" id="clone-search-input" placeholder="Search programs..." autocomplete="off">
-          <div class="search-bar__icon" id="clone-search-icon">
-            <svg class="search-bar__icon-search" viewBox="0 0 24 24"><path d="M9.5 17C13.6421 17 17 13.6421 17 9.5C17 5.35786 13.6421 2 9.5 2C5.35786 2 2 5.35786 2 9.5C2 13.6421 5.35786 17 9.5 17Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22L17 17" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <svg class="search-bar__icon-clear" viewBox="0 0 24 24" style="display:none;"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+
+        <!-- Search all programs: button (default) + search bar (on click) -->
+        <div class="clone-search-row">
+          <button class="btn btn--tertiary btn--md" id="clone-all-btn" type="button">
+            <svg viewBox="0 0 24 24"><path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21L16.65 16.65" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="btn__label">Search all programs</span>
+          </button>
+          <div class="search-bar search-bar--lg" id="clone-search-bar-all" style="display: none;">
+            <input class="search-bar__input" type="text" id="clone-search-input-all" placeholder="Search all programs..." autocomplete="off">
+            <div class="search-bar__icon" id="clone-search-icon-all">
+              <svg class="search-bar__icon-search" viewBox="0 0 24 24" style="display:none;"><path d="M9.5 17C13.6421 17 17 13.6421 17 9.5C17 5.35786 13.6421 2 9.5 2C5.35786 2 2 5.35786 2 9.5C2 13.6421 5.35786 17 9.5 17Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22L17 17" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg class="search-bar__icon-clear" viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            </div>
           </div>
         </div>
-        <!-- Data table -->
-        <div style="overflow-x: auto;">
+
+        <!-- Client programs table -->
+        <div id="clone-client-wrap" style="overflow-x: auto;">
           <table class="data-table" id="clone-table">
             <thead>
               <tr>
                 <th></th>
                 <th>Client</th>
-                <th>Program Name</th>
-                <th>Program Code</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Topic</th>
                 <th>No. of Weeks</th>
                 <th>Lessons per Week</th>
               </tr>
@@ -2543,6 +2564,7 @@
                 <td>Acme Corporation</td>
                 <td>Data Science Bootcamp</td>
                 <td>ACME-DATA-001</td>
+                <td>Data Science</td>
                 <td>12</td>
                 <td>3</td>
               </tr>
@@ -2551,78 +2573,127 @@
                 <td>Acme Corporation</td>
                 <td>Machine Learning Intensive</td>
                 <td>ACME-MCLN-002</td>
+                <td>Machine Learning</td>
                 <td>16</td>
                 <td>2</td>
               </tr>
               <tr data-clone-row>
                 <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Horizon Technologies</td>
-                <td>Product Management Essentials</td>
-                <td>HRZN-PMGT-001</td>
-                <td>8</td>
-                <td>4</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Horizon Technologies</td>
-                <td>UX Design Masterclass</td>
-                <td>HRZN-UXDS-003</td>
+                <td>Acme Corporation</td>
+                <td>AI for Business Analytics</td>
+                <td>ACME-AIBA-003</td>
+                <td>AI Analytics</td>
                 <td>10</td>
                 <td>3</td>
               </tr>
               <tr data-clone-row>
                 <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Meridian Group</td>
-                <td>Financial Analysis Certificate</td>
-                <td>MRID-FNAN-001</td>
-                <td>14</td>
-                <td>2</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>NovaStar Industries</td>
-                <td>AI Engineering Program</td>
-                <td>NVST-AIEN-001</td>
-                <td>20</td>
-                <td>3</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Summit Partners</td>
-                <td>Leadership Development Track</td>
-                <td>SMMT-LEAD-002</td>
-                <td>6</td>
-                <td>5</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Vertex Solutions</td>
-                <td>Cybersecurity Foundations</td>
-                <td>VRTX-CYBR-001</td>
-                <td>12</td>
-                <td>3</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>Vertex Solutions</td>
-                <td>Cloud Architecture Bootcamp</td>
-                <td>VRTX-CLDA-004</td>
-                <td>10</td>
-                <td>4</td>
-              </tr>
-              <tr data-clone-row>
-                <td><span class="radio"><span class="radio__circle"></span></span></td>
-                <td>NovaStar Industries</td>
-                <td>Computer Vision Workshop</td>
-                <td>NVST-CVSN-003</td>
+                <td>Acme Corporation</td>
+                <td>Python Programming Fundamentals</td>
+                <td>ACME-PYTH-004</td>
+                <td>Programming</td>
                 <td>8</td>
-                <td>2</td>
+                <td>4</td>
               </tr>
               <tr class="data-table__no-results" id="clone-no-results">
-                <td colspan="6">No programs found matching your search.</td>
+                <td colspan="7">No programs found matching your search.</td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- All programs results table (hidden, replaces client table when searching) -->
+        <div id="clone-all-results" style="display: none; overflow-x: auto;">
+            <table class="data-table" id="clone-table-all">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Client</th>
+                  <th>Name</th>
+                  <th>Code</th>
+                  <th>Topic</th>
+                  <th>No. of Weeks</th>
+                  <th>Lessons per Week</th>
+                </tr>
+              </thead>
+              <tbody id="clone-table-body-all">
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Horizon Technologies</td>
+                  <td>Product Management Essentials</td>
+                  <td>HRZN-PMGT-001</td>
+                  <td>Product Management</td>
+                  <td>8</td>
+                  <td>4</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Horizon Technologies</td>
+                  <td>UX Design Masterclass</td>
+                  <td>HRZN-UXDS-003</td>
+                  <td>UX Design</td>
+                  <td>10</td>
+                  <td>3</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Meridian Group</td>
+                  <td>Financial Analysis Certificate</td>
+                  <td>MRID-FNAN-001</td>
+                  <td>Financial Analysis</td>
+                  <td>14</td>
+                  <td>2</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>NovaStar Industries</td>
+                  <td>AI Engineering Program</td>
+                  <td>NVST-AIEN-001</td>
+                  <td>AI Engineering</td>
+                  <td>20</td>
+                  <td>3</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Summit Partners</td>
+                  <td>Leadership Development Track</td>
+                  <td>SMMT-LEAD-002</td>
+                  <td>Leadership</td>
+                  <td>6</td>
+                  <td>5</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Vertex Solutions</td>
+                  <td>Cybersecurity Foundations</td>
+                  <td>VRTX-CYBR-001</td>
+                  <td>Cybersecurity</td>
+                  <td>12</td>
+                  <td>3</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>Vertex Solutions</td>
+                  <td>Cloud Architecture Bootcamp</td>
+                  <td>VRTX-CLDA-004</td>
+                  <td>Cloud Architecture</td>
+                  <td>10</td>
+                  <td>4</td>
+                </tr>
+                <tr data-clone-row>
+                  <td><span class="radio"><span class="radio__circle"></span></span></td>
+                  <td>NovaStar Industries</td>
+                  <td>Computer Vision Workshop</td>
+                  <td>NVST-CVSN-003</td>
+                  <td>Computer Vision</td>
+                  <td>8</td>
+                  <td>2</td>
+                </tr>
+                <tr class="data-table__no-results" id="clone-no-results-all">
+                  <td colspan="7">No programs found matching your search.</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
       </div>
 
@@ -4230,29 +4301,19 @@
             document.getElementById('clone-back-btn').addEventListener('click', function() {
               cloneView.classList.remove('is-visible');
               successView.classList.add('is-visible');
-              // Reset clone selection
-              cloneTableBody.querySelectorAll('.radio__circle').forEach(function(r) {
+              // Reset clone selection across both tables
+              document.querySelectorAll('#clone-view .radio__circle').forEach(function(r) {
                 r.classList.remove('is-selected');
               });
               selectedCloneRow = null;
-              // Reset search and search bar state
-              var searchInput = document.getElementById('clone-search-input');
-              if (searchInput) {
-                searchInput.value = '';
-                cloneTableBody.querySelectorAll('tr[data-clone-row]').forEach(function(row) {
-                  row.style.display = '';
-                });
-              }
+              // Reset search-all back to button state
+              resetSearchAll();
+              // Show all client program rows
+              document.querySelectorAll('#clone-table-body tr[data-clone-row]').forEach(function(row) {
+                row.style.display = '';
+              });
+              var cloneNoResults = document.getElementById('clone-no-results');
               if (cloneNoResults) cloneNoResults.classList.remove('is-visible');
-              // Reset search bar to default state
-              var sb = document.getElementById('clone-search-bar');
-              if (sb) {
-                sb.classList.remove('search-bar--active');
-                var is = sb.querySelector('.search-bar__icon-search');
-                var ic = sb.querySelector('.search-bar__icon-clear');
-                if (is) is.style.display = '';
-                if (ic) ic.style.display = 'none';
-              }
               // Restore top-right to success Next button
               navRight.innerHTML = '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
               successNextBtn = document.getElementById('success-next-btn');
@@ -4274,93 +4335,120 @@
       successNextBtn.addEventListener('click', successNextHandler);
 
       /* ========================================
-         CLONE VIEW — RADIO SELECTION + SEARCH
+         CLONE VIEW — RADIO SELECTION (both tables)
          ======================================== */
-      var cloneSearchInput = document.getElementById('clone-search-input');
-      var cloneTableBody = document.getElementById('clone-table-body');
-      var cloneNoResults = document.getElementById('clone-no-results');
       var selectedCloneRow = null;
 
-      // Radio row selection via event delegation on table body
-      if (cloneTableBody) {
-        cloneTableBody.addEventListener('click', function(e) {
-          var row = e.target.closest('tr[data-clone-row]');
-          if (!row) return;
-          // Deselect all radio circles
-          cloneTableBody.querySelectorAll('.radio__circle').forEach(function(r) {
+      document.getElementById('clone-view').addEventListener('click', function(e) {
+        var row = e.target.closest('tr[data-clone-row]');
+        if (!row) return;
+        // Deselect all radio circles across both tables
+        document.querySelectorAll('#clone-view .radio__circle').forEach(function(r) {
+          r.classList.remove('is-selected');
+        });
+        // Select this row's radio circle
+        var radioCircle = row.querySelector('.radio__circle');
+        if (radioCircle) radioCircle.classList.add('is-selected');
+        selectedCloneRow = row;
+        // Enable clone Next button
+        var cloneNextBtn = document.getElementById('clone-next-btn');
+        if (cloneNextBtn) {
+          cloneNextBtn.disabled = false;
+          cloneNextBtn.classList.remove('btn--disabled');
+        }
+      });
+
+      /* ========================================
+         CLONE VIEW — "Search all programs" BUTTON → SEARCH BAR
+         ======================================== */
+      var cloneAllBtn = document.getElementById('clone-all-btn');
+      var cloneSearchBarAll = document.getElementById('clone-search-bar-all');
+      var cloneSearchInputAll = document.getElementById('clone-search-input-all');
+      var cloneClientTable = document.getElementById('clone-client-wrap');
+      var cloneAllResults = document.getElementById('clone-all-results');
+      var cloneTableBodyAll = document.getElementById('clone-table-body-all');
+      var cloneNoResultsAll = document.getElementById('clone-no-results-all');
+
+      // Helper to reset search-all back to button state
+      function resetSearchAll() {
+        if (cloneAllBtn) cloneAllBtn.style.display = '';
+        if (cloneSearchBarAll) cloneSearchBarAll.style.display = 'none';
+        if (cloneSearchInputAll) cloneSearchInputAll.value = '';
+        // Show client table, hide all-programs table
+        if (cloneClientTable) cloneClientTable.style.display = '';
+        if (cloneAllResults) cloneAllResults.style.display = 'none';
+        if (cloneNoResultsAll) cloneNoResultsAll.classList.remove('is-visible');
+        // Reset search bar visual state
+        if (cloneSearchBarAll) cloneSearchBarAll.classList.remove('search-bar--active');
+        // If selection was in all-programs table, deselect
+        if (selectedCloneRow && selectedCloneRow.closest('#clone-table-all')) {
+          document.querySelectorAll('#clone-view .radio__circle').forEach(function(r) {
             r.classList.remove('is-selected');
           });
-          // Select this row's radio circle
-          var radioCircle = row.querySelector('.radio__circle');
-          if (radioCircle) radioCircle.classList.add('is-selected');
-          selectedCloneRow = row;
-          // Enable clone Next button in top nav
+          selectedCloneRow = null;
           var cloneNextBtn = document.getElementById('clone-next-btn');
           if (cloneNextBtn) {
-            cloneNextBtn.disabled = false;
-            cloneNextBtn.classList.remove('btn--disabled');
+            cloneNextBtn.disabled = true;
+            cloneNextBtn.classList.add('btn--disabled');
           }
+        }
+      }
+
+      // Click button → show search bar, hide button
+      if (cloneAllBtn) {
+        cloneAllBtn.addEventListener('click', function() {
+          cloneAllBtn.style.display = 'none';
+          cloneSearchBarAll.style.display = '';
+          cloneSearchBarAll.classList.add('search-bar--active');
+          cloneSearchInputAll.focus();
         });
       }
 
-      // Search bar — DS interactive states (focus/blur/active/clear)
-      if (cloneSearchInput) {
-        var searchBar = document.getElementById('clone-search-bar');
-        var iconSearch = searchBar.querySelector('.search-bar__icon-search');
-        var iconClear = searchBar.querySelector('.search-bar__icon-clear');
-        var iconBtn = document.getElementById('clone-search-icon');
-        var searchFocused = false;
-
-        function renderSearchState() {
-          var hasValue = cloneSearchInput.value.length > 0;
-          searchBar.classList.remove('search-bar--active');
-
-          if (hasValue && searchFocused) {
-            searchBar.classList.add('search-bar--active');
-            iconSearch.style.display = 'none';
-            iconClear.style.display = '';
-          } else if (hasValue) {
-            iconSearch.style.display = 'none';
-            iconClear.style.display = '';
-          } else if (searchFocused) {
-            searchBar.classList.add('search-bar--active');
-            iconSearch.style.display = 'none';
-            iconClear.style.display = '';
-          } else {
-            iconSearch.style.display = '';
-            iconClear.style.display = 'none';
-          }
-        }
-
-        cloneSearchInput.addEventListener('focus', function() { searchFocused = true; renderSearchState(); });
-        cloneSearchInput.addEventListener('blur', function() { searchFocused = false; renderSearchState(); });
-
-        // Clear button click
-        iconBtn.addEventListener('mousedown', function(e) {
+      // Search bar clear icon → reset back to button
+      var cloneSearchIconAll = document.getElementById('clone-search-icon-all');
+      if (cloneSearchIconAll) {
+        cloneSearchIconAll.addEventListener('mousedown', function(e) {
           e.preventDefault();
-          cloneSearchInput.value = '';
-          cloneSearchInput.focus();
-          searchFocused = true;
-          renderSearchState();
-          // Trigger filter reset
-          cloneSearchInput.dispatchEvent(new Event('input'));
+          resetSearchAll();
+        });
+      }
+
+      // Blur with empty input → revert to button
+      if (cloneSearchInputAll) {
+        cloneSearchInputAll.addEventListener('blur', function() {
+          if (this.value.trim() === '') {
+            setTimeout(function() {
+              if (cloneSearchInputAll.value.trim() === '' && document.activeElement !== cloneSearchInputAll) {
+                resetSearchAll();
+              }
+            }, 150);
+          }
         });
 
-        // Search filtering + state render on input
-        cloneSearchInput.addEventListener('input', function() {
-          renderSearchState();
+        // Typing → hide client table, show filtered all-programs table
+        cloneSearchInputAll.addEventListener('input', function() {
           var query = this.value.toLowerCase().trim();
-          var rows = cloneTableBody.querySelectorAll('tr[data-clone-row]');
+
+          if (query === '') {
+            // Restore client table
+            if (cloneClientTable) cloneClientTable.style.display = '';
+            if (cloneAllResults) cloneAllResults.style.display = 'none';
+            if (cloneNoResultsAll) cloneNoResultsAll.classList.remove('is-visible');
+            return;
+          }
+
+          // Hide client table, show all-programs results
+          if (cloneClientTable) cloneClientTable.style.display = 'none';
+          cloneAllResults.style.display = '';
+
+          var rows = cloneTableBodyAll.querySelectorAll('tr[data-clone-row]');
           var visibleCount = 0;
 
           rows.forEach(function(row) {
             var cells = row.querySelectorAll('td');
             var rowText = '';
-            cells.forEach(function(cell) {
-              rowText += cell.textContent.toLowerCase() + ' ';
-            });
-
-            if (query === '' || rowText.indexOf(query) !== -1) {
+            cells.forEach(function(cell) { rowText += cell.textContent.toLowerCase() + ' '; });
+            if (rowText.indexOf(query) !== -1) {
               row.style.display = '';
               visibleCount++;
             } else {
@@ -4368,12 +4456,11 @@
             }
           });
 
-          // Show/hide no results
-          if (cloneNoResults) {
-            if (visibleCount === 0 && query !== '') {
-              cloneNoResults.classList.add('is-visible');
+          if (cloneNoResultsAll) {
+            if (visibleCount === 0) {
+              cloneNoResultsAll.classList.add('is-visible');
             } else {
-              cloneNoResults.classList.remove('is-visible');
+              cloneNoResultsAll.classList.remove('is-visible');
             }
           }
         });
@@ -4421,29 +4508,19 @@
             document.getElementById('clone-back-btn').addEventListener('click', function() {
               cloneView.classList.remove('is-visible');
               successView.classList.add('is-visible');
-              // Reset clone selection
-              cloneTableBody.querySelectorAll('.radio__circle').forEach(function(r) {
+              // Reset clone selection across both tables
+              document.querySelectorAll('#clone-view .radio__circle').forEach(function(r) {
                 r.classList.remove('is-selected');
               });
               selectedCloneRow = null;
-              // Reset search
-              var searchInput = document.getElementById('clone-search-input');
-              if (searchInput) {
-                searchInput.value = '';
-                cloneTableBody.querySelectorAll('tr[data-clone-row]').forEach(function(row) {
-                  row.style.display = '';
-                });
-              }
+              // Reset search-all back to button state
+              resetSearchAll();
+              // Show all client program rows
+              document.querySelectorAll('#clone-table-body tr[data-clone-row]').forEach(function(row) {
+                row.style.display = '';
+              });
+              var cloneNoResults = document.getElementById('clone-no-results');
               if (cloneNoResults) cloneNoResults.classList.remove('is-visible');
-              // Reset search bar state
-              var sb = document.getElementById('clone-search-bar');
-              if (sb) {
-                sb.classList.remove('search-bar--active');
-                var is = sb.querySelector('.search-bar__icon-search');
-                var ic = sb.querySelector('.search-bar__icon-clear');
-                if (is) is.style.display = '';
-                if (ic) ic.style.display = 'none';
-              }
               // Restore top-right to success Next button
               navRight.innerHTML = '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
               successNextBtn = document.getElementById('success-next-btn');
