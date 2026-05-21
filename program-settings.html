@@ -1783,14 +1783,13 @@
       align-items: flex-start;
       gap: 10px;
       padding: 12px;
-      border: 1px solid var(--color-border-primary);
+      border: none;
       border-radius: var(--radius-lg);
       background: var(--color-light-secondary);
-      transition: background var(--duration-standard) var(--ease-default),
-                  border-color var(--duration-standard) var(--ease-default);
+      transition: background var(--duration-standard) var(--ease-default);
     }
     .rubric-item:hover {
-      border-color: var(--color-grey-60);
+      background: var(--color-light-dark);
     }
     .rubric-item.is-unchecked {
       opacity: 0.5;
@@ -3470,79 +3469,81 @@
       });
     });
 
+    // Helper: populate page-nav__left with program name, code, and status
+    function populateNavLeft() {
+      var navLeft = document.getElementById('page-nav-left');
+      var programName = document.getElementById('program-name-input').value.trim();
+      var programCode = window.getProgramCodeValue ? window.getProgramCodeValue() : '';
+
+      // Determine program status from start/end dates
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      var startCtrl = datepickerControllers['start-datepicker'];
+      var endCtrl = datepickerControllers['end-datepicker'];
+      var startDate = startCtrl ? startCtrl.getDate() : null;
+      var endDate = endCtrl ? endCtrl.getDate() : null;
+
+      var statusClass = '';
+      var statusLabel = '';
+
+      if (startDate) startDate.setHours(0, 0, 0, 0);
+      if (endDate) endDate.setHours(0, 0, 0, 0);
+
+      if (endDate && today > endDate) {
+        statusClass = 'program-status--closed';
+        statusLabel = 'Closed';
+      } else if (startDate && today >= startDate) {
+        statusClass = 'program-status--live';
+        statusLabel = 'Live';
+      } else {
+        statusClass = 'program-status--pre-program';
+        statusLabel = 'Pre-program set up';
+      }
+
+      // Build the nav content
+      navLeft.innerHTML = '';
+
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'page-nav__text';
+      nameSpan.id = 'nav-program-name';
+      nameSpan.textContent = programName;
+      navLeft.appendChild(nameSpan);
+
+      var sep1 = document.createElement('div');
+      sep1.className = 'page-nav__separator';
+      navLeft.appendChild(sep1);
+
+      var codeSpan = document.createElement('span');
+      codeSpan.className = 'page-nav__text';
+      codeSpan.id = 'nav-program-code';
+      codeSpan.textContent = programCode;
+      navLeft.appendChild(codeSpan);
+
+      var sep2 = document.createElement('div');
+      sep2.className = 'page-nav__separator';
+      navLeft.appendChild(sep2);
+
+      var statusBadge = document.createElement('span');
+      statusBadge.className = 'program-status ' + statusClass;
+      statusBadge.id = 'nav-program-status';
+      statusBadge.textContent = statusLabel;
+      navLeft.appendChild(statusBadge);
+    }
+
     // Save button
     document.getElementById('btn-save').addEventListener('click', function(e) {
       e.preventDefault();
       if (validateForm()) {
-        // --- Populate page-nav__left with program info ---
-        var navLeft = document.getElementById('page-nav-left');
-        var programName = document.getElementById('program-name-input').value.trim();
-        var programCode = window.getProgramCodeValue ? window.getProgramCodeValue() : '';
-
-        // Determine program status from start/end dates
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        var startCtrl = datepickerControllers['start-datepicker'];
-        var endCtrl = datepickerControllers['end-datepicker'];
-        var startDate = startCtrl ? startCtrl.getDate() : null;
-        var endDate = endCtrl ? endCtrl.getDate() : null;
-
-        var statusClass = '';
-        var statusLabel = '';
-
-        if (startDate) startDate.setHours(0, 0, 0, 0);
-        if (endDate) endDate.setHours(0, 0, 0, 0);
-
-        if (endDate && today > endDate) {
-          statusClass = 'program-status--closed';
-          statusLabel = 'Closed';
-        } else if (startDate && today >= startDate) {
-          statusClass = 'program-status--live';
-          statusLabel = 'Live';
-        } else {
-          statusClass = 'program-status--pre-program';
-          statusLabel = 'Pre-program set up';
-        }
-
-        // Build the nav content
-        navLeft.innerHTML = '';
-
-        var nameSpan = document.createElement('span');
-        nameSpan.className = 'page-nav__text';
-        nameSpan.id = 'nav-program-name';
-        nameSpan.textContent = programName;
-        navLeft.appendChild(nameSpan);
-
-        var sep1 = document.createElement('div');
-        sep1.className = 'page-nav__separator';
-        navLeft.appendChild(sep1);
-
-        var codeSpan = document.createElement('span');
-        codeSpan.className = 'page-nav__text';
-        codeSpan.id = 'nav-program-code';
-        codeSpan.textContent = programCode;
-        navLeft.appendChild(codeSpan);
-
-        var sep2 = document.createElement('div');
-        sep2.className = 'page-nav__separator';
-        navLeft.appendChild(sep2);
-
-        var statusBadge = document.createElement('span');
-        statusBadge.className = 'program-status ' + statusClass;
-        statusBadge.id = 'nav-program-status';
-        statusBadge.textContent = statusLabel;
-        navLeft.appendChild(statusBadge);
-
         // If program settings were already created (user came back via Start from Scratch / Clone),
-        // just stay on the form — don't show the success view again.
+        // populate nav and stay on the form — don't show the success view again.
         if (window._programSettingsCreated) {
-          // Scroll to top to confirm save
+          populateNavLeft();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-          // --- First save: show success view ---
+          // --- First save: show success view (nav stays as "--" until user commits) ---
 
-          // Show Next button in nav
+          // Show Back + Next buttons in nav
           var navRight = document.getElementById('page-nav-right');
           if (navRight) navRight.style.display = '';
 
@@ -4427,6 +4428,7 @@
           var navRight = document.getElementById('page-nav-right');
           if (navRight) navRight.style.display = 'none';
           buildNav(scratchNavItems);
+          populateNavLeft();
           window._programSettingsCreated = true;
           window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -4720,6 +4722,7 @@
           var navRight = document.getElementById('page-nav-right');
           if (navRight) navRight.style.display = 'none';
           buildNav(scratchNavItems);
+          populateNavLeft();
           window._programSettingsCreated = true;
           window.scrollTo({ top: 0, behavior: 'smooth' });
 
