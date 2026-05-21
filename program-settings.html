@@ -1766,6 +1766,66 @@
     .review-card.is-unchecked .review-card__items {
       opacity: 0.4;
     }
+    /* Rubric mini cards inside review card */
+    .rubric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 32px;
+      width: 100%;
+    }
+    .review-card.is-unchecked .rubric-list {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .rubric-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--color-border-primary);
+      border-radius: var(--radius-lg);
+      background: var(--color-light-secondary);
+      transition: background var(--duration-standard) var(--ease-default),
+                  border-color var(--duration-standard) var(--ease-default);
+    }
+    .rubric-item:hover {
+      border-color: var(--color-grey-60);
+    }
+    .rubric-item.is-unchecked {
+      opacity: 0.5;
+    }
+    .rubric-item__content {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      min-width: 0;
+    }
+    .rubric-item__name {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      color: var(--color-text-primary);
+    }
+    .rubric-item__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .review-card__title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .review-card__count {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-secondary);
+    }
     /* Enrollment pill — DS cell-label filled-blue (Enrolled) */
     .cell-label {
       display: inline-flex;
@@ -1899,12 +1959,10 @@
       gap: var(--space-4);
       cursor: pointer;
       user-select: none;
-      padding: 4px;
+      font-family: var(--font-family);
+      padding: 7px 8px;
       border-radius: var(--radius-sm);
       transition: background var(--duration-standard) var(--ease-default);
-    }
-    .checkbox:hover {
-      background: var(--color-primary-20);
     }
     .checkbox__input {
       position: absolute;
@@ -1919,13 +1977,14 @@
       height: 16px;
       min-width: 16px;
       border: 1.5px solid var(--color-grey-70);
-      border-radius: var(--radius-xs);
+      border-radius: var(--radius-sm);
       background: var(--color-grey-0);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background var(--duration-standard) var(--ease-default),
-                  border-color var(--duration-standard) var(--ease-default);
+                  border-color var(--duration-standard) var(--ease-default),
+                  box-shadow var(--duration-standard) var(--ease-default);
     }
     .checkbox__box svg {
       display: none;
@@ -1933,10 +1992,36 @@
       height: 10px;
       stroke: var(--color-text-dark);
       fill: none;
-      stroke-width: 2;
+      stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
+    .checkbox__label {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+    }
+    /* Hover — unchecked: row background highlight */
+    .checkbox:hover {
+      background: var(--color-primary-20);
+    }
+    .checkbox:hover .checkbox__box:not(.is-checked):not(.is-indeterminate) {
+      border-color: var(--color-grey-70);
+    }
+    /* Hover — checked: subtle brightness shift on tick-square icon */
+    .checkbox:hover .checkbox__box.is-checked {
+      background: transparent;
+      border-color: transparent;
+      border-width: 0;
+      filter: brightness(0.85);
+    }
+    /* Focus */
+    .checkbox__input:focus-visible ~ .checkbox__box {
+      border-color: var(--color-primary-70);
+      box-shadow: 0 0 0 2px rgba(0, 89, 184, 0.25);
+    }
+    /* Checked — tick-square icon fills entire box */
     .checkbox__box.is-checked {
       background: transparent;
       border-color: transparent;
@@ -1948,11 +2033,16 @@
       height: 100%;
       stroke: none;
     }
-    .checkbox__label {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      color: var(--color-text-dark);
+    /* Indeterminate */
+    .checkbox__box.is-indeterminate {
+      background: var(--color-secondary-medium);
+      border-color: var(--color-secondary-medium);
+    }
+    .checkbox__box.is-indeterminate svg.minus-icon {
+      display: block;
+    }
+    .checkbox__box.is-indeterminate svg.check-icon {
+      display: none;
     }
   </style>
 </head>
@@ -2002,6 +2092,9 @@
           <span class="page-nav__text" id="nav-program-code">--</span>
         </div>
         <div class="page-nav__right" id="page-nav-right" style="display:none;">
+          <button class="btn btn--md btn--secondary" id="success-back-btn">
+            <span class="btn__label">Back</span>
+          </button>
           <button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled>
             <span class="btn__label">Next</span>
           </button>
@@ -2715,33 +2808,82 @@
                   <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
                 </span>
               </label>
-              <div class="review-card__title">Program Schedule</div>
+              <div class="review-card__title">Program Schedule and Resources</div>
             </div>
             <div class="review-card__items">
               <span class="cell-label cell-label--filled-blue">3 lessons per week</span>
               <span class="cell-label cell-label--filled-blue">24 lessons</span>
               <span class="cell-label cell-label--filled-blue">18 assignments</span>
-              <span class="cell-label cell-label--filled-blue">Resources</span>
-              <span class="cell-label cell-label--filled-blue">PD Resources</span>
             </div>
           </div>
 
-          <!-- Rubric -->
+          <!-- Rubrics -->
           <div class="review-card" id="review-card-rubric" data-review-card>
             <div class="review-card__header">
-              <label class="checkbox" data-review-checkbox="rubric">
+              <label class="checkbox" data-review-checkbox="rubric" id="rubric-select-all">
                 <input type="checkbox" class="checkbox__input" checked>
                 <span class="checkbox__box is-checked">
                   <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
                   <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
                 </span>
               </label>
-              <div class="review-card__title">Rubric</div>
+              <div class="review-card__title-row">
+                <div class="review-card__title">Rubrics</div>
+                <div class="review-card__count" id="rubric-count">(3 of 3 selected)</div>
+              </div>
             </div>
-            <div class="review-card__items">
-              <span class="cell-label cell-label--filled-blue">Technical Skills Assessment</span>
-              <span class="cell-label cell-label--filled-blue">Technical, Analytical, Communication</span>
-              <span class="cell-label cell-label--filled-blue">5-point scale</span>
+            <div class="rubric-list" id="rubric-list">
+              <!-- Rubric 1 -->
+              <div class="rubric-item" data-rubric-item>
+                <label class="checkbox" data-rubric-checkbox>
+                  <input type="checkbox" class="checkbox__input" checked>
+                  <span class="checkbox__box is-checked">
+                    <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                    <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                  </span>
+                </label>
+                <div class="rubric-item__content">
+                  <div class="rubric-item__name">Technical Skills Assessment</div>
+                  <div class="rubric-item__tags">
+                    <span class="cell-label cell-label--filled-blue">Skills Only</span>
+                    <span class="cell-label cell-label--filled-blue">5 levels</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Rubric 2 -->
+              <div class="rubric-item" data-rubric-item>
+                <label class="checkbox" data-rubric-checkbox>
+                  <input type="checkbox" class="checkbox__input" checked>
+                  <span class="checkbox__box is-checked">
+                    <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                    <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                  </span>
+                </label>
+                <div class="rubric-item__content">
+                  <div class="rubric-item__name">Communication Rubric</div>
+                  <div class="rubric-item__tags">
+                    <span class="cell-label cell-label--filled-blue">Skill Sets &amp; Skills</span>
+                    <span class="cell-label cell-label--filled-blue">4 levels</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Rubric 3 -->
+              <div class="rubric-item" data-rubric-item>
+                <label class="checkbox" data-rubric-checkbox>
+                  <input type="checkbox" class="checkbox__input" checked>
+                  <span class="checkbox__box is-checked">
+                    <svg class="check-icon" viewBox="0 0 16 16" fill="none"><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337Z" fill="#000A14"/><path d="M10.7934 1.33337H5.20671C2.78004 1.33337 1.33337 2.78004 1.33337 5.20671V10.7867C1.33337 13.22 2.78004 14.6667 5.20671 14.6667H10.7867C13.2134 14.6667 14.66 13.22 14.66 10.7934V5.20671C14.6667 2.78004 13.22 1.33337 10.7934 1.33337ZM11.1867 6.46671L7.40671 10.2467C7.31337 10.34 7.18671 10.3934 7.05337 10.3934C6.92004 10.3934 6.79337 10.34 6.70004 10.2467L4.81337 8.36004C4.62004 8.16671 4.62004 7.84671 4.81337 7.65337C5.00671 7.46004 5.32671 7.46004 5.52004 7.65337L7.05337 9.18671L10.48 5.76004C10.6734 5.56671 10.9934 5.56671 11.1867 5.76004C11.38 5.95337 11.38 6.26671 11.1867 6.46671Z" fill="#4AD7D1"/></svg>
+                    <svg class="minus-icon" viewBox="0 0 10 10"><path d="M2 5h6"/></svg>
+                  </span>
+                </label>
+                <div class="rubric-item__content">
+                  <div class="rubric-item__name">Problem Solving Framework</div>
+                  <div class="rubric-item__tags">
+                    <span class="cell-label cell-label--filled-blue">Skills Only</span>
+                    <span class="cell-label cell-label--filled-blue">3 levels</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -4314,8 +4456,9 @@
               });
               var cloneNoResults = document.getElementById('clone-no-results');
               if (cloneNoResults) cloneNoResults.classList.remove('is-visible');
-              // Restore top-right to success Next button
-              navRight.innerHTML = '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
+              // Restore top-right to success Back + Next buttons
+              navRight.innerHTML = '<button class="btn btn--md btn--secondary" id="success-back-btn"><span class="btn__label">Back</span></button>' +
+                '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
               successNextBtn = document.getElementById('success-next-btn');
               // Re-select the card that was selected
               if (selectedCard === 'clone') {
@@ -4324,6 +4467,7 @@
               }
               // Rebind the success next button
               successNextBtn.addEventListener('click', successNextHandler);
+              bindSuccessBackBtn();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             });
           }
@@ -4331,8 +4475,35 @@
         }
       }
 
+      // Bind success Back button — returns to the form for editing
+      // Does NOT set _programSettingsCreated so the next Save will show the success view again
+      function bindSuccessBackBtn() {
+        var backBtn = document.getElementById('success-back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', function() {
+            successView.classList.remove('is-visible');
+            mainContent.classList.remove('success-state');
+            if (pageTitle) pageTitle.style.display = '';
+            if (contentWrap) contentWrap.style.display = '';
+            var navRight = document.getElementById('page-nav-right');
+            if (navRight) navRight.style.display = 'none';
+            // Reset card selection so user must choose again on next save
+            cardScratch.classList.remove('selected');
+            cardClone.classList.remove('selected');
+            selectedCard = null;
+            successNextBtn = document.getElementById('success-next-btn');
+            if (successNextBtn) {
+              successNextBtn.disabled = true;
+              successNextBtn.classList.add('btn--disabled');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+      }
+
       // Bind initial success Next button
       successNextBtn.addEventListener('click', successNextHandler);
+      bindSuccessBackBtn();
 
       /* ========================================
          CLONE VIEW — RADIO SELECTION (both tables)
@@ -4521,14 +4692,16 @@
               });
               var cloneNoResults = document.getElementById('clone-no-results');
               if (cloneNoResults) cloneNoResults.classList.remove('is-visible');
-              // Restore top-right to success Next button
-              navRight.innerHTML = '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
+              // Restore top-right to success Back + Next buttons
+              navRight.innerHTML = '<button class="btn btn--md btn--secondary" id="success-back-btn"><span class="btn__label">Back</span></button>' +
+                '<button class="btn btn--md btn--primary btn--disabled" id="success-next-btn" disabled><span class="btn__label">Next</span></button>';
               successNextBtn = document.getElementById('success-next-btn');
               if (selectedCard === 'clone') {
                 successNextBtn.disabled = false;
                 successNextBtn.classList.remove('btn--disabled');
               }
               successNextBtn.addEventListener('click', successNextHandler);
+              bindSuccessBackBtn();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             });
           }
@@ -4568,8 +4741,11 @@
         }
       });
 
-      // Checkbox toggle for review cards
+      // Checkbox toggle for NON-rubric review cards (schedule, graduation)
       document.querySelectorAll('[data-review-checkbox]').forEach(function(cb) {
+        // Skip the rubric select-all — handled separately below
+        if (cb.id === 'rubric-select-all') return;
+
         cb.addEventListener('click', function(e) {
           e.preventDefault();
           var box = this.querySelector('.checkbox__box');
@@ -4587,6 +4763,105 @@
           }
         });
       });
+
+      /* ========================================
+         RUBRIC — INDIVIDUAL + SELECT ALL LOGIC
+         ======================================== */
+      (function() {
+        var selectAllLabel = document.getElementById('rubric-select-all');
+        var rubricCard = document.getElementById('review-card-rubric');
+        var rubricList = document.getElementById('rubric-list');
+        var rubricCountEl = document.getElementById('rubric-count');
+        if (!selectAllLabel || !rubricCard || !rubricList) return;
+
+        var allItems = rubricList.querySelectorAll('[data-rubric-item]');
+        var totalCount = allItems.length;
+
+        // Helper: toggle a single checkbox element
+        function toggleCheckbox(label, checked) {
+          var box = label.querySelector('.checkbox__box');
+          var input = label.querySelector('.checkbox__input');
+          box.classList.remove('is-checked', 'is-indeterminate');
+          if (checked) {
+            box.classList.add('is-checked');
+            input.checked = true;
+          } else {
+            input.checked = false;
+          }
+        }
+
+        // Helper: update select-all state + count label
+        function syncSelectAll() {
+          var checkedCount = 0;
+          allItems.forEach(function(item) {
+            if (item.querySelector('.checkbox__input').checked) checkedCount++;
+          });
+
+          var box = selectAllLabel.querySelector('.checkbox__box');
+          var input = selectAllLabel.querySelector('.checkbox__input');
+          box.classList.remove('is-checked', 'is-indeterminate');
+
+          if (checkedCount === totalCount) {
+            box.classList.add('is-checked');
+            input.checked = true;
+            rubricCard.classList.remove('is-unchecked');
+          } else if (checkedCount === 0) {
+            input.checked = false;
+            rubricCard.classList.add('is-unchecked');
+          } else {
+            box.classList.add('is-indeterminate');
+            input.checked = false;
+            rubricCard.classList.remove('is-unchecked');
+          }
+
+          // Update count text
+          if (rubricCountEl) {
+            rubricCountEl.textContent = '(' + checkedCount + ' of ' + totalCount + ' selected)';
+          }
+        }
+
+        // Individual rubric checkbox click
+        allItems.forEach(function(item) {
+          var cb = item.querySelector('[data-rubric-checkbox]');
+          if (!cb) return;
+          cb.addEventListener('click', function(e) {
+            e.preventDefault();
+            var input = this.querySelector('.checkbox__input');
+            var isChecked = input.checked;
+            toggleCheckbox(this, !isChecked);
+            // Toggle dimmed state on the mini card
+            if (!input.checked) {
+              item.classList.add('is-unchecked');
+            } else {
+              item.classList.remove('is-unchecked');
+            }
+            syncSelectAll();
+          });
+        });
+
+        // Select-all checkbox click
+        selectAllLabel.addEventListener('click', function(e) {
+          e.preventDefault();
+          var input = this.querySelector('.checkbox__input');
+          // If all are checked or indeterminate → uncheck all; otherwise → check all
+          var checkedCount = 0;
+          allItems.forEach(function(item) {
+            if (item.querySelector('.checkbox__input').checked) checkedCount++;
+          });
+          var newState = checkedCount < totalCount; // true = check all, false = uncheck all
+
+          allItems.forEach(function(item) {
+            var cb = item.querySelector('[data-rubric-checkbox]');
+            if (cb) toggleCheckbox(cb, newState);
+            if (newState) {
+              item.classList.remove('is-unchecked');
+            } else {
+              item.classList.add('is-unchecked');
+            }
+          });
+          syncSelectAll();
+        });
+      })();
     })();
 
     /* ========================================
