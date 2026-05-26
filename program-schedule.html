@@ -2316,6 +2316,89 @@
       width: 100%;
     }
 
+    /* Field with add button wrapper */
+    .field-with-add {
+      display: flex;
+      align-items: flex-start;
+    }
+    .field-with-add__list {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .field-with-add__list .editor-action {
+      width: 100%;
+    }
+    .field-with-add__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-pill-md);
+      transition: background var(--duration-standard) var(--ease-default);
+    }
+    .field-with-add__btn:hover {
+      background: var(--color-blue-hover);
+    }
+    .field-with-add__btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--color-text-link);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Content Approved — tertiary button override */
+    .content-approved-btn.btn--tertiary {
+      white-space: nowrap;
+      color: var(--color-text-muted-med);
+    }
+    .content-approved-btn.btn--tertiary svg {
+      stroke: none !important;
+      color: var(--color-text-muted-light);
+    }
+    .content-approved-btn--approved.btn--tertiary {
+      color: var(--color-text-dark);
+      background: var(--success-muted-light);
+      border-radius: var(--radius-pill-md);
+    }
+    .content-approved-btn--approved.btn--tertiary:hover {
+      text-decoration: underline;
+    }
+    .content-approved-btn--approved.btn--tertiary svg {
+      stroke: none !important;
+      color: var(--success-muted-dark);
+    }
+    /* Approval flyout details */
+    .approval-detail-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .approval-detail-label {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      color: var(--color-text-muted-dark);
+      flex-shrink: 0;
+    }
+    .approval-detail-value {
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-dark);
+    }
+
     /* Dropdown Menu */
     .dropdown-menu {
       display: inline-flex;
@@ -2613,7 +2696,7 @@
           </div>
         </div>
 
-        <!-- Sub Section: Friday, 21 March 2025 — Comment option 1 -->
+        <!-- Sub Section: Friday, 21 March 2025 — Introduction to IT &amp; Cloud Computing -->
         <div class="sub-section">
           <div class="sub-section__left">
             <div class="date-title" style="display:flex; align-items:center; gap:4px;">
@@ -2659,7 +2742,7 @@
             </div>
           </div>
           <div class="sub-section__right">
-            <!-- Live Session Item — Comment option 1 -->
+            <!-- Live Session Item — Introduction to IT &amp; Cloud Computing -->
             <div class="schedule-item">
               <div class="schedule-item__header">
                 <div class="schedule-item__checkbox">
@@ -2680,6 +2763,7 @@
                       <span>/</span>
                       <span>Lesson</span>
                     </div>
+                    <button class="btn btn--tertiary btn--sm content-approved-btn" type="button" onclick="openContentApprovalFlyout(this)"><svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.833252 7.99996C0.833252 11.9428 4.05711 15.1666 7.99992 15.1666C11.9427 15.1666 15.1666 11.9428 15.1666 7.99996C15.1666 4.05715 11.9427 0.833294 7.99992 0.833294C4.05711 0.833294 0.833252 4.05715 0.833252 7.99996ZM11.8536 5.14645C12.0488 5.34171 12.0488 5.65829 11.8536 5.85355L7.35355 10.3536C7.15829 10.5488 6.84171 10.5488 6.64645 10.3536L4.64645 8.35355C4.45118 8.15829 4.45118 7.84171 4.64645 7.64645C4.84171 7.45118 5.15829 7.45118 5.35355 7.64645L7 9.29289L11.1464 5.14645C11.3417 4.95118 11.6583 4.95118 11.8536 5.14645Z" fill="currentColor"/></svg>Approve Content</button>
                     <div class="item-actions">
                       <button class="item-action-btn" title="Collapse"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6L12 10" /></svg></button>
                       <button class="item-action-btn" title="Move down"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3V13" /><path d="M12 9L8 13L4 9" /></svg></button>
@@ -2695,7 +2779,7 @@
                       <div class="item-name">
                         <span class="item-name__required">*</span>
                         <div class="editor-field" style="flex:1;">
-                          <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Comment option 1</textarea>
+                          <textarea class="editor-field__input" rows="1" style="font-size:18px; font-weight:400; line-height:26px;" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Introduction to IT &amp; Cloud Computing</textarea>
                         </div>
                       </div>
                     </div>
@@ -2739,13 +2823,52 @@
                       <div class="content-field-row">
                         <div class="content-field-row__label">Lesson / LTI link:</div>
                         <div class="content-field-row__field">
-                          <div class="editor-action">
-                            <div class="editor-action__row">
-                              <textarea class="editor-action__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
-                              <div class="editor-action__icons">
-                                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          <div class="field-with-add">
+                            <div class="field-with-add__list">
+                              <div class="editor-action">
+                                <div class="editor-action__row">
+                                  <textarea class="editor-action__input editor-action__input--filled" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Introduction to IT &amp; Cloud Computing [PDF]</textarea>
+                                  <div class="editor-action__icons">
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="editor-action">
+                                <div class="editor-action__row">
+                                  <textarea class="editor-action__input editor-action__input--filled" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Introduction to IT &amp; Cloud Computing [Recording]</textarea>
+                                  <div class="editor-action__icons">
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="editor-action">
+                                <div class="editor-action__row">
+                                  <textarea class="editor-action__input editor-action__input--filled" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Introduction to IT &amp; Cloud Computing [AI Summary]</textarea>
+                                  <div class="editor-action__icons">
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="editor-action">
+                                <div class="editor-action__row">
+                                  <textarea class="editor-action__input editor-action__input--filled" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';">Introduction to IT &amp; Cloud Computing [Codio]</textarea>
+                                  <div class="editor-action__icons">
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+                            <button class="field-with-add__btn" type="button" title="Add">
+                              <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -2910,6 +3033,7 @@
                       <span>/</span>
                       <span>Lesson</span>
                     </div>
+                    <button class="btn btn--tertiary btn--sm content-approved-btn" type="button" onclick="openContentApprovalFlyout(this)"><svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.833252 7.99996C0.833252 11.9428 4.05711 15.1666 7.99992 15.1666C11.9427 15.1666 15.1666 11.9428 15.1666 7.99996C15.1666 4.05715 11.9427 0.833294 7.99992 0.833294C4.05711 0.833294 0.833252 4.05715 0.833252 7.99996ZM11.8536 5.14645C12.0488 5.34171 12.0488 5.65829 11.8536 5.85355L7.35355 10.3536C7.15829 10.5488 6.84171 10.5488 6.64645 10.3536L4.64645 8.35355C4.45118 8.15829 4.45118 7.84171 4.64645 7.64645C4.84171 7.45118 5.15829 7.45118 5.35355 7.64645L7 9.29289L11.1464 5.14645C11.3417 4.95118 11.6583 4.95118 11.8536 5.14645Z" fill="currentColor"/></svg>Approve Content</button>
                     <div class="item-actions">
                       <button class="item-action-btn" title="Collapse"><svg viewBox="0 0 16 16" fill="none"><path d="M4 10L8 6L12 10" /></svg></button>
                       <button class="item-action-btn" title="Move down"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3V13" /><path d="M12 9L8 13L4 9" /></svg></button>
@@ -2969,13 +3093,22 @@
                       <div class="content-field-row">
                         <div class="content-field-row__label">Lesson / LTI link:</div>
                         <div class="content-field-row__field">
-                          <div class="editor-action">
-                            <div class="editor-action__row">
-                              <textarea class="editor-action__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
-                              <div class="editor-action__icons">
-                                <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          <div class="field-with-add">
+                            <div class="field-with-add__list">
+                              <div class="editor-action">
+                                <div class="editor-action__row">
+                                  <textarea class="editor-action__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+                                  <div class="editor-action__icons">
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                  </div>
+                                </div>
                               </div>
                             </div>
+                            <button class="field-with-add__btn" type="button" title="Add">
+                              <svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -3349,7 +3482,7 @@
         <div class="flyout__content flyout__content--readonly">
           <!-- Title -->
           <div>
-            <h2 class="flyout__title">Comment option 1</h2>
+            <h2 class="flyout__title">Introduction to IT &amp; Cloud Computing</h2>
             <div class="flyout__info">
               <div class="flyout__info-row">
                 <span class="flyout__info-label">Lecture date:</span>
@@ -3516,7 +3649,7 @@
           </div>
         </div>
       </div>
-      <!-- Lecture Plan Flyout V2 — single-comment feedback (Comment option 1) -->
+      <!-- Lecture Plan Flyout V2 — single-comment feedback (Introduction to IT &amp; Cloud Computing) -->
       <div class="flyout-overlay" id="lecture-plan-v2-overlay"></div>
       <div class="flyout" id="lecture-plan-v2-flyout">
         <div class="flyout__header">
@@ -3529,7 +3662,7 @@
         <div class="flyout__content flyout__content--readonly">
           <!-- Title -->
           <div>
-            <h2 class="flyout__title">Comment option 1</h2>
+            <h2 class="flyout__title">Introduction to IT &amp; Cloud Computing</h2>
             <div class="flyout__info">
               <div class="flyout__info-row">
                 <span class="flyout__info-label">Lecture date:</span>
@@ -3745,6 +3878,55 @@
 
       <!-- Cursor-following tooltip -->
       <div class="cursor-tooltip" id="cursor-tooltip">Select text to add a comment</div>
+      <!-- Content Approval Modal — confirm step -->
+      <div class="modal-overlay" id="content-approval-overlay" style="position:fixed; inset:0; background:rgba(3,15,29,0.4); z-index:9998; display:none; align-items:center; justify-content:center;">
+        <div style="width:600px; background:#FFFFFF; border-radius:12px; box-shadow:0 0 32px rgba(3,15,29,0.2); overflow:hidden; display:flex; flex-direction:column;">
+          <!-- Tools row -->
+          <div style="display:flex; justify-content:flex-end; width:100%; padding:16px 16px 0;">
+            <button class="modal__close" id="content-approval-close" style="width:32px; height:32px; border-radius:50%; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s ease;" onmouseover="this.style.background='var(--color-primary-20)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" fill="none" stroke="#000A14" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>
+            </button>
+          </div>
+          <!-- Content -->
+          <div style="display:flex; flex-direction:column; align-items:center; padding:0 48px 48px; gap:16px; text-align:center;">
+            <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_modal_confirm)"><path d="M9.31126 115.647C10.0258 115.898 10.7929 115.961 11.5388 115.83C12.2847 115.698 12.9842 115.377 13.5699 114.897C15.0615 113.645 15.5293 111.583 15.9097 109.673L17.0352 104.024L14.6788 105.647C12.9842 106.813 11.2515 108.018 10.0783 109.708C8.90502 111.398 8.39317 113.705 9.33556 115.534" fill="#E6E6E6"/><path d="M9.67517 122.879C9.37859 120.719 9.07345 118.53 9.28198 116.346C9.46678 114.407 10.0585 112.513 11.2632 110.959C11.9027 110.136 12.6808 109.431 13.5625 108.875C13.7924 108.73 14.004 109.095 13.7751 109.239C12.2494 110.203 11.0693 111.627 10.405 113.305C9.67123 115.171 9.55342 117.206 9.6798 119.188C9.75619 120.387 9.91853 121.578 10.0816 122.767C10.0944 122.821 10.0864 122.878 10.0591 122.926C10.0318 122.974 9.98719 123.01 9.9344 123.026C9.88053 123.041 9.82312 123.034 9.77462 123.006C9.72612 122.978 9.69044 122.933 9.67532 122.879L9.67517 122.879Z" fill="#5CABFF"/><path d="M11.8099 119.412C12.1163 119.878 12.5375 120.257 13.033 120.513C13.5284 120.769 14.0814 120.893 14.6386 120.873C16.071 120.805 17.2646 119.806 18.339 118.857L21.5175 116.05L19.4139 115.95C17.9011 115.877 16.3493 115.809 14.9084 116.276C13.4675 116.743 12.1387 117.865 11.8752 119.357" fill="#E6E6E6"/><path d="M8.83679 124.122C10.2646 121.595 11.9206 118.787 14.88 117.89C15.7027 117.641 16.5654 117.552 17.4216 117.627C17.6915 117.651 17.6241 118.067 17.3548 118.044C15.9195 117.924 14.4871 118.303 13.2985 119.117C12.1547 119.895 11.2642 120.978 10.5105 122.125C10.0488 122.828 9.63525 123.561 9.22169 124.293C9.08955 124.527 8.70311 124.358 8.83679 124.122Z" fill="#5CABFF"/><path d="M123.085 92.9335H44.3665C44.1239 92.9332 43.8914 92.8367 43.7199 92.6652C43.5484 92.4937 43.4519 92.2611 43.4515 92.0186V18.9149C43.4519 18.6724 43.5484 18.4398 43.7199 18.2683C43.8914 18.0968 44.1239 18.0003 44.3665 18H123.085C123.328 18.0003 123.56 18.0968 123.732 18.2683C123.903 18.4398 124 18.6724 124 18.9149V92.0184C124 92.261 123.903 92.4936 123.732 92.6651C123.56 92.8366 123.328 92.9333 123.085 92.9335Z" fill="white"/><path d="M123.085 92.9335H44.3665C44.1239 92.9332 43.8914 92.8367 43.7199 92.6652C43.5484 92.4937 43.4519 92.2611 43.4515 92.0186V18.9149C43.4519 18.6724 43.5484 18.4398 43.7199 18.2683C43.8914 18.0968 44.1239 18.0003 44.3665 18H123.085C123.328 18.0003 123.56 18.0968 123.732 18.2683C123.903 18.4398 124 18.6724 124 18.9149V92.0184C124 92.261 123.903 92.4936 123.732 92.6651C123.56 92.8366 123.328 92.9333 123.085 92.9335ZM44.3665 18.3653C44.2211 18.3656 44.0818 18.4235 43.979 18.5263C43.8762 18.629 43.8183 18.7684 43.818 18.9137V92.0184C43.8183 92.1638 43.8762 92.3031 43.979 92.4059C44.0818 92.5087 44.2211 92.5666 44.3665 92.5669H123.085C123.23 92.5666 123.37 92.5088 123.473 92.4059C123.575 92.3031 123.633 92.1638 123.634 92.0184V18.9149C123.633 18.7696 123.575 18.6302 123.473 18.5275C123.37 18.4247 123.23 18.3668 123.085 18.3665L44.3665 18.3653Z" fill="#C2DFFF"/><path d="M81.5625 36.9962C81.3979 36.9965 81.2402 37.0621 81.1239 37.1785C81.0077 37.295 80.9424 37.4528 80.9424 37.6174C80.9424 37.7819 81.0077 37.9398 81.1239 38.0562C81.2402 38.1727 81.3979 38.2382 81.5625 38.2385H115.646C115.811 38.2382 115.969 38.1727 116.085 38.0562C116.201 37.9398 116.267 37.7819 116.267 37.6174C116.267 37.4528 116.201 37.295 116.085 37.1785C115.969 37.0621 115.811 36.9965 115.646 36.9962H81.5625Z" fill="#C2DFFF"/><path d="M81.5624 40.7235C81.3979 40.7239 81.2403 40.7895 81.1242 40.906C81.008 41.0224 80.9427 41.1802 80.9427 41.3447C80.9427 41.5091 81.008 41.6669 81.1242 41.7834C81.2403 41.8998 81.3979 41.9654 81.5624 41.9658H98.963C99.1275 41.9654 99.2851 41.8998 99.4012 41.7834C99.5174 41.6669 99.5826 41.5091 99.5826 41.3447C99.5826 41.1802 99.5174 41.0224 99.4012 40.906C99.2851 40.7895 99.1275 40.7239 98.963 40.7235H81.5624Z" fill="#C2DFFF"/><path d="M51.772 60.7675C51.6075 60.7679 51.4499 60.8335 51.3337 60.95C51.2176 61.0664 51.1523 61.2242 51.1523 61.3887C51.1523 61.5532 51.2176 61.7109 51.3337 61.8274C51.4499 61.9438 51.6075 62.0094 51.772 62.0098H115.68C115.844 62.0094 116.002 61.9438 116.118 61.8274C116.234 61.7109 116.299 61.5532 116.299 61.3887C116.299 61.2242 116.234 61.0664 116.118 60.95C116.002 60.8335 115.844 60.7679 115.68 60.7675H51.772Z" fill="#C2DFFF"/><path d="M51.772 64.4948C51.6075 64.4951 51.4499 64.5608 51.3337 64.6772C51.2176 64.7937 51.1523 64.9514 51.1523 65.1159C51.1523 65.2804 51.2176 65.4381 51.3337 65.5546C51.4499 65.671 51.6075 65.7367 51.772 65.7371H98.9962C99.1607 65.7367 99.3183 65.671 99.4345 65.5546C99.5507 65.4381 99.6159 65.2804 99.6159 65.1159C99.6159 64.9514 99.5507 64.7937 99.4345 64.6772C99.3183 64.5608 99.1607 64.4951 98.9962 64.4948H51.772Z" fill="#C2DFFF"/><path d="M51.772 68.1377C51.6075 68.1381 51.4499 68.2037 51.3337 68.3202C51.2176 68.4366 51.1523 68.5944 51.1523 68.7588C51.1523 68.9233 51.2176 69.0811 51.3337 69.1975C51.4499 69.314 51.6075 69.3796 51.772 69.38H115.68C115.844 69.3796 116.002 69.314 116.118 69.1975C116.234 69.0811 116.299 68.9233 116.299 68.7588C116.299 68.5944 116.234 68.4366 116.118 68.3202C116.002 68.2037 115.844 68.1381 115.68 68.1377H51.772Z" fill="#C2DFFF"/><path d="M51.772 71.865C51.6075 71.8654 51.4499 71.931 51.3337 72.0475C51.2176 72.1639 51.1523 72.3217 51.1523 72.4861C51.1523 72.6506 51.2176 72.8084 51.3337 72.9248C51.4499 73.0413 51.6075 73.1069 51.772 73.1073H98.9962C99.1607 73.1069 99.3183 73.0413 99.4345 72.9248C99.5507 72.8084 99.6159 72.6506 99.6159 72.4861C99.6159 72.3217 99.5507 72.1639 99.4345 72.0475C99.3183 71.931 99.1607 71.8654 98.9962 71.865H51.772Z" fill="#C2DFFF"/><path d="M51.772 75.605C51.6075 75.6054 51.4499 75.671 51.3337 75.7874C51.2176 75.9039 51.1523 76.0617 51.1523 76.2261C51.1523 76.3906 51.2176 76.5484 51.3337 76.6648C51.4499 76.7813 51.6075 76.8469 51.772 76.8473H115.68C115.844 76.8469 116.002 76.7813 116.118 76.6648C116.234 76.5484 116.299 76.3906 116.299 76.2261C116.299 76.0617 116.234 75.9039 116.118 75.7874C116.002 75.671 115.844 75.6054 115.68 75.605H51.772Z" fill="#C2DFFF"/><path d="M51.772 79.3322C51.6075 79.3326 51.4499 79.3982 51.3337 79.5147C51.2176 79.6311 51.1523 79.7889 51.1523 79.9534C51.1523 80.1178 51.2176 80.2756 51.3337 80.3921C51.4499 80.5085 51.6075 80.5741 51.772 80.5745H98.9962C99.1607 80.5741 99.3183 80.5085 99.4345 80.3921C99.5507 80.2756 99.6159 80.1178 99.6159 79.9534C99.6159 79.7889 99.5507 79.6311 99.4345 79.5147C99.3183 79.3982 99.1607 79.3326 98.9962 79.3322H51.772Z" fill="#C2DFFF"/><path d="M61.8942 48.4053C60.1292 48.4053 58.4037 47.8819 56.9361 46.9013C55.4685 45.9207 54.3247 44.5269 53.6492 42.8962C52.9737 41.2655 52.797 39.4712 53.1413 37.74C53.4857 36.0089 54.3356 34.4187 55.5837 33.1706C56.8318 31.9225 58.4219 31.0725 60.1531 30.7282C61.8842 30.3838 63.6786 30.5606 65.3093 31.236C66.94 31.9115 68.3338 33.0553 69.3144 34.5229C70.295 35.9905 70.8184 37.7159 70.8184 39.481C70.8157 41.847 69.8747 44.1154 68.2016 45.7884C66.5286 47.4615 64.2603 48.4026 61.8942 48.4053Z" fill="#05714A"/><path d="M34.8043 82.1486C34.7888 81.8228 34.7022 81.5044 34.5504 81.2158C34.3986 80.9272 34.1854 80.6754 33.9257 80.4781C33.6661 80.2808 33.3663 80.1428 33.0476 80.0739C32.7288 80.005 32.3989 80.0068 32.0809 80.0792L29.1311 75.9221L26.1676 77.0985L30.4158 82.9107C30.5728 83.4368 30.9174 83.887 31.3842 84.176C31.851 84.465 32.4076 84.5728 32.9485 84.4788C33.4895 84.3849 33.9771 84.0958 34.3192 83.6663C34.6612 83.2368 34.8338 82.6968 34.8043 82.1486Z" fill="#A0616A"/><path d="M29.0552 81.8405L20.1295 70.2612L23.4739 59.7504C23.719 57.1078 25.3726 56.3699 25.443 56.3397L25.5503 56.2937L28.4605 64.0545L26.3237 69.7526L31.5684 78.5735L29.0552 81.8405Z" fill="#0059B8"/><path d="M60.0527 46.1454C59.7291 46.186 59.4184 46.297 59.1424 46.4706C58.8664 46.6443 58.6318 46.8763 58.4551 47.1505C58.2785 47.4246 58.1641 47.7341 58.12 48.0572C58.076 48.3803 58.1033 48.7092 58.2001 49.0206L54.2834 52.283L55.6855 55.1466L61.1518 50.4618C61.6642 50.2646 62.0864 49.8862 62.3385 49.3985C62.5906 48.9107 62.655 48.3475 62.5195 47.8154C62.384 47.2834 62.0581 46.8195 61.6034 46.5117C61.1488 46.2039 60.597 46.0736 60.0527 46.1454Z" fill="#A0616A"/><path d="M60.1901 51.9011L49.3355 61.6953L38.5976 59.1736C35.944 59.1336 35.0804 57.542 35.0449 57.4742L34.9907 57.3707L42.5033 53.8692L48.3496 55.559L56.7385 49.648L60.1901 51.9011Z" fill="#0059B8"/><path d="M41.3882 121.528L44.3047 121.528L45.6919 110.279L41.3877 110.279L41.3882 121.528Z" fill="#A0616A"/><path d="M49.9292 124.236L40.7634 124.237L40.7632 120.695L47.3575 120.695C48.0395 120.695 48.6936 120.966 49.1759 121.448C49.6582 121.93 49.9291 122.584 49.9292 123.266L49.9292 124.236Z" fill="#575C64"/><path d="M29.7319 121.528L32.6484 121.528L34.0358 110.279L29.7316 110.279L29.7319 121.528Z" fill="#A0616A"/><path d="M38.2729 124.236L29.1071 124.237L29.107 120.695L35.7013 120.695C36.039 120.695 36.3734 120.761 36.6854 120.891C36.9974 121.02 37.2809 121.209 37.5197 121.448C37.7584 121.687 37.9479 121.97 38.0771 122.282C38.2064 122.594 38.2729 122.929 38.2729 123.266L38.2729 124.236Z" fill="#575C64"/><path d="M28.6947 80.4684L28.9326 97.1202L29.1706 119.005L34.4039 118.53L37.0207 88.3187L40.3511 118.53H45.7539L46.2981 88.0808L44.3951 81.42L28.6947 80.4684Z" fill="#001730"/><path d="M38.9379 82.7046C33.2436 82.705 28.0021 80.1277 27.9313 80.0924L27.8725 80.063L27.3947 68.595C27.2561 68.1898 24.5275 60.1933 24.0654 57.6516C23.5971 55.0765 30.3831 52.8166 31.2072 52.5523L31.3942 50.4807L38.9987 49.6613L39.9625 52.3119L42.6907 53.3349C43 53.451 43.256 53.6765 43.4101 53.9686C43.5642 54.2608 43.6059 54.5994 43.5271 54.9202L42.0108 61.0864L45.714 81.4871L44.9167 81.5216C43.0057 82.3847 40.9432 82.7044 38.9379 82.7046Z" fill="#0059B8"/><path d="M38.1203 47.6783C40.7737 46.2278 41.7488 42.9011 40.2983 40.2477C38.8479 37.5944 35.5211 36.6192 32.8678 38.0697C30.2144 39.5202 29.2393 42.8469 30.6898 45.5003C32.1402 48.1536 35.467 49.1288 38.1203 47.6783Z" fill="#A0616A"/><path d="M31.0594 48.1746C32.1028 49.2861 34.0407 48.6894 34.1767 47.1709C34.1873 47.053 34.1865 46.9344 34.1743 46.8166C34.1041 46.144 33.7156 45.5333 33.8086 44.8232C33.8297 44.6464 33.8956 44.478 34 44.3338C34.8315 43.2203 36.7833 44.8318 37.5681 43.8238C38.0493 43.2057 37.4837 42.2326 37.8529 41.5418C38.3403 40.6301 39.7838 41.0799 40.6891 40.5805C41.6963 40.025 41.636 38.4797 40.973 37.5397C40.1644 36.3934 38.7468 35.7817 37.3467 35.6936C35.9467 35.6054 34.5564 35.9839 33.2493 36.4932C31.7643 37.072 30.2916 37.8718 29.3777 39.1776C28.2664 40.7656 28.1594 42.9006 28.7152 44.7575C29.0534 45.887 30.2073 47.2669 31.0594 48.1746Z" fill="#001730"/><path d="M61.3789 42.8517C61.2179 42.8519 61.0629 42.791 60.9452 42.6813L58.0025 39.948C57.8788 39.8329 57.8059 39.6734 57.7997 39.5046C57.7936 39.3358 57.8547 39.1714 57.9697 39.0476C58.0847 38.9238 58.2441 38.8507 58.4129 38.8444C58.5817 38.8381 58.7462 38.8991 58.8701 39.0139L61.3626 41.3291L66.294 36.3978C66.3531 36.3382 66.4234 36.2909 66.5009 36.2586C66.5783 36.2262 66.6614 36.2095 66.7453 36.2094C66.8292 36.2092 66.9123 36.2256 66.9899 36.2577C67.0675 36.2897 67.1379 36.3368 67.1973 36.3961C67.2566 36.4554 67.3036 36.5259 67.3357 36.6035C67.3677 36.6811 67.3841 36.7642 67.3839 36.8481C67.3838 36.932 67.367 37.0151 67.3347 37.0925C67.3023 37.1699 67.255 37.2402 67.1954 37.2993L61.8298 42.665C61.7706 42.7243 61.7003 42.7713 61.6229 42.8033C61.5455 42.8353 61.4626 42.8518 61.3789 42.8517Z" fill="white"/></g><defs><clipPath id="clip0_modal_confirm"><rect width="124" height="124" fill="white"/></clipPath></defs></svg>
+            <h3 style="font-size:20px; font-weight:600; line-height:32px; color:#000A14; margin:0;">Approve Lesson Content</h3>
+            <p style="font-size:14px; font-weight:400; line-height:20px; color:#575C64; margin:0;">You're about to approve the content for this lesson. This confirms that all materials have been reviewed and are ready for delivery.</p>
+            <div style="display:flex; gap:12px; margin-top:8px;">
+              <button class="btn btn--secondary btn--md" id="content-approval-cancel">Cancel</button>
+              <button class="btn btn--primary btn--md" id="content-approval-confirm">Approve Content</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Approval Modal — details view (after approved) -->
+      <div class="modal-overlay" id="content-approval-details-overlay" style="position:fixed; inset:0; background:rgba(3,15,29,0.4); z-index:9998; display:none; align-items:center; justify-content:center;">
+        <div style="width:600px; background:#FFFFFF; border-radius:12px; box-shadow:0 0 32px rgba(3,15,29,0.2); overflow:hidden; display:flex; flex-direction:column;">
+          <!-- Tools row -->
+          <div style="display:flex; justify-content:flex-end; width:100%; padding:16px 16px 0;">
+            <button class="modal__close" id="content-approval-details-close" style="width:32px; height:32px; border-radius:50%; border:none; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s ease;" onmouseover="this.style.background='var(--color-primary-20)'" onmouseout="this.style.background='transparent'">
+              <svg width="16" height="16" fill="none" stroke="#000A14" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>
+            </button>
+          </div>
+          <!-- Content -->
+          <div style="display:flex; flex-direction:column; align-items:center; padding:0 48px 48px; gap:16px; text-align:center;">
+            <svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_modal_details)"><path d="M9.31126 115.647C10.0258 115.898 10.7929 115.961 11.5388 115.83C12.2847 115.698 12.9842 115.377 13.5699 114.897C15.0615 113.645 15.5293 111.583 15.9097 109.673L17.0352 104.024L14.6788 105.647C12.9842 106.813 11.2515 108.018 10.0783 109.708C8.90502 111.398 8.39317 113.705 9.33556 115.534" fill="#E6E6E6"/><path d="M9.67517 122.879C9.37859 120.719 9.07345 118.53 9.28198 116.346C9.46678 114.407 10.0585 112.513 11.2632 110.959C11.9027 110.136 12.6808 109.431 13.5625 108.875C13.7924 108.73 14.004 109.095 13.7751 109.239C12.2494 110.203 11.0693 111.627 10.405 113.305C9.67123 115.171 9.55342 117.206 9.6798 119.188C9.75619 120.387 9.91853 121.578 10.0816 122.767C10.0944 122.821 10.0864 122.878 10.0591 122.926C10.0318 122.974 9.98719 123.01 9.9344 123.026C9.88053 123.041 9.82312 123.034 9.77462 123.006C9.72612 122.978 9.69044 122.933 9.67532 122.879L9.67517 122.879Z" fill="#5CABFF"/><path d="M11.8099 119.412C12.1163 119.878 12.5375 120.257 13.033 120.513C13.5284 120.769 14.0814 120.893 14.6386 120.873C16.071 120.805 17.2646 119.806 18.339 118.857L21.5175 116.05L19.4139 115.95C17.9011 115.877 16.3493 115.809 14.9084 116.276C13.4675 116.743 12.1387 117.865 11.8752 119.357" fill="#E6E6E6"/><path d="M8.83679 124.122C10.2646 121.595 11.9206 118.787 14.88 117.89C15.7027 117.641 16.5654 117.552 17.4216 117.627C17.6915 117.651 17.6241 118.067 17.3548 118.044C15.9195 117.924 14.4871 118.303 13.2985 119.117C12.1547 119.895 11.2642 120.978 10.5105 122.125C10.0488 122.828 9.63525 123.561 9.22169 124.293C9.08955 124.527 8.70311 124.358 8.83679 124.122Z" fill="#5CABFF"/><path d="M123.085 92.9335H44.3665C44.1239 92.9332 43.8914 92.8367 43.7199 92.6652C43.5484 92.4937 43.4519 92.2611 43.4515 92.0186V18.9149C43.4519 18.6724 43.5484 18.4398 43.7199 18.2683C43.8914 18.0968 44.1239 18.0003 44.3665 18H123.085C123.328 18.0003 123.56 18.0968 123.732 18.2683C123.903 18.4398 124 18.6724 124 18.9149V92.0184C124 92.261 123.903 92.4936 123.732 92.6651C123.56 92.8366 123.328 92.9333 123.085 92.9335Z" fill="white"/><path d="M123.085 92.9335H44.3665C44.1239 92.9332 43.8914 92.8367 43.7199 92.6652C43.5484 92.4937 43.4519 92.2611 43.4515 92.0186V18.9149C43.4519 18.6724 43.5484 18.4398 43.7199 18.2683C43.8914 18.0968 44.1239 18.0003 44.3665 18H123.085C123.328 18.0003 123.56 18.0968 123.732 18.2683C123.903 18.4398 124 18.6724 124 18.9149V92.0184C124 92.261 123.903 92.4936 123.732 92.6651C123.56 92.8366 123.328 92.9333 123.085 92.9335ZM44.3665 18.3653C44.2211 18.3656 44.0818 18.4235 43.979 18.5263C43.8762 18.629 43.8183 18.7684 43.818 18.9137V92.0184C43.8183 92.1638 43.8762 92.3031 43.979 92.4059C44.0818 92.5087 44.2211 92.5666 44.3665 92.5669H123.085C123.23 92.5666 123.37 92.5088 123.473 92.4059C123.575 92.3031 123.633 92.1638 123.634 92.0184V18.9149C123.633 18.7696 123.575 18.6302 123.473 18.5275C123.37 18.4247 123.23 18.3668 123.085 18.3665L44.3665 18.3653Z" fill="#C2DFFF"/><path d="M81.5625 36.9962C81.3979 36.9965 81.2402 37.0621 81.1239 37.1785C81.0077 37.295 80.9424 37.4528 80.9424 37.6174C80.9424 37.7819 81.0077 37.9398 81.1239 38.0562C81.2402 38.1727 81.3979 38.2382 81.5625 38.2385H115.646C115.811 38.2382 115.969 38.1727 116.085 38.0562C116.201 37.9398 116.267 37.7819 116.267 37.6174C116.267 37.4528 116.201 37.295 116.085 37.1785C115.969 37.0621 115.811 36.9965 115.646 36.9962H81.5625Z" fill="#C2DFFF"/><path d="M81.5624 40.7235C81.3979 40.7239 81.2403 40.7895 81.1242 40.906C81.008 41.0224 80.9427 41.1802 80.9427 41.3447C80.9427 41.5091 81.008 41.6669 81.1242 41.7834C81.2403 41.8998 81.3979 41.9654 81.5624 41.9658H98.963C99.1275 41.9654 99.2851 41.8998 99.4012 41.7834C99.5174 41.6669 99.5826 41.5091 99.5826 41.3447C99.5826 41.1802 99.5174 41.0224 99.4012 40.906C99.2851 40.7895 99.1275 40.7239 98.963 40.7235H81.5624Z" fill="#C2DFFF"/><path d="M51.772 60.7675C51.6075 60.7679 51.4499 60.8335 51.3337 60.95C51.2176 61.0664 51.1523 61.2242 51.1523 61.3887C51.1523 61.5532 51.2176 61.7109 51.3337 61.8274C51.4499 61.9438 51.6075 62.0094 51.772 62.0098H115.68C115.844 62.0094 116.002 61.9438 116.118 61.8274C116.234 61.7109 116.299 61.5532 116.299 61.3887C116.299 61.2242 116.234 61.0664 116.118 60.95C116.002 60.8335 115.844 60.7679 115.68 60.7675H51.772Z" fill="#C2DFFF"/><path d="M51.772 64.4948C51.6075 64.4951 51.4499 64.5608 51.3337 64.6772C51.2176 64.7937 51.1523 64.9514 51.1523 65.1159C51.1523 65.2804 51.2176 65.4381 51.3337 65.5546C51.4499 65.671 51.6075 65.7367 51.772 65.7371H98.9962C99.1607 65.7367 99.3183 65.671 99.4345 65.5546C99.5507 65.4381 99.6159 65.2804 99.6159 65.1159C99.6159 64.9514 99.5507 64.7937 99.4345 64.6772C99.3183 64.5608 99.1607 64.4951 98.9962 64.4948H51.772Z" fill="#C2DFFF"/><path d="M51.772 68.1377C51.6075 68.1381 51.4499 68.2037 51.3337 68.3202C51.2176 68.4366 51.1523 68.5944 51.1523 68.7588C51.1523 68.9233 51.2176 69.0811 51.3337 69.1975C51.4499 69.314 51.6075 69.3796 51.772 69.38H115.68C115.844 69.3796 116.002 69.314 116.118 69.1975C116.234 69.0811 116.299 68.9233 116.299 68.7588C116.299 68.5944 116.234 68.4366 116.118 68.3202C116.002 68.2037 115.844 68.1381 115.68 68.1377H51.772Z" fill="#C2DFFF"/><path d="M51.772 71.865C51.6075 71.8654 51.4499 71.931 51.3337 72.0475C51.2176 72.1639 51.1523 72.3217 51.1523 72.4861C51.1523 72.6506 51.2176 72.8084 51.3337 72.9248C51.4499 73.0413 51.6075 73.1069 51.772 73.1073H98.9962C99.1607 73.1069 99.3183 73.0413 99.4345 72.9248C99.5507 72.8084 99.6159 72.6506 99.6159 72.4861C99.6159 72.3217 99.5507 72.1639 99.4345 72.0475C99.3183 71.931 99.1607 71.8654 98.9962 71.865H51.772Z" fill="#C2DFFF"/><path d="M51.772 75.605C51.6075 75.6054 51.4499 75.671 51.3337 75.7874C51.2176 75.9039 51.1523 76.0617 51.1523 76.2261C51.1523 76.3906 51.2176 76.5484 51.3337 76.6648C51.4499 76.7813 51.6075 76.8469 51.772 76.8473H115.68C115.844 76.8469 116.002 76.7813 116.118 76.6648C116.234 76.5484 116.299 76.3906 116.299 76.2261C116.299 76.0617 116.234 75.9039 116.118 75.7874C116.002 75.671 115.844 75.6054 115.68 75.605H51.772Z" fill="#C2DFFF"/><path d="M51.772 79.3322C51.6075 79.3326 51.4499 79.3982 51.3337 79.5147C51.2176 79.6311 51.1523 79.7889 51.1523 79.9534C51.1523 80.1178 51.2176 80.2756 51.3337 80.3921C51.4499 80.5085 51.6075 80.5741 51.772 80.5745H98.9962C99.1607 80.5741 99.3183 80.5085 99.4345 80.3921C99.5507 80.2756 99.6159 80.1178 99.6159 79.9534C99.6159 79.7889 99.5507 79.6311 99.4345 79.5147C99.3183 79.3982 99.1607 79.3326 98.9962 79.3322H51.772Z" fill="#C2DFFF"/><path d="M61.8942 48.4053C60.1292 48.4053 58.4037 47.8819 56.9361 46.9013C55.4685 45.9207 54.3247 44.5269 53.6492 42.8962C52.9737 41.2655 52.797 39.4712 53.1413 37.74C53.4857 36.0089 54.3356 34.4187 55.5837 33.1706C56.8318 31.9225 58.4219 31.0725 60.1531 30.7282C61.8842 30.3838 63.6786 30.5606 65.3093 31.236C66.94 31.9115 68.3338 33.0553 69.3144 34.5229C70.295 35.9905 70.8184 37.7159 70.8184 39.481C70.8157 41.847 69.8747 44.1154 68.2016 45.7884C66.5286 47.4615 64.2603 48.4026 61.8942 48.4053Z" fill="#05714A"/><path d="M34.8043 82.1486C34.7888 81.8228 34.7022 81.5044 34.5504 81.2158C34.3986 80.9272 34.1854 80.6754 33.9257 80.4781C33.6661 80.2808 33.3663 80.1428 33.0476 80.0739C32.7288 80.005 32.3989 80.0068 32.0809 80.0792L29.1311 75.9221L26.1676 77.0985L30.4158 82.9107C30.5728 83.4368 30.9174 83.887 31.3842 84.176C31.851 84.465 32.4076 84.5728 32.9485 84.4788C33.4895 84.3849 33.9771 84.0958 34.3192 83.6663C34.6612 83.2368 34.8338 82.6968 34.8043 82.1486Z" fill="#A0616A"/><path d="M29.0552 81.8405L20.1295 70.2612L23.4739 59.7504C23.719 57.1078 25.3726 56.3699 25.443 56.3397L25.5503 56.2937L28.4605 64.0545L26.3237 69.7526L31.5684 78.5735L29.0552 81.8405Z" fill="#0059B8"/><path d="M60.0527 46.1454C59.7291 46.186 59.4184 46.297 59.1424 46.4706C58.8664 46.6443 58.6318 46.8763 58.4551 47.1505C58.2785 47.4246 58.1641 47.7341 58.12 48.0572C58.076 48.3803 58.1033 48.7092 58.2001 49.0206L54.2834 52.283L55.6855 55.1466L61.1518 50.4618C61.6642 50.2646 62.0864 49.8862 62.3385 49.3985C62.5906 48.9107 62.655 48.3475 62.5195 47.8154C62.384 47.2834 62.0581 46.8195 61.6034 46.5117C61.1488 46.2039 60.597 46.0736 60.0527 46.1454Z" fill="#A0616A"/><path d="M60.1901 51.9011L49.3355 61.6953L38.5976 59.1736C35.944 59.1336 35.0804 57.542 35.0449 57.4742L34.9907 57.3707L42.5033 53.8692L48.3496 55.559L56.7385 49.648L60.1901 51.9011Z" fill="#0059B8"/><path d="M41.3882 121.528L44.3047 121.528L45.6919 110.279L41.3877 110.279L41.3882 121.528Z" fill="#A0616A"/><path d="M49.9292 124.236L40.7634 124.237L40.7632 120.695L47.3575 120.695C48.0395 120.695 48.6936 120.966 49.1759 121.448C49.6582 121.93 49.9291 122.584 49.9292 123.266L49.9292 124.236Z" fill="#575C64"/><path d="M29.7319 121.528L32.6484 121.528L34.0358 110.279L29.7316 110.279L29.7319 121.528Z" fill="#A0616A"/><path d="M38.2729 124.236L29.1071 124.237L29.107 120.695L35.7013 120.695C36.039 120.695 36.3734 120.761 36.6854 120.891C36.9974 121.02 37.2809 121.209 37.5197 121.448C37.7584 121.687 37.9479 121.97 38.0771 122.282C38.2064 122.594 38.2729 122.929 38.2729 123.266L38.2729 124.236Z" fill="#575C64"/><path d="M28.6947 80.4684L28.9326 97.1202L29.1706 119.005L34.4039 118.53L37.0207 88.3187L40.3511 118.53H45.7539L46.2981 88.0808L44.3951 81.42L28.6947 80.4684Z" fill="#001730"/><path d="M38.9379 82.7046C33.2436 82.705 28.0021 80.1277 27.9313 80.0924L27.8725 80.063L27.3947 68.595C27.2561 68.1898 24.5275 60.1933 24.0654 57.6516C23.5971 55.0765 30.3831 52.8166 31.2072 52.5523L31.3942 50.4807L38.9987 49.6613L39.9625 52.3119L42.6907 53.3349C43 53.451 43.256 53.6765 43.4101 53.9686C43.5642 54.2608 43.6059 54.5994 43.5271 54.9202L42.0108 61.0864L45.714 81.4871L44.9167 81.5216C43.0057 82.3847 40.9432 82.7044 38.9379 82.7046Z" fill="#0059B8"/><path d="M38.1203 47.6783C40.7737 46.2278 41.7488 42.9011 40.2983 40.2477C38.8479 37.5944 35.5211 36.6192 32.8678 38.0697C30.2144 39.5202 29.2393 42.8469 30.6898 45.5003C32.1402 48.1536 35.467 49.1288 38.1203 47.6783Z" fill="#A0616A"/><path d="M31.0594 48.1746C32.1028 49.2861 34.0407 48.6894 34.1767 47.1709C34.1873 47.053 34.1865 46.9344 34.1743 46.8166C34.1041 46.144 33.7156 45.5333 33.8086 44.8232C33.8297 44.6464 33.8956 44.478 34 44.3338C34.8315 43.2203 36.7833 44.8318 37.5681 43.8238C38.0493 43.2057 37.4837 42.2326 37.8529 41.5418C38.3403 40.6301 39.7838 41.0799 40.6891 40.5805C41.6963 40.025 41.636 38.4797 40.973 37.5397C40.1644 36.3934 38.7468 35.7817 37.3467 35.6936C35.9467 35.6054 34.5564 35.9839 33.2493 36.4932C31.7643 37.072 30.2916 37.8718 29.3777 39.1776C28.2664 40.7656 28.1594 42.9006 28.7152 44.7575C29.0534 45.887 30.2073 47.2669 31.0594 48.1746Z" fill="#001730"/><path d="M61.3789 42.8517C61.2179 42.8519 61.0629 42.791 60.9452 42.6813L58.0025 39.948C57.8788 39.8329 57.8059 39.6734 57.7997 39.5046C57.7936 39.3358 57.8547 39.1714 57.9697 39.0476C58.0847 38.9238 58.2441 38.8507 58.4129 38.8444C58.5817 38.8381 58.7462 38.8991 58.8701 39.0139L61.3626 41.3291L66.294 36.3978C66.3531 36.3382 66.4234 36.2909 66.5009 36.2586C66.5783 36.2262 66.6614 36.2095 66.7453 36.2094C66.8292 36.2092 66.9123 36.2256 66.9899 36.2577C67.0675 36.2897 67.1379 36.3368 67.1973 36.3961C67.2566 36.4554 67.3036 36.5259 67.3357 36.6035C67.3677 36.6811 67.3841 36.7642 67.3839 36.8481C67.3838 36.932 67.367 37.0151 67.3347 37.0925C67.3023 37.1699 67.255 37.2402 67.1954 37.2993L61.8298 42.665C61.7706 42.7243 61.7003 42.7713 61.6229 42.8033C61.5455 42.8353 61.4626 42.8518 61.3789 42.8517Z" fill="white"/></g><defs><clipPath id="clip0_modal_details"><rect width="124" height="124" fill="white"/></clipPath></defs></svg>
+            <h3 style="font-size:20px; font-weight:600; line-height:32px; color:#000A14; margin:0;">Content Approved</h3>
+            <div style="display:flex; flex-direction:column; gap:8px; text-align:center;">
+              <div class="approval-detail-row" style="justify-content:center;">
+                <span class="approval-detail-label">Approved by:</span>
+                <span class="approval-detail-value" id="approval-detail-who"></span>
+              </div>
+              <div class="approval-detail-row" style="justify-content:center;">
+                <span class="approval-detail-label">Date:</span>
+                <span class="approval-detail-value" id="approval-detail-when"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
@@ -3938,7 +4120,7 @@
 
     // Helper: build an editor-action field row (text + add icon)
     function actionFieldRow(labelText, placeholder) {
-      return '<div class="content-field-row"><div class="content-field-row__label">' + labelText + ':</div><div class="content-field-row__field"><div class="editor-action"><div class="editor-action__row"><textarea class="editor-action__input" rows="1" placeholder="' + placeholder + '" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\';"></textarea><div class="editor-action__icons"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div></div></div>';
+      return '<div class="content-field-row"><div class="content-field-row__label">' + labelText + ':</div><div class="content-field-row__field"><div class="field-with-add"><div class="field-with-add__list"><div class="editor-action"><div class="editor-action__row"><textarea class="editor-action__input" rows="1" placeholder="' + placeholder + '" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\';"></textarea><div class="editor-action__icons"><svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div></div><button class="field-with-add__btn" type="button" title="Add"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8H12" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12V4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>';
     }
 
     // Helper: optional-for-learner checkbox
@@ -3959,6 +4141,7 @@
         +     '<div class="schedule-item__divider"></div>'
         +     '<div class="item-title-row">'
         +       '<div class="item-module-lesson"><span>Module</span><span>/</span><span>Lesson</span></div>'
+        +       '<button class="btn btn--tertiary btn--sm content-approved-btn" type="button" onclick="openContentApprovalFlyout(this)"><svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.833252 7.99996C0.833252 11.9428 4.05711 15.1666 7.99992 15.1666C11.9427 15.1666 15.1666 11.9428 15.1666 7.99996C15.1666 4.05715 11.9427 0.833294 7.99992 0.833294C4.05711 0.833294 0.833252 4.05715 0.833252 7.99996ZM11.8536 5.14645C12.0488 5.34171 12.0488 5.65829 11.8536 5.85355L7.35355 10.3536C7.15829 10.5488 6.84171 10.5488 6.64645 10.3536L4.64645 8.35355C4.45118 8.15829 4.45118 7.84171 4.64645 7.64645C4.84171 7.45118 5.15829 7.45118 5.35355 7.64645L7 9.29289L11.1464 5.14645C11.3417 4.95118 11.6583 4.95118 11.8536 5.14645Z" fill="currentColor"/></svg>Approve Content</button>'
         +       '<div class="item-actions">' + actionBtns + '</div>'
         +     '</div>'
         +     '<div class="item-name-row">'
@@ -5391,6 +5574,151 @@
       ta.style.height = 'auto';
       ta.style.height = ta.scrollHeight + 'px';
     });
+
+    // ── Lesson / LTI link: add, reorder, remove ──
+    (function() {
+      // Template for a new editor-action row
+      var actionRowHtml = '<div class="editor-action"><div class="editor-action__row">'
+        + '<textarea class="editor-action__input" rows="1" placeholder="Embed a hyperlink into text" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\';"></textarea>'
+        + '<div class="editor-action__icons">'
+        + '<svg viewBox="0 0 16 16" fill="none"><path d="M12.047 9.62L8 13.667 3.953 9.62" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 2.333v11.22" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '<svg viewBox="0 0 16 16" fill="none"><path d="M12.047 6.38L8 2.333 3.953 6.38" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13.667V2.447" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '<svg viewBox="0 0 16 16" fill="none"><path d="M3.757 12.243L12.243 3.757" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.243 12.243L3.757 3.757" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '</div></div></div>';
+
+      // Delegate all clicks inside field-with-add wrappers
+      document.addEventListener('click', function(e) {
+        // ── ADD button ──
+        var addBtn = e.target.closest('.field-with-add__btn');
+        if (addBtn) {
+          var wrapper = addBtn.closest('.field-with-add');
+          var list = wrapper.querySelector('.field-with-add__list');
+          if (list) {
+            var temp = document.createElement('div');
+            temp.innerHTML = actionRowHtml;
+            var newRow = temp.firstChild;
+            list.appendChild(newRow);
+          }
+          return;
+        }
+
+        // Only handle icons inside field-with-add__list
+        var iconSvg = e.target.closest('.field-with-add__list .editor-action__icons svg');
+        if (!iconSvg) return;
+
+        var icons = iconSvg.parentElement;
+        var allIcons = icons.querySelectorAll('svg');
+        var actionEl = iconSvg.closest('.editor-action');
+        var list = iconSvg.closest('.field-with-add__list');
+        if (!actionEl || !list) return;
+
+        var items = list.querySelectorAll(':scope > .editor-action');
+        var idx = Array.prototype.indexOf.call(items, actionEl);
+
+        // Icon order: 0 = arrow-down, 1 = arrow-up, 2 = close (X)
+        var iconIndex = Array.prototype.indexOf.call(allIcons, iconSvg);
+
+        if (iconIndex === 0) {
+          // ── MOVE DOWN ──
+          if (idx < items.length - 1) {
+            list.insertBefore(items[idx + 1], actionEl);
+          }
+        } else if (iconIndex === 1) {
+          // ── MOVE UP ──
+          if (idx > 0) {
+            list.insertBefore(actionEl, items[idx - 1]);
+          }
+        } else if (iconIndex === 2) {
+          // ── REMOVE (keep at least 1) ──
+          if (items.length > 1) {
+            actionEl.remove();
+          }
+        }
+      });
+    })();
+
+    // ── Content Approval Modal ──
+    (function() {
+      var overlay = document.getElementById('content-approval-overlay');
+      var closeBtn = document.getElementById('content-approval-close');
+      var cancelBtn = document.getElementById('content-approval-cancel');
+      var confirmBtn = document.getElementById('content-approval-confirm');
+
+      var detailsOverlay = document.getElementById('content-approval-details-overlay');
+      var detailsCloseBtn = document.getElementById('content-approval-details-close');
+      var detailWho = document.getElementById('approval-detail-who');
+      var detailWhen = document.getElementById('approval-detail-when');
+
+      var activeBtn = null; // the button that opened the modal
+
+      // Check Filled SVG (CSS controls the fill color via currentColor)
+      var checkFilledSvg = '<svg viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.833252 7.99996C0.833252 11.9428 4.05711 15.1666 7.99992 15.1666C11.9427 15.1666 15.1666 11.9428 15.1666 7.99996C15.1666 4.05715 11.9427 0.833294 7.99992 0.833294C4.05711 0.833294 0.833252 4.05715 0.833252 7.99996ZM11.8536 5.14645C12.0488 5.34171 12.0488 5.65829 11.8536 5.85355L7.35355 10.3536C7.15829 10.5488 6.84171 10.5488 6.64645 10.3536L4.64645 8.35355C4.45118 8.15829 4.45118 7.84171 4.64645 7.64645C4.84171 7.45118 5.15829 7.45118 5.35355 7.64645L7 9.29289L11.1464 5.14645C11.3417 4.95118 11.6583 4.95118 11.8536 5.14645Z" fill="currentColor"/></svg>';
+
+      function openModal() {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      function openApproval(btn) {
+        activeBtn = btn;
+        openModal();
+      }
+
+      function confirmApproval() {
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        var timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+
+        if (activeBtn) {
+          activeBtn.setAttribute('data-approved', 'true');
+          activeBtn.setAttribute('data-approved-by', 'Kobi Lee');
+          activeBtn.setAttribute('data-approved-date', dateStr);
+          activeBtn.setAttribute('data-approved-time', timeStr);
+          activeBtn.classList.add('content-approved-btn--approved');
+          activeBtn.innerHTML = checkFilledSvg + ' Approved';
+          activeBtn.setAttribute('onclick', 'openContentApprovalDetails(this)');
+        }
+        closeModal();
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+      confirmBtn.addEventListener('click', confirmApproval);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      // Details modal
+      function openDetailsModal() {
+        detailsOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDetailsModal() {
+        detailsOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      function openDetails(btn) {
+        detailWho.textContent = btn.getAttribute('data-approved-by') || '';
+        detailWhen.textContent = (btn.getAttribute('data-approved-date') || '') + ' at ' + (btn.getAttribute('data-approved-time') || '');
+        openDetailsModal();
+      }
+
+      detailsCloseBtn.addEventListener('click', closeDetailsModal);
+      detailsOverlay.addEventListener('click', function(e) {
+        if (e.target === detailsOverlay) closeDetailsModal();
+      });
+
+      // Expose globally for inline onclick handlers
+      window.openContentApprovalFlyout = function(btn) { openApproval(btn); };
+      window.openContentApprovalDetails = function(btn) { openDetails(btn); };
+    })();
 
   </script>
 </body>
